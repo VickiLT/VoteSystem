@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vote.dao.VoteItemDao">
+  <resultMap id="BaseResultMap" type="com.vote.entity.VoteItem">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="vote_project_id" jdbcType="BIGINT" property="voteProjectId" />
+    <result column="vote_item_number" jdbcType="VARCHAR" property="voteItemNumber" />
+    <result column="vote_item_content" jdbcType="VARCHAR" property="voteItemContent" />
+    <result column="vote_item_poll" jdbcType="INTEGER" property="voteItemPoll" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, vote_project_id, vote_item_number, vote_item_content, vote_item_poll
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from vote_item
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByVoteProjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from vote_item
+    where vote_project_id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByProjectIdAndNumber"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from vote_item
+    where vote_project_id = #{0} AND vote_item_number = #{1}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from vote_item
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByProjectId" parameterType="java.lang.Long">
+    delete from vote_item
+    where vote_project_id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.vote.entity.VoteItem">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      <!-- SELECT LAST_INSERT_ID()：得到刚insert到数据表中的记录的主键值，只适用于自增主键 -->
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into vote_item (vote_project_id, vote_item_number,
+      vote_item_content, vote_item_poll)
+    values ( #{voteProjectId,jdbcType=BIGINT}, #{voteItemNumber,jdbcType=VARCHAR},
+      #{voteItemContent,jdbcType=VARCHAR}, #{voteItemPoll,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vote.entity.VoteItem">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      <!-- SELECT LAST_INSERT_ID()：得到刚insert到数据表中的记录的主键值，只适用于自增主键 -->
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into vote_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="voteProjectId != null">
+        vote_project_id,
+      </if>
+      <if test="voteItemNumber != null">
+        vote_item_number,
+      </if>
+      <if test="voteItemContent != null">
+        vote_item_content,
+      </if>
+      <if test="voteItemPoll != null">
+        vote_item_poll,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="voteProjectId != null">
+        #{voteProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="voteItemNumber != null">
+        #{voteItemNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="voteItemContent != null">
+        #{voteItemContent,jdbcType=VARCHAR},
+      </if>
+      <if test="voteItemPoll != null">
+        #{voteItemPoll,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vote.entity.VoteItem">
+    update vote_item
+    <set>
+      <if test="voteProjectId != null">
+        vote_project_id = #{voteProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="voteItemNumber != null">
+        vote_item_number = #{voteItemNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="voteItemContent != null">
+        vote_item_content = #{voteItemContent,jdbcType=VARCHAR},
+      </if>
+      <if test="voteItemPoll != null">
+        vote_item_poll = #{voteItemPoll,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vote.entity.VoteItem">
+    update vote_item
+    set vote_project_id = #{voteProjectId,jdbcType=BIGINT},
+      vote_item_number = #{voteItemNumber,jdbcType=VARCHAR},
+      vote_item_content = #{voteItemContent,jdbcType=VARCHAR},
+      vote_item_poll = #{voteItemPoll,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vote.dao.VoteDetailsDao">
+  <resultMap id="BaseResultMap" type="com.vote.entity.VoteDetails">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="vote_project_id" jdbcType="BIGINT" property="voteProjectId" />
+    <result column="voter_name" jdbcType="VARCHAR" property="voterName" />
+    <result column="vote_selects" jdbcType="VARCHAR" property="voteSelects" />
+    <result column="vote_time" jdbcType="TIMESTAMP" property="voteTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, vote_project_id, voter_name, vote_selects, vote_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from vote_details
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByProjectIdAndVoter"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from vote_details
+    where vote_project_id = #{0} AND  voter_name = #{1}
+  </select>
+  <select id="selectByVoter" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from vote_details
+    where voter_name = #{name,jdbcType = VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from vote_details
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByProjectId" parameterType="java.lang.Long">
+    delete from vote_details
+    where vote_project_id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.vote.entity.VoteDetails">
+    insert into vote_details (id, vote_project_id, voter_name, 
+      vote_selects, vote_time)
+    values (#{id,jdbcType=BIGINT}, #{voteProjectId,jdbcType=BIGINT}, #{voterName,jdbcType=VARCHAR}, 
+      #{voteSelects,jdbcType=VARCHAR}, #{voteTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vote.entity.VoteDetails">
+    insert into vote_details
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="voteProjectId != null">
+        vote_project_id,
+      </if>
+      <if test="voterName != null">
+        voter_name,
+      </if>
+      <if test="voteSelects != null">
+        vote_selects,
+      </if>
+      <if test="voteTime != null">
+        vote_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="voteProjectId != null">
+        #{voteProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="voterName != null">
+        #{voterName,jdbcType=VARCHAR},
+      </if>
+      <if test="voteSelects != null">
+        #{voteSelects,jdbcType=VARCHAR},
+      </if>
+      <if test="voteTime != null">
+        #{voteTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vote.entity.VoteDetails">
+    update vote_details
+    <set>
+      <if test="voteProjectId != null">
+        vote_project_id = #{voteProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="voterName != null">
+        voter_name = #{voterName,jdbcType=VARCHAR},
+      </if>
+      <if test="voteSelects != null">
+        vote_selects = #{voteSelects,jdbcType=VARCHAR},
+      </if>
+      <if test="voteTime != null">
+        vote_time = #{voteTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vote.entity.VoteDetails">
+    update vote_details
+    set vote_project_id = #{voteProjectId,jdbcType=BIGINT},
+      voter_name = #{voterName,jdbcType=VARCHAR},
+      vote_selects = #{voteSelects,jdbcType=VARCHAR},
+      vote_time = #{voteTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

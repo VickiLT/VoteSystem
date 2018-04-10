@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vote.dao.VoteProjectDao">
+    <resultMap id="BaseResultMap" type="com.vote.entity.VoteProject">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="vote_title" jdbcType="VARCHAR" property="voteTitle"/>
+        <result column="vote_sum" jdbcType="INTEGER" property="voteSum"/>
+        <result column="vote_explain" jdbcType="VARCHAR" property="voteExplain"/>
+        <result column="image" jdbcType="VARCHAR" property="image"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="vote_mode" jdbcType="BIT" property="voteMode"/>
+        <result column="select_num" jdbcType="INTEGER" property="selectNum"/>
+        <result column="is_check_results" jdbcType="BIT" property="isCheckResults"/>
+        <result column="is_modify_vote" jdbcType="BIT" property="isModifyVote"/>
+        <result column="is_close" jdbcType="BIT" property="isClose"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, vote_title, vote_sum, image, create_time, end_time, vote_mode, select_num, is_check_results, 
+    is_modify_vote, is_close, vote_explain
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from vote_project
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="findAllVote" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from vote_project
+    </select>
+    <select id="selectByIsClose" parameterType="java.lang.Boolean" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from vote_project
+        WHERE is_close = #{isClose,jdbcType=BIT}
+    </select>
+    <select id="findVote" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from vote_project
+        <where>
+            <if test="voteTitle!=null">
+                vote_title LIKE CONCAT('%',#{voteTitle},'%')
+            </if>
+            <if test="voteMode != null">
+                AND vote_mode = #{voteMode}
+            </if>
+            <if test="isClose != null">
+                AND is_close = #{isClose}
+            </if>
+        </where>
+    </select>
+    <select id="findNoVote" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from vote_project
+        WHERE id NOT IN
+        (SELECT vote_project_id from vote_details where voter_name = #{name,jdbcType=VARCHAR})
+        <if test="voteTitle!=null">
+            AND vote_title LIKE CONCAT('%',#{voteTitle},'%')
+        </if>
+        <if test="voteMode != null">
+            AND vote_mode = #{voteMode}
+        </if>
+        <if test="isClose != null">
+            AND is_close = #{isClose}
+        </if>
+    </select>
+    <select id="findVoted" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from vote_project
+        WHERE id IN
+        (SELECT vote_project_id from vote_details where voter_name = #{name,jdbcType=VARCHAR})
+        <if test="voteTitle!=null">
+            AND vote_title LIKE CONCAT('%',#{voteTitle},'%')
+        </if>
+        <if test="voteMode != null">
+            AND vote_mode = #{voteMode}
+        </if>
+        <if test="isClose != null">
+            AND is_close = #{isClose}
+        </if>
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from vote_project
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.vote.entity.VoteProject">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            <!-- SELECT LAST_INSERT_ID()：得到刚insert到数据表中的记录的主键值，只适用于自增主键 -->
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into vote_project (vote_title, vote_sum,
+        image, create_time, end_time,
+        vote_mode, select_num, is_check_results,
+        is_modify_vote, is_close, vote_explain)
+        values ( #{voteTitle,jdbcType=VARCHAR}, #{voteSum,jdbcType=INTEGER},
+        #{image,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+        #{voteMode,jdbcType=BIT}, #{selectNum,jdbcType=INTEGER}, #{isCheckResults,jdbcType=BIT},
+        #{isModifyVote,jdbcType=BIT}, #{isClose,jdbcType=BIT}, #{voteExplain,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.vote.entity.VoteProject">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            <!-- SELECT LAST_INSERT_ID()：得到刚insert到数据表中的记录的主键值，只适用于自增主键 -->
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into vote_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="voteTitle != null">
+                vote_title,
+            </if>
+            <if test="voteSum != null">
+                vote_sum,
+            </if>
+            <if test="image != null">
+                image,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="voteMode != null">
+                vote_mode,
+            </if>
+            <if test="selectNum != null">
+                select_num,
+            </if>
+            <if test="isCheckResults != null">
+                is_check_results,
+            </if>
+            <if test="isModifyVote != null">
+                is_modify_vote,
+            </if>
+            <if test="isClose != null">
+                is_close,
+            </if>
+            <if test="voteExplain != null">
+                vote_explain,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="voteTitle != null">
+                #{voteTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="voteSum != null">
+                #{voteSum,jdbcType=INTEGER},
+            </if>
+            <if test="image != null">
+                #{image,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="voteMode != null">
+                #{voteMode,jdbcType=INTEGER},
+            </if>
+            <if test="selectNum != null">
+                #{selectNum,jdbcType=INTEGER},
+            </if>
+            <if test="isCheckResults != null">
+                #{isCheckResults,jdbcType=BIT},
+            </if>
+            <if test="isModifyVote != null">
+                #{isModifyVote,jdbcType=BIT},
+            </if>
+            <if test="isClose != null">
+                #{isClose,jdbcType=BIT},
+            </if>
+            <if test="voteExplain != null">
+                #{voteExplain,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.vote.entity.VoteProject">
+        update vote_project
+        <set>
+            <if test="voteTitle != null">
+                vote_title = #{voteTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="voteSum != null">
+                vote_sum = #{voteSum,jdbcType=INTEGER},
+            </if>
+            <if test="image != null">
+                image = #{image,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="voteMode != null">
+                vote_mode = #{voteMode,jdbcType=BIT},
+            </if>
+            <if test="selectNum != null">
+                select_num = #{selectNum,jdbcType=INTEGER},
+            </if>
+            <if test="isCheckResults != null">
+                is_check_results = #{isCheckResults,jdbcType=BIT},
+            </if>
+            <if test="isModifyVote != null">
+                is_modify_vote = #{isModifyVote,jdbcType=BIT},
+            </if>
+            <if test="isClose != null">
+                is_close = #{isClose,jdbcType=BIT},
+            </if>
+            <if test="voteExplain != null">
+                vote_explain = #{voteExplain,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.vote.entity.VoteProject">
+    update vote_project
+    set vote_title = #{voteTitle,jdbcType=VARCHAR},
+      vote_sum = #{voteSum,jdbcType=INTEGER},
+      image = #{image,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      vote_mode = #{voteMode,jdbcType=BIT},
+      select_num = #{selectNum,jdbcType=INTEGER},
+      is_check_results = #{isCheckResults,jdbcType=BIT},
+      is_modify_vote = #{isModifyVote,jdbcType=BIT},
+      is_close = #{isClose,jdbcType=BIT},
+      vote_explain = #{voteExplain,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
