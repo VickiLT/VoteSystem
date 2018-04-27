@@ -73,7 +73,7 @@
 
         .menu-title {
             margin-left: 15px;
-            color: #828e9a;
+            color: #0C0C0C;
             padding-top: 10px;
             padding-bottom: 10px;
             font-size: 17px;

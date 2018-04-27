@@ -3,6 +3,7 @@ package com.vote.service.Impl;
 import com.vote.dao.UserDao;
 import com.vote.entity.User;
 import com.vote.service.UserService;
+import com.vote.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,7 +52,7 @@ public class UserServiceImpl implements UserService {
         User user = selectUserByName(name);
         if (user != null) {
             String pwd = user.getPassword();
-            if (password.equals(pwd)) {
+            if (MD5Util.verify(password,pwd)) {
                 return 1;
             }
         }

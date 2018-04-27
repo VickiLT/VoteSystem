@@ -13,7 +13,7 @@
     <!-- 配置拦截器 -->
     <mvc:interceptors>
 
-        <!-- 配置登陆拦截器 -->
+        <!-- 配置拦截器 -->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/user/login"/>
@@ -26,13 +26,13 @@
             <mvc:exclude-mapping path="/user/toLogin"/>
             <bean class="com.vote.util.SessionInterceptor"></bean>
         </mvc:interceptor>
+        <!--资源权限拦截器-->
         <mvc:interceptor>
-            <mvc:mapping path="/manage/**"/>
-            <bean class="com.vote.util.AdminRolesInterceptor"></bean>
-        </mvc:interceptor>
-        <mvc:interceptor>
-            <mvc:mapping path="/vote/**"/>
-            <bean class="com.vote.util.VoteInterceptor"></bean>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/user/toLogin"/>
+            <mvc:exclude-mapping path="/user/noLogin2Login"/>
+            <bean class="com.vote.util.RolesInterceptor"></bean>
         </mvc:interceptor>
 
         <!--
@@ -44,6 +44,7 @@
         <task:scheduled ref="quartzTestBean" method="voteEndTimeJobMethod" cron="*/2 * * * * ?" />
     </task:scheduled-tasks>
 
+    <!--<bean id="startupListener" class="com.vote.service.Impl.StartupListener"/>-->
     <bean id="quartzTestBean" class="com.vote.service.Impl.VoteEndTimeJobServiceImpl"/>
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
     <bean id="mappingJacksonHttpMessageConverter"

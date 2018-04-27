@@ -126,6 +126,10 @@
                     var s = xhr.getResponseHeader("CONTEXTPATH");
                     win.location.href = xhr.getResponseHeader("CONTEXTPATH");
                 }
+                if(REDIRECT == "REDIRECT1"){
+                    var s =  xhr.getResponseHeader("CONTEXTPATH");
+                    window.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                }
             }
         });
         $(document).ready(function () {

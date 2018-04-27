@@ -6,6 +6,7 @@ import com.vote.entity.Manager;
 import com.vote.entity.Secretary;
 import com.vote.service.ManagerService;
 import com.vote.service.SecretaryService;
+import com.vote.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -99,6 +100,7 @@ public class ManagerManageController {
                     map.put("message", "用户名已存在");
                     return map;
                 } else {
+                    manager.setPassword(MD5Util.generate(manager.getPassword()));
                     i = managerService.insert(manager);
                 }
             }
@@ -123,6 +125,7 @@ public class ManagerManageController {
         int i = 0;
         if (manager.getName() != null && !(manager.getName().equals(""))) {
             if (manager.getPassword() != null && !(manager.getPassword().equals(""))) {
+                manager.setPassword(MD5Util.generate(manager.getPassword()));
                 manager.setId(Integer.parseInt(manager.getIds()));
                 i = managerService.update(manager);
             }

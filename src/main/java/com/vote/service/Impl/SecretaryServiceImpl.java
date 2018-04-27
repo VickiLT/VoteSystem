@@ -3,6 +3,7 @@ package com.vote.service.Impl;
 import com.vote.dao.SecretaryDao;
 import com.vote.entity.Secretary;
 import com.vote.service.SecretaryService;
+import com.vote.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +47,7 @@ public class SecretaryServiceImpl implements SecretaryService {
         Secretary secretary = selectSecretaryByName(name);
         if (secretary != null) {
             String pwd = secretary.getPassword();
-            if (password.equals(pwd)) {
+            if (MD5Util.verify(password,pwd)) {
                 return 1;
             }
         }

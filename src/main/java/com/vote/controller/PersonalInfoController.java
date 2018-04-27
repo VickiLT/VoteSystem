@@ -5,6 +5,7 @@ import com.vote.service.ManagerService;
 import com.vote.service.SecretaryService;
 import com.vote.service.UserService;
 import com.vote.service.VoteProjectService;
+import com.vote.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -84,29 +85,32 @@ public class PersonalInfoController {
         String newPwd = passwordVo.getNewPassword();
         if (identity.equals("manager")) {
             Manager manager =  managerService.selectManagerByName(name);
-            if (!oldPwd.equals(manager.getPassword())) {
+            if (!MD5Util.verify(oldPwd,manager.getPassword())) {
                 model.addAttribute("msg", "旧密码错误,请重新输入");
                 return "frame/changepassword";
             } else {
-                manager.setPassword(newPwd);
+                String md5 = MD5Util.generate(newPwd);
+                manager.setPassword(md5);
                 managerService.update(manager);
             }
         } else if (identity.equals("secretary")) {
             Secretary secretary = secretaryService.selectSecretaryByName(name);
-            if (!oldPwd.equals(secretary.getPassword())) {
+            if (!MD5Util.verify(oldPwd,secretary.getPassword())) {
                 model.addAttribute("msg", "旧密码错误,请重新输入");
                 return "frame/changepassword";
             } else {
-                secretary.setPassword(newPwd);
+                String md5 = MD5Util.generate(newPwd);
+                secretary.setPassword(md5);
                 secretaryService.updateById(secretary);
             }
         } else {
             User user = userService.selectUserByName(name);
-            if (!oldPwd.equals(user.getPassword())) {
+            if (!MD5Util.verify(oldPwd,user.getPassword())) {
                 model.addAttribute("msg", "旧密码错误,请重新输入");
                 return "frame/changepassword";
             } else {
-                user.setPassword(newPwd);
+                String md5 = MD5Util.generate(newPwd);
+                user.setPassword(md5);
                 userService.updateById(user);
             }
         }
@@ -171,5 +175,23 @@ public class PersonalInfoController {
     @RequestMapping("/toError")
     public String toError(Model model){
         return "roleserror";
+    }
+    @RequestMapping("/passwordEncrypt")
+    public void passwordEncrypt(Model model){
+        List<Manager> managers = managerService.selectManager();
+        List<User> users = userService.findAllUser();
+        List<Secretary> secretaries = secretaryService.selectSecretary();
+        for(Manager manager:managers){
+            manager.setPassword(MD5Util.generate(manager.getPassword()));
+            managerService.update(manager);
+        }
+        for(Secretary secretary:secretaries){
+            secretary.setPassword(MD5Util.generate(secretary.getPassword()));
+            secretaryService.updateById(secretary);
+        }
+        for(User user:users){
+            user.setPassword(MD5Util.generate(user.getPassword()));
+            userService.updateById(user);
+        }
     }
 }

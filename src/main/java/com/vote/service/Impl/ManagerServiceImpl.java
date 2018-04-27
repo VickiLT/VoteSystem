@@ -6,6 +6,7 @@ import com.vote.entity.Manager;
 import com.vote.entity.User;
 import com.vote.service.ManagerService;
 import com.vote.service.UserService;
+import com.vote.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,7 +60,7 @@ public class ManagerServiceImpl implements ManagerService {
         Manager manager = selectManagerByName(name);
         if (manager != null) {
             String pwd = manager.getPassword();
-            if (password.equals(pwd)) {
+            if (MD5Util.verify(password,pwd)) {
                 return 1;
             }
         }

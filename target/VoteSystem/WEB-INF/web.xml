@@ -30,6 +30,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>default</servlet-name>
+        <url-pattern>/datetimepicker-master/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
         <url-pattern>/js/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -43,7 +47,6 @@
     <listener>
         <listener-class>com.vote.util.SessionListener</listener-class>
     </listener>
-
     <servlet>
         <servlet-name>springmvc</servlet-name>
         <servlet-class>
@@ -59,6 +62,14 @@
         <servlet-name>springmvc</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <!--<listener>-->
+        <!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
+    <!--</listener>-->
+
+    <!--<context-param>-->
+        <!--<param-name>contextConfigLocation</param-name>-->
+        <!--<param-value>classpath:spring-*.xml</param-value>-->
+    <!--</context-param>-->
     <welcome-file-list>
         <welcome-file>jsp/login.jsp</welcome-file>
     </welcome-file-list>

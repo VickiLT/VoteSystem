@@ -49,6 +49,10 @@
                     var s =  xhr.getResponseHeader("CONTEXTPATH");
                     win.location.href = xhr.getResponseHeader("CONTEXTPATH");
                 }
+                if(REDIRECT == "REDIRECT1"){
+                    var s =  xhr.getResponseHeader("CONTEXTPATH");
+                    window.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                }
             }
         });
         $(document).ready(function () {
@@ -56,7 +60,7 @@
                 url: '/manage/managerManage/load',//请求数据的地址
                 mtype: "POST",
                 datatype: "json",
-                colNames: ['用户编号', '用户名', '密码', '联系电话', '联系邮箱'],
+                colNames: ['用户编号', '用户名', '联系电话', '联系邮箱',''],
                 //jqgrid主要通过下面的索引信息与后台传过来的值对应
                 colModel: [
                     {name: 'id', index: 'id', width: 200, key: true},
@@ -64,9 +68,10 @@
                         name: 'name', index: 'name', width: 200, editable: true,
                         editoptions: {size: "20", maxlength: "30"}
                     },
-                    {name: 'password', index: 'password', width: 200},
+
                     {name: 'tel', index: 'tel', width: 230, editable: true},
                     {name: 'email', index: 'email', width: 230},
+                    {name: 'password', index: 'password', width: 200,hidden:true}
 
                 ],
                 width: 1060,

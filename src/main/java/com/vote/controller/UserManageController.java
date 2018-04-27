@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.vote.entity.User;
 import com.vote.entity.VoteProject;
 import com.vote.service.UserService;
+import com.vote.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,6 +82,7 @@ public class UserManageController {
                      map.put("message","用户名已存在");
                      return map;
                  }else {
+                     user.setPassword(MD5Util.generate(user.getPassword()));
                      i = userService.insert(user);
                  }
             }
@@ -100,6 +102,7 @@ public class UserManageController {
         int i = 0;
         if(user.getName()!=null && !(user.getName().equals(""))){
             if(user.getPassword()!=null && !(user.getPassword().equals(""))){
+                user.setPassword(MD5Util.generate(user.getPassword()));
                 user.setId(Integer.parseInt(user.getIds()));
                 i = userService.updateById(user);
             }

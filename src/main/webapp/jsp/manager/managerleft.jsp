@@ -103,7 +103,7 @@
         <div class="menu-title" style="border-bottom:1px solid #9d9d9d">账号管理</div>
         <ul class="nav nav-pills nav-stacked">
             <li style="border-bottom:1px solid #9d9d9d"><a href="/frame/personalInfoManage" target="mainFrame">-个人信息修改</a></li>
-            <li style="border-bottom:1px solid #9d9d9d"><a href="usernamage.jsp" target="mainFrame">-用户管理</a></li>
+            <li style="border-bottom:1px solid #9d9d9d"><a href="usernamage.jsp" target="mainFrame">-委员管理</a></li>
             <li style="border-bottom:1px solid #9d9d9d"><a href="secretarymanage.jsp" target="mainFrame">-教学秘书管理</a></li>
             <li style="border-bottom:1px solid #9d9d9d"><a href="managermanage.jsp" target="mainFrame">-管理员管理</a> </li>
         </ul>
