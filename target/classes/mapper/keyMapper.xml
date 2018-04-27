@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vote.dao.keyDao">
+  <resultMap id="BaseResultMap" type="com.vote.entity.key">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="vote_details_id" jdbcType="BIGINT" property="voteDetailsId" />
+    <result column="R1" jdbcType="VARCHAR" property="r1" />
+    <result column="R2" jdbcType="VARCHAR" property="r2" />
+    <result column="ET" jdbcType="VARCHAR" property="et" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, vote_details_id, R1, R2, ET
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from key
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from key
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.vote.entity.key">
+    insert into key (id, vote_details_id, R1, 
+      R2, ET)
+    values (#{id,jdbcType=BIGINT}, #{voteDetailsId,jdbcType=BIGINT}, #{r1,jdbcType=VARCHAR}, 
+      #{r2,jdbcType=VARCHAR}, #{et,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vote.entity.key">
+    insert into key
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="voteDetailsId != null">
+        vote_details_id,
+      </if>
+      <if test="r1 != null">
+        R1,
+      </if>
+      <if test="r2 != null">
+        R2,
+      </if>
+      <if test="et != null">
+        ET,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="voteDetailsId != null">
+        #{voteDetailsId,jdbcType=BIGINT},
+      </if>
+      <if test="r1 != null">
+        #{r1,jdbcType=VARCHAR},
+      </if>
+      <if test="r2 != null">
+        #{r2,jdbcType=VARCHAR},
+      </if>
+      <if test="et != null">
+        #{et,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vote.entity.key">
+    update key
+    <set>
+      <if test="voteDetailsId != null">
+        vote_details_id = #{voteDetailsId,jdbcType=BIGINT},
+      </if>
+      <if test="r1 != null">
+        R1 = #{r1,jdbcType=VARCHAR},
+      </if>
+      <if test="r2 != null">
+        R2 = #{r2,jdbcType=VARCHAR},
+      </if>
+      <if test="et != null">
+        ET = #{et,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vote.entity.key">
+    update key
+    set vote_details_id = #{voteDetailsId,jdbcType=BIGINT},
+      R1 = #{r1,jdbcType=VARCHAR},
+      R2 = #{r2,jdbcType=VARCHAR},
+      ET = #{et,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
