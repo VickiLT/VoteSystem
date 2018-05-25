@@ -68,6 +68,22 @@
                     </c:if>
                 </c:forEach>
             </table>
+            <p/>
+            <p/>
+            <div>
+                <label>附件:</label>
+                <table>
+                <c:forEach var="me" items="${fileMap}">
+                    <tr>
+                    <c:url value="/file/downFile" var="downurl">
+                        <c:param name="filename" value="${me.value}"></c:param>
+                    </c:url>
+                        <td>${me.value}</td>
+                        <td>&nbsp;&nbsp;<a href="${downurl}">下载</a></td>
+                    </tr>
+                </c:forEach>
+                </table>
+            </div>
             <font color="#483d8b">
                 <c:if test="${msg != null}">
                     注:*${msg}*

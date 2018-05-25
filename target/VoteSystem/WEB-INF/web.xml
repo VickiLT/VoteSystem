@@ -34,6 +34,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>default</servlet-name>
+        <url-pattern>/uploadify/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
         <url-pattern>/js/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -46,6 +50,9 @@
     </servlet-mapping>
     <listener>
         <listener-class>com.vote.util.SessionListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>com.vote.service.Impl.StartupListener</listener-class>
     </listener>
     <servlet>
         <servlet-name>springmvc</servlet-name>

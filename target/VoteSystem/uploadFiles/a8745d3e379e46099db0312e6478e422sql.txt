@@ -1,0 +1,69 @@
+CREATE TABLE `manager` (
+`id`  int(11) NOT NULL COMMENT '管理员id' ,
+`name`  varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '管理员用户名' ,
+`password`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL ,
+`tel`  varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '联系电话' ,
+`email`  varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '邮箱' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8mb4 COLLATE=utf8mb4_general_ci
+ROW_FORMAT=DYNAMIC
+;
+
+
+CREATE TABLE `user` (
+`id`  int(11) NOT NULL COMMENT '用户id' ,
+`name`  varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户名' ,
+`password`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL ,
+`tel`  varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '联系电话' ,
+`email`  varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '邮箱' ,
+PRIMARY KEY (`id`)
+)
+
+
+CREATE TABLE `vote_item` (
+`id`  int(11) NOT NULL COMMENT '投票项目id' ,
+`vote_title_id`  bigint(20) NOT NULL ,
+`vote_item_number`  varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '投票选项编号(A-Z)' ,
+`vote_item`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '投票选项内容' ,
+`vote_item_poll`  int(11) NULL DEFAULT NULL COMMENT '选项票数' ,
+PRIMARY KEY (`id`)
+)
+
+
+CREATE TABLE `vote_projects` (
+`id`  bigint(20) NOT NULL ,
+`vote_title`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '投票标题' ,
+`vote_sum`  int(11) NULL DEFAULT NULL COMMENT '总投票数' ,
+`image`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图片' ,
+`create_time`  datetime NULL DEFAULT NULL ,
+`end_time`  datetime NULL DEFAULT NULL COMMENT '截至时间' ,
+`vote_mode`  int(11) NULL DEFAULT NULL COMMENT '投票模式；1表示单选模式，0表示多选模式' ,
+`select_num`  int(11) NULL DEFAULT NULL COMMENT '多选模式下需要选择的个数' ,
+`is_check_results`  bit(1) NULL DEFAULT b'0' COMMENT '用户是否可以查看投票结果;1表示可查看;0便是不可查看' ,
+`is_modify_vote`  bit(1) NULL DEFAULT NULL COMMENT '用户在截止时间前是否可以修改选择结果;1表示可修改,0表示不可修改' ,
+`is_close`  bit(1) NULL DEFAULT b'0' COMMENT '投票是否关闭；1未关闭，0已关闭' ,
+PRIMARY KEY (`id`)
+)
+
+
+CREATE TABLE `vote_details` (
+`id`  bigint(20) NOT NULL COMMENT '投票信息统计表id' ,
+`vote_project_id`  bigint(20) NULL DEFAULT NULL COMMENT '投票项目id' ,
+`voter_name`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '投票人用户名' ,
+`vote_selects`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '所投选项集合' ,
+`vote_time`  datetime NULL DEFAULT NULL COMMENT '投票时间' ,
+PRIMARY KEY (`id`)
+)
+
+
+
+
+
+
+
+
+
+INSERT INTO `user` (`name`, `password`, `tel`, `email`) VALUES ('four', '123', '15927090665', '258895378@qq.com');INSERT INTO `user` (`name`, `password`, `tel`, `email`) VALUES ('five', '123', '15927090665', '258895378@qq.com');INSERT INTO `user` (`name`, `password`, `tel`, `email`) VALUES ('six', '123', '15927090665', '258895378@qq.com');INSERT INTO `user` (`name`, `password`, `tel`, `email`) VALUES ('seven', '123', '15927090665', '258895378@qq.com');INSERT INTO `user` (`name`, `password`, `tel`, `email`) VALUES ('eight', '123', '15927090665', '258895378@qq.com');INSERT INTO `user` (`name`, `password`, `tel`, `email`) VALUES ('nine', '123', '15927090665', '258895378@qq.com');INSERT INTO `user` (`name`, `password`, `tel`, `email`) VALUES ('ten
+', '123', '15927090665', '258895378@qq.com');

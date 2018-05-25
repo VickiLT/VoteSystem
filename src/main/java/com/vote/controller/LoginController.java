@@ -1,10 +1,8 @@
 package com.vote.controller;
 
-import com.vote.entity.Person;
-import com.vote.entity.Secretary;
-import com.vote.entity.User;
-import com.vote.entity.VoteProject;
+import com.vote.entity.*;
 import com.vote.service.*;
+import com.vote.service.Impl.KeyServiceImpl;
 import com.vote.util.SessionListener;
 import org.aspectj.apache.bcel.verifier.VerifierFactoryObserver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +23,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 public class LoginController {
+
+    @Autowired
+    private KeyService keyService;
 
     @Autowired
     private UserService userService;

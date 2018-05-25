@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vote.dao.FileDao">
+  <resultMap id="BaseResultMap" type="com.vote.entity.File">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="vote_project_id" jdbcType="BIGINT" property="voteProjectId" />
+    <result column="filename" jdbcType="VARCHAR" property="filename" />
+    <result column="filepath" jdbcType="VARCHAR" property="filepath" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, vote_project_id, filename, filepath
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from file
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByVoteProjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from file
+    where vote_project_id = #{voteProjectId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from file
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.vote.entity.File">
+    insert into file (id, vote_project_id, filename, 
+      filepath)
+    values (#{id,jdbcType=BIGINT}, #{voteProjectId,jdbcType=BIGINT}, #{filename,jdbcType=VARCHAR}, 
+      #{filepath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vote.entity.File">
+    insert into file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="voteProjectId != null">
+        vote_project_id,
+      </if>
+      <if test="filename != null">
+        filename,
+      </if>
+      <if test="filepath != null">
+        filepath,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="voteProjectId != null">
+        #{voteProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="filename != null">
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null">
+        #{filepath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vote.entity.File">
+    update file
+    <set>
+      <if test="voteProjectId != null">
+        vote_project_id = #{voteProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="filename != null">
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null">
+        filepath = #{filepath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vote.entity.File">
+    update file
+    set vote_project_id = #{voteProjectId,jdbcType=BIGINT},
+      filename = #{filename,jdbcType=VARCHAR},
+      filepath = #{filepath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -47,7 +47,7 @@
         <td>&nbsp;</td>
     </tr>
     <tr>
-        <td bgcolor="#d6dff7">
+        <td bgcolor="#d6dff7" align="center">
             统计信息
         </td>
     </tr>

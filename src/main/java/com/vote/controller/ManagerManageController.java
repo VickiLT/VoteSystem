@@ -6,6 +6,7 @@ import com.vote.entity.Manager;
 import com.vote.entity.Secretary;
 import com.vote.service.ManagerService;
 import com.vote.service.SecretaryService;
+import com.vote.util.LogUtils;
 import com.vote.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Created by sunwe on 2018/3/23.
@@ -101,6 +103,7 @@ public class ManagerManageController {
                     return map;
                 } else {
                     manager.setPassword(MD5Util.generate(manager.getPassword()));
+                    LogUtils.info("姓名"+manager.getName());
                     i = managerService.insert(manager);
                 }
             }

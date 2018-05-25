@@ -132,14 +132,14 @@ public class PersonalInfoController {
               Manager manager = new Manager();
               manager.setId(person.getId());
               manager.setName(person.getName());
-              manager.setPassword(person.getPassword());
+              //manager.setPassword(person.getPassword());
               manager.setTel(person.getTel());
               manager.setEmail(person.getEmail());
               managerService.update(manager);
           }else if(identity.equals("user")){
               User user = new User();
               user.setId(person.getId());
-              user.setPassword(person.getPassword());
+              //user.setPassword(person.getPassword());
               user.setName(person.getName());
               user.setEmail(person.getEmail());
               user.setTel(person.getTel());
@@ -147,7 +147,7 @@ public class PersonalInfoController {
         }else {
               Secretary secretary = new Secretary();
               secretary.setId(person.getId());
-              secretary.setPassword(person.getPassword());
+              //secretary.setPassword(person.getPassword());
               secretary.setEmail(person.getEmail());
               secretary.setName(person.getName());
               secretary.setTel(person.getTel());

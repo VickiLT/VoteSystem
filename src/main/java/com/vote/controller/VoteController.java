@@ -2,12 +2,13 @@ package com.vote.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.vote.entity.VoteDetails;
-import com.vote.entity.VoteItem;
-import com.vote.entity.VoteProject;
-import com.vote.service.VoteDetailsService;
-import com.vote.service.VoteItemService;
-import com.vote.service.VoteProjectService;
+import com.vote.dao.FileDao;
+import com.vote.entity.*;
+import com.vote.service.*;
+import com.vote.service.Impl.KeyServiceImpl;
+import com.vote.util.AESUtil;
+import com.vote.util.FileUtil;
+import com.vote.util.LogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,6 +36,9 @@ import java.util.Date;
 public class VoteController {
 
     @Autowired
+    private DetailsService detailsService;
+
+    @Autowired
     private VoteProjectService voteProjectService;
 
     @Autowired
@@ -39,6 +46,12 @@ public class VoteController {
 
     @Autowired
     private VoteDetailsService voteDetailsService;
+
+    @Autowired
+    private KeyService keyService;
+
+    @Autowired
+    private FileDao fileDao;
 
     @RequestMapping("/createVote/firstStep")
     public String firstStep(VoteProject voteProject, Model model, HttpServletRequest request) throws UnsupportedEncodingException {
@@ -52,8 +65,8 @@ public class VoteController {
         return "vote/newvotecontext";
     }
 
-    @RequestMapping(value = "/createVote/show", method = {RequestMethod.POST})
-    public String createVoteShow(VoteProject voteProject, Model model) throws ParseException {
+    @RequestMapping(value = "/createVote/show", method = {RequestMethod.POST},produces = "text/html;charset=utf-8")
+    public String createVoteShow( Model model,VoteProject voteProject,HttpServletRequest request) throws ParseException {
         VoteProject vp = new VoteProject();
         String time = voteProject.getTime();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
@@ -81,6 +94,28 @@ public class VoteController {
             voteItem.setVoteItemNumber(String.valueOf((char) (65 + i)));
             voteItem.setVoteItemContent(content[i]);
             voteItemService.insert(voteItem);
+        }
+        //文件处理
+        MultipartFile[] files = voteProject.getFiles();
+        String filePath = request.getSession().getServletContext().getRealPath(System.getProperty("file.separator")+"uploadFiles"+System.getProperty("file.separator"));
+        for(int i=0;i<files.length;i++){
+            if (!files[i].isEmpty()) {
+                String uniqueName=files[i].getOriginalFilename();//得到文件名
+                String uuid = UUID.randomUUID().toString().replace("-","");
+                String uuidFileName = uuid +"_"+uniqueName;
+                //String fileType = uniqueName.split("[.]")[1];
+                //File f = new File(filePath+"/"+uuid+"."+fileType);
+                try {
+                    FileUtil.upFile(files[i].getInputStream(), uuidFileName, filePath);
+                    com.vote.entity.File upFile = new com.vote.entity.File();
+                    upFile.setFilename(uuidFileName);
+                    upFile.setFilepath(filePath);
+                    upFile.setVoteProjectId(id);
+                    fileDao.insertSelective(upFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return "vote/addvotesuccess";
     }
@@ -255,11 +290,19 @@ public class VoteController {
             contentMap.put(vo.getVoteItemNumber(), vo.getVoteItemContent());
         }
         String name = (String) request.getSession().getAttribute("username");
-        VoteDetails voteDetails = voteDetailsService.selectByProjectIdAndVoter(projectId, name);
+        VoteDetails voteDetails = voteDetailsService.selectByProjectIdAndVoter(projectId,name);
         String msg = null;
         if (voteDetails != null) {
-            msg = "你已投过票，上次所投选项为" + voteDetails.getVoteSelects();
+            String[] out = AESUtil.decrypt(voteDetails.getId());
+            msg = "你已投过票，上次所投选项为" + out[1];
         }
+        List<com.vote.entity.File> files = fileDao.selectByVoteProjectId(projectId);
+        HashMap<String,String> fileMap = new HashMap<String, String>();
+        for (com.vote.entity.File file:files) {
+            String path = file.getFilepath()+file.getFilename();
+            fileMap.put(path,file.getFilename());
+        }
+        model.addAttribute("fileMap",fileMap);
         model.addAttribute("msg", msg);
         model.addAttribute("contentMap", contentMap);
         model.addAttribute("createTime",createTime);
@@ -282,15 +325,20 @@ public class VoteController {
             voteItemService.update(voteItem);
         }
         if (voteDetail != null) {
-            String[] select = voteDetail.getVoteSelects().split("");
+            String[] out1 = AESUtil.decrypt(voteDetail.getId());
+            //LogUtils.info(out1[1]);
+            String[] select = {out1[1]};
+            //LogUtils.info(select[0]);
             for (String i : select) {
                 voteItem = voteItemService.selectByProjectIdAndNumber(projectId, i);
+                //LogUtils.info(voteItem);
                 int poll = voteItem.getVoteItemPoll();
                 voteItem.setVoteItemPoll(poll - 1);
                 voteItemService.update(voteItem);
             }
+            String[] out = AESUtil.encryptAndUpdate(voteDetail.getVoterName(),selects.toString(),voteDetail.getId());
             voteDetail.setVoteTime(new Date());
-            voteDetail.setVoteSelects(selects.toString());
+            voteDetail.setVoteSelects(out[1]);
             voteDetailsService.updateByPrimaryKey(voteDetail);
         } else {
             VoteDetails voteDetails = new VoteDetails();
@@ -299,6 +347,15 @@ public class VoteController {
             voteDetails.setVoteSelects(selects.toString());
             voteDetails.setVoteTime(new Date());
             voteDetailsService.insert(voteDetails);
+            Details details = new Details();
+            details.setVoteProjectId(projectId);
+            details.setVoter(name);
+            voteDetailsService.insert1(details);
+            Long ID = voteDetails.getId();
+            String[] out = AESUtil.encryptAndInsert(voteDetails.getVoterName(),voteDetails.getVoteSelects(),ID);
+            voteDetails.setVoteSelects(out[1]);
+            voteDetailsService.updateByPrimaryKey(voteDetails);
+
         }
         return "vote/votesuccess";
     }
@@ -341,8 +398,16 @@ public class VoteController {
         VoteDetails voteDetails = voteDetailsService.selectByProjectIdAndVoter(projectId, name);
         String msg = null;
         if (voteDetails != null) {
-            msg = "你已投过票，上次所投选项为" + voteDetails.getVoteSelects();
+            String[] out = AESUtil.decrypt(voteDetails.getId());
+            msg = "你已投过票，上次所投选项为" + out[1];
         }
+        List<com.vote.entity.File> files = fileDao.selectByVoteProjectId(projectId);
+        HashMap<String,String> fileMap = new HashMap<String, String>();
+        for (com.vote.entity.File file:files) {
+            String path = file.getFilepath()+file.getFilename();
+            fileMap.put(path,file.getFilename());
+        }
+        model.addAttribute("fileMap",fileMap);
         model.addAttribute("msg", msg);
         model.addAttribute("contentMap", contentMap);
         model.addAttribute("createTime",createTime);

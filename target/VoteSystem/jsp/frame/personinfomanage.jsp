@@ -111,14 +111,14 @@
     <div class="layui-form-item">
         <label class="layui-form-label">用户名</label>
         <div class="layui-input-block" style="width: 300px">
-            <input type="text" name="name" required="required" readonly="readonly" style="opacity: 0.3" autocomplete="off" value="${person.name}"
+            <input type="text" name="name" required="required" readonly="readonly" style="opacity: 0.5" autocomplete="off" value="${person.name}"
                    class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
         <div class="layui-input-block" style="width: 300px">
-            <input type="password" id="password" name="password" required="required" value="${person.password}"
+            <input type="password" id="password" name="password" required="required" readonly="readonly" style="opacity: 0.5" value="***"
                    class="layui-input">
             <input type="button" class="layui-btn layui-btn-xs" value="点击修改密码" onclick="jump()" style="margin-left: 80px">
         </div>

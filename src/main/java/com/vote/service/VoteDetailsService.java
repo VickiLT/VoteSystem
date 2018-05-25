@@ -1,5 +1,6 @@
 package com.vote.service;
 
+import com.vote.entity.Details;
 import com.vote.entity.VoteDetails;
 
 import java.util.List;
@@ -22,5 +23,7 @@ public interface VoteDetailsService {
     int deleteByProjectId(Long id);
 
     List<VoteDetails> selectByVoter(String name);
+
+    int insert1(Details details);
 
 }

@@ -1,5 +1,6 @@
 package com.vote.dao;
 
+import com.vote.entity.Details;
 import com.vote.entity.VoteDetails;
 import org.springframework.stereotype.Repository;
 
@@ -27,4 +28,6 @@ public interface VoteDetailsDao {
     int deleteByProjectId(Long id);
 
     List<VoteDetails> selectByVoter(String name);
+
+    int insert1(Details details);
 }

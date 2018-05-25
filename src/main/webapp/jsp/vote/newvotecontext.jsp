@@ -31,6 +31,40 @@
         //各种基于事件的操作，下面会有进一步介绍
     });
 </script>
+<%--<script type="text/javascript">--%>
+    <%--/*--%>
+     <%--* 上传文件--%>
+     <%--*/--%>
+    <%--function upload(){--%>
+        <%--var formData = new FormData($( "#uploadfiles" )[0]);--%>
+        <%--$.ajax({--%>
+            <%--type: "post",--%>
+            <%--url: "/file/uploadFile",--%>
+            <%--dataType: "json",--%>
+            <%--data: formData,--%>
+            <%--/**--%>
+             <%--*必须false才会自动加上正确的Content-Type--%>
+             <%--*/--%>
+            <%--contentType : false,--%>
+            <%--/**--%>
+             <%--* 必须false才会避开jQuery对 formdata 的默认处理--%>
+             <%--* XMLHttpRequest会对 formdata 进行正确的处理--%>
+             <%--*/--%>
+            <%--processData : false,--%>
+            <%--success: function(data){//从后端返回数据进行处理--%>
+                <%--if(data){--%>
+                    <%--alert("上传成功！");--%>
+                <%--}else{--%>
+                    <%--alert("上传失败！");--%>
+                <%--}--%>
+            <%--},--%>
+            <%--error: function(err) {//提交出错--%>
+                <%--$("#msg").html(JSON.stringify(err));//打出响应信息--%>
+                <%--alert("服务器无响应");--%>
+            <%--}--%>
+        <%--});--%>
+    <%--}--%>
+<%--</script>--%>
 <script type="text/javascript">
 
     var validate = function () {
@@ -66,7 +100,7 @@
 <br>
 <br>
 
-<form class="layui-form te-left" id="form" action="/vote/createVote/show" method="post" width="60%">
+<form class="layui-form te-left" id="form" action="/vote/createVote/show" method="post" width="60%" enctype="multipart/form-data">
     <div class="layui-form-item">
         <label class="layui-form-label">投票标题</label>
         <div class="layui-input-block">
@@ -77,7 +111,8 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">投票描述</label>
         <div class="layui-input-block">
-            <textarea name="voteExplain" id="voteExplain" placeholder="请输入内容" class="layui-textarea" style="width: 700px"></textarea>
+            <textarea name="voteExplain" id="voteExplain" placeholder="请输入内容" class="layui-textarea"
+                      style="width: 700px"></textarea>
         </div>
     </div>
     <c:forEach begin="1" end="${voteProject.voteSum}" step="1" var="i">
@@ -124,14 +159,18 @@
             </select>
         </div>
     </div>
-    <div class="layui-form-item" style="margin-left: 200px">
-        <div class="layui-input-block">
-            <%--<button class="btn" onclick="validate()">立即提交</button>--%>
-            <input type="button" class="layui-btn" onclick="validate()" value="提交">
-        </div>
-    </div>
     <input name="time" value="${voteProject.time}" type="text" id="endTime" hidden="hidden">
+    <div id="uploadfiles">
+    <label>上传文件:</label>
+    <input type="file" multiple="multiple" id="file_upload" name="files" />
+    <%--<input type="button" value="上传" onclick="upload()" />--%>
 </form>
+</div>
+    <div class="layui-input-block">
+        <%--<button class="btn" onclick="validate()">立即提交</button>--%>
+        <input type="button" class="layui-btn" onclick="validate()" value="提交">
+    </div>
+</div>
 </body>
 </html>
 

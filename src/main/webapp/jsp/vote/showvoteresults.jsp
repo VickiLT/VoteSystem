@@ -45,11 +45,11 @@
             <span style="margin-left: 5px">投票描述:${voteProject.voteExplain}</span>
         </div>
         <center>
-            <table>
+            <table style="border: 1px dashed #000">
                 <c:forEach items="${voteItems}" var="item">
                     <tr>
-                        <td>${item.voteItemNumber}.${item.voteItemContent}</td>
-                        <td>${item.voteItemPoll}票</td>
+                        <td style="border: 1px dashed #000">${item.voteItemNumber}.${item.voteItemContent}</td>
+                        <td style="border: 1px dashed #000">&nbsp;&nbsp;&nbsp;${item.voteItemPoll}票</td>
                     </tr>
                 </c:forEach>
             </table>

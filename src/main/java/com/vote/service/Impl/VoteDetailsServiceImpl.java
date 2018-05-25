@@ -1,6 +1,7 @@
 package com.vote.service.Impl;
 
 import com.vote.dao.VoteDetailsDao;
+import com.vote.entity.Details;
 import com.vote.entity.VoteDetails;
 import com.vote.service.VoteDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,12 @@ public class VoteDetailsServiceImpl implements VoteDetailsService {
     @Transactional
     public List<VoteDetails> selectByVoter(String name) {
         return voteDetailsDao.selectByVoter(name);
+    }
+
+    @Override
+    @Transactional
+    public int insert1(Details details) {
+        return voteDetailsDao.insert1(details);
     }
 
 }

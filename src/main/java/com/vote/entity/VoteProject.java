@@ -2,6 +2,7 @@ package com.vote.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
@@ -42,6 +43,16 @@ public class VoteProject {
     private String[] content;
 
     private String time;
+
+    private MultipartFile[] files;
+
+    public MultipartFile[] getFiles() {
+        return files;
+    }
+
+    public void setFiles(MultipartFile[] files) {
+        this.files = files;
+    }
 
     public String getTime() {
         return time;

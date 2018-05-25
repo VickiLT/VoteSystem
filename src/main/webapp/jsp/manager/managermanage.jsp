@@ -75,7 +75,7 @@
 
                 ],
                 width: 1060,
-                caption: "管理员信息管理",
+                caption: "主任信息管理",
                 sortname: 'id',
                 sortable: true,
                 sortorder: 'asc',
@@ -294,6 +294,7 @@
                 $.ajax({
                     url: "${basePath}/manage/managerManage/createManager",
                     data: params,
+                    //contentType:'application/x-www-form-urlencoded; charset=UTF-8',
                     dataType: "json",
                     cache: false,
                     success: function (data) {
@@ -349,7 +350,7 @@
 <body>
 <div style="margin-left: 10px">
 <a href="/frame/toMain">投票主页
-</a>>>>管理员管理
+</a>>>>主任管理
 <br>
 <br>
 <div>

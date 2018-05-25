@@ -54,7 +54,7 @@
                             <div class="selectOuter" id="identity">
                                 <select name="identity">
                                     <option value="user">委员</option>
-                                    <option value="manager">管理员</option>
+                                    <option value="manager">主任</option>
                                     <option value="secretary">秘书</option>
                                 </select>
                             </div>
@@ -71,7 +71,7 @@
         <!--登录end-->
     </div>
 </div>
-<div class="jianyi">*推荐使用ie8或以上版本ie浏览器或Chrome内核浏览器访问本站</div>
+<div class="jianyi">*推荐使用ie8或以上版本ie浏览器或FireFox内核浏览器访问本站</div>
 </body>
 </html>
 
