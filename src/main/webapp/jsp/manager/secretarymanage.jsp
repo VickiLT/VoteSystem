@@ -156,7 +156,7 @@
                         var s = body.contents().find("#id");
                         body.contents().find("#id").val(rowData.id);
                         body.contents().find("#name").val(rowData.name);
-                        body.contents().find("#password").val(rowData.password);
+                        body.contents().find("#password").val("***");
                         body.contents().find("#tel").val(rowData.tel);
                         body.contents().find("#email").val(rowData.email);
                         //body.contents().find("#id").attr("readOnly", "true");

@@ -26,8 +26,6 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-//        WebApplicationContext webApplicationContext = ContextLoader.getCurrentWebApplicationContext();
-//        ServletContext servletContext = webApplicationContext.getServletContext();
         List<Role> allRoles = roleDao.getAllRoles();
         Map<String, Set<String>> resourceMap = new HashMap<String, Set<String>>();
         for (Role role : allRoles) {
