@@ -12,9 +12,47 @@
 <head>
     <title>投票系统</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../layui/layui.js"></script>
+<%--    <script type="text/javascript" src="../js/login.js"></script>--%>
+
     <%--<script type="text/javascript" src="images/login.js"></script>--%>
     <link href="../css/login2.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript">
+        /**
+         * Created by luter on 2018-5-26-0026.
+         */
+        function forgetPw(){
+            layui.use(['layer'], function () {
+                var layer = layui.layer;
+                layer.open({
+                    type: 2,
+                    area: ['400px', '360px'],
+                    shadeClose: true, //点击遮罩关闭
+                    skin: 'layui-layer-rim',
+                    closeBtn: 1,
+                    content:"jsp/forgetPw.jsp",
+                    success: function (layero, index) {
+                       /* var body = layer.getChildFrame('body', index);
+                        var s = body.contents().find("#id");
+                        body.contents().val("用户名");
+                        body.contents().val("邮箱");
+                        body.contents().val("身份");*/
+
+                        //body.contents().find("#id").attr("readOnly", "true");
+                    },
+                    btn: ['取消'],
+                    btn2: function (index, layero) {
+                        //按钮【按钮2】的回调
+                        editItem(index, layero);
+                        return false;
+                    }
+                })
+            })
+        }
+    </script>
 </head>
 <body>
 <h1>投票系统<sup>V2018</sup></h1>
@@ -59,9 +97,10 @@
                                 </select>
                             </div>
                         </div>
-                        <div style="padding-left:70px;margin-top:20px;"><input type="submit" value="登 录"
-                                                                               style="width:150px;"
-                                                                               class="button_blue"/></div>
+                        <div style="padding-left:70px;margin-top:20px;">
+                            <input type="submit" value="登 录"style="width:150px;"class="button_blue"/>
+                            <div class="forgetPw"onclick="forgetPw()">忘记密码</div>
+                        </div>
                     </form>
                 </div>
 

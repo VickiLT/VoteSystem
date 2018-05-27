@@ -9,7 +9,7 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/jquery-ui.css">
-    <script type="text/javascript" src="../../js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/jquery-ui.js"></script>
     <script type="text/javascript" src="../../layui/layui.js"></script>
     <link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
@@ -98,7 +98,25 @@
         }
         function validate() {
             var params = callbackdata();
-            if (!(checkPhone(params.tel) || checkMobile(params.tel) || trim(params.tel) == null || trim(params.tel) == "")) {
+            if(params.name==""){
+                layui.use(['layer'], function () {
+                    var layer = layui.layer;
+                    layer.open({
+                        content: '用户名必填',
+                        btn: '确定'
+                    });
+                });
+                return false;
+            }else if(params.email== ""){
+                layui.use(['layer'], function () {
+                    var layer = layui.layer;
+                    layer.open({
+                        content: '联系邮箱为必填',
+                        btn: '确定'
+                    });
+                });
+                return false;
+            } else if (!(checkPhone(params.tel) || checkMobile(params.tel) || trim(params.tel) == null || trim(params.tel) == "")) {
                 layui.use(['layer'], function () {
                     var layer = layui.layer;
                     layer.open({
@@ -164,8 +182,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
             <div class="layui-input-block" style="width: 250px">
-                <input type="password" id="password" name="password" required="required"
-                       class="layui-input">
+                <input type="text" id="password" name="password" required="required"class="layui-input"value="123456" readonly>
             </div>
         </div>
 

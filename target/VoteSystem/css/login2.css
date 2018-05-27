@@ -41,11 +41,11 @@ input[type="text"]:focus, input[type="password"]:focus {
 	position:relative;
 }
 #web_login{_left:60px;*left:0;}
-.web_login .login_form {
+.web_login .login_form,.forgetPw_form{
 	width:300px;
 	margin:0 auto;
 }
-.web_login .input-tips {
+.web_login .input-tips,.forgetPw-box .input-tips {
 	float:left;
 	margin-top:10px;
 	width:70px;
@@ -54,21 +54,21 @@ input[type="text"]:focus, input[type="password"]:focus {
 	line-height:42px;
 	font-family:"Hiragino Sans GB", "Microsoft Yahei";
 }
-.web_login .inputOuter {
+.web_login .inputOuter,.forgetPw-box .inputOuter{
 	width:200px;
 	height:42px;
 	margin-top:10px;
 	float:left;
 	
 }
-.web_login .selectOuter {
+.web_login .selectOuter,.forgetPw-box .selectOuter{
 	width:200px;
 	height:42px;
 	margin-top:20px;
 	float:left;
 
 }
-.web_login .inputstyle {
+.web_login .inputstyle,.forgetPw-box .inputstyle{
 	width:200px;
 	height:38px;
 	padding-left:5px;
@@ -80,7 +80,7 @@ input[type="text"]:focus, input[type="password"]:focus {
 	font-size:16px;
 	ime-mode:disabled;
 }
-.web_login .uinArea {
+.web_login .uinArea ,.forgetPw-box .uinArea{
 	height:55px;
 	position:relative;
 	z-index:10;
@@ -130,7 +130,10 @@ height: 55px;
 margin-top: 15px;
 margin-bottom: 10px;border:1px solid #eee;border-radius:3px;
 }
-.web_login input.inputstyle2:focus, .web_login input.inputstyle:focus {
+.web_login input.inputstyle2:focus,
+.web_login input.inputstyle:focus,
+.forgetPw-box input.inputstyle2:focus,
+.forgetPw-box input.inputstyle:focus{
 border: 1px solid #5796f;
 box-shadow: 0 0 0;
 }
@@ -138,8 +141,8 @@ box-shadow: 0 0 0;
 width: 300px;
 margin: 0 auto;
 }
-.web_login .inputstyle2 {border-radius:2px;width:210px;}
-.web_login .input-tips2 {
+.web_login .inputstyle2,.forgetPw-box input.inputstyle2 {border-radius:2px;width:210px;}
+.web_login .input-tips2,.forgetPw-box .input-tips2{
 padding-right: 5px;
 width: 80px;_width: 75px;_font-size:12px;}
 .button_blue
@@ -161,8 +164,18 @@ input.button_blue:hover
 	text-decoration:none;
 }
 a.zcxy {text-decoration: underline;line-height:58px;margin-left:15px;color: #959ca8;}
-.web_login .login_form {margin-top:30px;}
-.web_login .uinArea {
+
+.web_login .login_form ,.forgetPw_form {
+	margin-top:30px;
+}
+.web_login .uinArea ,.forgetPw_form .uinArea{
 height: 60px;}
 .header{font-size: 20px;width: auto;line-height:50px;text-align: center;}
 
+.forgetPw{
+	display:inline-block;
+	border: 0px;
+	margin: 21px 0px 0px 14px;
+	background-color: transparent;
+	font-size: 12px;
+}

@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/ui.jqgrid.css">
     <link rel="stylesheet" type="text/css" href="../../css/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
-    <script type="text/javascript" src="../../js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/jquery-ui.js"></script>
     <script type="text/javascript" src="../../js/grid.locale-cn.js"></script>
     <script type="text/javascript" src="../../js/jquery.jqGrid.min.js"></script>
@@ -380,7 +380,7 @@
 <br>
 <br>
 <div>
-    <div>
+    <div style="margin-bottom:10px">
         <form onsubmit="return false;">
             投票标题:<input name="voteTitle" id="voteTitle"/>&nbsp;
             投票类型:

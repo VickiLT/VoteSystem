@@ -10,10 +10,11 @@
 <%@page isELIgnored="false" %>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../../css/ui.jqgrid.css">
     <link rel="stylesheet" type="text/css" href="../../css/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
-    <script type="text/javascript" src="../../js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/jquery-ui.js"></script>
     <script type="text/javascript" src="../../js/grid.locale-cn.js"></script>
     <script type="text/javascript" src="../../js/jquery.jqGrid.min.js"></script>
@@ -103,14 +104,14 @@
             });
 
             $("#grid").jqGrid('navGrid', '#pager', {
-                edit: true,
+                edit: false,
                 del: true,
                 search: false,
                 refresh: true,
                 add: true,
                 addfunc: openDialog4Adding,
                 delfunc: openDialog4Deleting,
-                editfunc: openDialog4Updating,
+                //editfunc: openDialog4Updating,
                 alerttext: "请选择需要操作的数据行!"
 //            edit:false,add:false,del:false,search:false,refresh:false
 
@@ -354,10 +355,10 @@
 <br>
 <br>
 <div>
-    <div>
-        <form onsubmit="return false;">
-            用户名:<input name="name" id="name"/>&nbsp;
-            <button type="button" value="查询" id="searchBtn" onclick="search()">查询</button>
+    <div style="margin-bottom:10px">
+        <form class="form-search" onsubmit="return false;">
+            用户名:<input class="input-medium search-query" type="text" name="name" id="name"/>&nbsp;
+            <button class="btn" type="button" value="查询" id="searchBtn" onclick="search()">查询</button>
         </form>
     </div>
     <table id="grid"></table>

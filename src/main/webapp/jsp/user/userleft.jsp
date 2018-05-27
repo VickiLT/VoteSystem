@@ -79,9 +79,35 @@
             font-size: 17px;
             font-weight: bold;
         }
-
-        a {
+        .login-out{
+            color: #b97c7c;
+            font-size: 12px;
+            margin-left: 35px;
+        }
+        .panel-group{
+            margin-top:50px;
+        }
+        .manu-ul{
+            padding-left:10%;
+        }
+        .manu-ul li{
+            border-radius: 10px;
+            background-color: #462c2c2b;
+            width:80%;
+        }
+        .nav > li > a{
+            padding:6px 15px;
+        }
+        a{
             color: #3F3F3F;
+            text-decoration: none;
+        }
+        a:hover,a:visited,a:link{
+            text-decoration: none;
+        }
+        .nav > li > a:hover, .nav > li > a:focus{
+            background-color: #462c2c2b;
+
         }
     </style>
 
@@ -99,20 +125,39 @@
                 <span>
                     ${sessionScope.username}
                 </span>
+                <a class="login-out" href="/user/loginOut" onclick="return yes()" font-size="10px">退出</a>
             </p>
             </div>
-            <div align="right">
-                <a href="/user/loginOut" onclick="return yes()" font-size="10px" style="color: #F6F6F6">注销</a>
+        </div>
+
+
+        <div class="panel-group" id="manage-menu">
+            <div class="panel panel-default">
+                <div class="panel-heading menu-title" >
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#manage-menu" href="#personList" >账号管理</a>
+                    </h4>
+                </div>
+                <div  id="personList" class="collapse panel-collapse collapse in">
+                    <ul class="panel-body nav nav-pills nav-stacked manu-ul" >
+                        <li><a href="/frame/personalInfoManage" target="mainFrame">个人信息修改</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading menu-title">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#manage-menu" href="#voteList">投票管理</a>
+                    </h4>
+                </div>
+                <div  id="voteList" class="collapse panel-collapse collapse">
+                    <ul class="panel-body nav nav-pills nav-stacked manu-ul">
+                        <li><a href="../vote/vote.jsp" target="mainFrame">投票</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="menu-title" style="border-bottom:1px solid #9d9d9d">账号管理</div>
-        <ul class="nav nav-pills nav-stacked">
-            <li style="border-bottom:1px solid #9d9d9d"><a href="/frame/personalInfoManage" target="mainFrame">-个人信息修改</a></li>
-        </ul>
-        <div class="menu-title" style="border-bottom:1px solid #9d9d9d">投票管理</div>
-        <ul class="nav nav-pills nav-stacked">
-            <li><a href="../vote/vote.jsp" target="mainFrame">-投票</a></li>
-        </ul>
+
     </div>
 </div>
 </body>

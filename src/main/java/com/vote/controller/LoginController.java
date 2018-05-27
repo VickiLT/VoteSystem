@@ -122,4 +122,12 @@ public class LoginController {
         model.addAttribute("msg","用户未登录！请重新登录");
         return "login";
     }
+
+
+
+    @RequestMapping(value = "/forgetPw",method = {RequestMethod.POST})
+    public String forgetPw(String name, String email, String identity, Model model, HttpServletRequest request, HttpServletResponse response){
+
+        return "";
+    }
 }
