@@ -49,8 +49,36 @@
         }
 
         function forgetPwCallBack(layero, index) {
-            var params = window["layui-layer-iframe" + index].callbackdata();
+            var body = layer.getChildFrame('body', index);
+            var name=body.find("input#name").val();
+            var email=body.find("input#email").val();
+            var identity=body.find("select.identity").val();
+            var data={
+                name:name,
+                email:email,
+                identity:identity
+            }
+            $.ajax({
+                url:"/user/retrieve",
+                data: JSON.stringify(data),
+                dataType:"json",
+                type: "POST",
+                async: false,
+                contentType: 'application/json',
+                success:function(data){
+                    if(data.status=="1"){
+                        alert(data.message);
+                        layer.close(index);
+                    }else if(data.status=="0"){
+                        alert(data.message);
+                    }
 
+
+                },
+                error:function(data){
+                    alert(data);
+                }
+            });
         }
     </script>
 </head>
