@@ -15,7 +15,7 @@
 <body>
 <div class="forgetPw-box">
     <div class="forgetPw_form">
-        <form action="/user/forgetPw" name="forgetPwform" accept-charset="utf-8" id="forgetPw_form" class="forgetPwForm"
+        <form action="/user/retrieve" name="forgetPwform" accept-charset="utf-8" id="forgetPw_form" class="forgetPwForm"
               method="post">
             <input type="hidden" name="did" value="0"/>
             <input type="hidden" name="to" value="log"/>
@@ -27,7 +27,7 @@
             </div>
             <div class="emailArea" id="emailArea">
                 <label class="input-tips">邮箱：</label>
-                <div class="inputOuter" id="pArea">
+                <div class="inputOuter" id="eArea">
                     <input type="email" id="email" name="email" class="inputstyle"/>
                 </div>
             </div>

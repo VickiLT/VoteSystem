@@ -3,6 +3,8 @@ package com.vote.controller;
 import com.vote.entity.*;
 import com.vote.service.*;
 import com.vote.service.Impl.KeyServiceImpl;
+import com.vote.util.MD5Util;
+import com.vote.util.MailUtil;
 import com.vote.util.SessionListener;
 import org.aspectj.apache.bcel.verifier.VerifierFactoryObserver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.rmi.CORBA.Util;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * login控制层
@@ -122,12 +126,50 @@ public class LoginController {
         model.addAttribute("msg","用户未登录！请重新登录");
         return "login";
     }
-
-
-
-    @RequestMapping(value = "/forgetPw",method = {RequestMethod.POST})
-    public String forgetPw(String name, String email, String identity, Model model, HttpServletRequest request, HttpServletResponse response){
-
-        return "";
+    /**
+     * 登录
+     * @param name
+     * @param email
+     * @param identity
+     * @param model
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/retrieve",method = {RequestMethod.POST})
+    public String retrieve(String name, String email, String identity, Model model, HttpServletRequest request, HttpServletResponse response) {
+        Person person=null;
+        if (identity.equals("user")) {
+            person = userService.selectUserByName(name);
+        } else if (identity.equals("manager")) {
+            person= managerService.selectManagerByName(name);
+        } else {
+            person = secretaryService.selectSecretaryByName(name);
+        }
+        //是否找到用户
+        if(person==null){
+            model.addAttribute("msg", "*用户不存在！*");
+            return "login";
+        }
+        //是否输入正确邮箱
+        if(!person.getEmail().equals(email)){
+            model.addAttribute("msg", "*邮箱错误！*");
+            return "login";
+        }
+        //生成随机密码
+        String random_str = UUID.randomUUID().toString().replace("-","").substring(16);
+        String random_pwd= MD5Util.generate(random_str);
+        person.setPassword(random_pwd);
+        //修改密码
+        if(identity.equals("user")){
+            userService.updateById((User)person);
+        }else if(identity.equals("manager")){
+            managerService.update((Manager)person);
+        }else {
+            secretaryService.updateById((Secretary)person);
+        }
+        //发送邮件
+        MailUtil.sendResetPwd(random_str,person.getEmail());
+        return "login";
     }
 }

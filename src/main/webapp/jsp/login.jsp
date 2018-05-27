@@ -33,24 +33,24 @@
                     shadeClose: true, //点击遮罩关闭
                     skin: 'layui-layer-rim',
                     closeBtn: 1,
-                    content:"jsp/forgetPw.jsp",
+                    content:"/jsp/forgetPw.jsp",
                     success: function (layero, index) {
-                       /* var body = layer.getChildFrame('body', index);
-                        var s = body.contents().find("#id");
-                        body.contents().val("用户名");
-                        body.contents().val("邮箱");
-                        body.contents().val("身份");*/
 
-                        //body.contents().find("#id").attr("readOnly", "true");
+
                     },
-                    btn: ['取消'],
+                    btn: ['取消',"确定"],
                     btn2: function (index, layero) {
                         //按钮【按钮2】的回调
-                        editItem(index, layero);
+                        forgetPwCallBack(layero, index);
                         return false;
                     }
                 })
             })
+        }
+
+        function forgetPwCallBack(layero, index) {
+            var params = window["layui-layer-iframe" + index].callbackdata();
+
         }
     </script>
 </head>

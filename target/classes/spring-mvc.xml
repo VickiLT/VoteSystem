@@ -18,12 +18,16 @@
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/user/login"/>
             <mvc:exclude-mapping path="/user/toLogin"/>
+            <mvc:exclude-mapping path="/user/retrieve"/>
+            <mvc:exclude-mapping path="/favicon.ico"/>
             <bean class="com.vote.util.LoginHandlerInterceptor"></bean>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/user/login"/>
             <mvc:exclude-mapping path="/user/toLogin"/>
+            <mvc:exclude-mapping path="/user/retrieve"/>
+            <mvc:exclude-mapping path="/favicon.ico"/>
             <bean class="com.vote.util.SessionInterceptor"></bean>
         </mvc:interceptor>
         <!--资源权限拦截器-->
@@ -31,6 +35,8 @@
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/user/login"/>
             <mvc:exclude-mapping path="/user/toLogin"/>
+            <mvc:exclude-mapping path="/user/retrieve"/>
+            <mvc:exclude-mapping path="/favicon.ico"/>
             <mvc:exclude-mapping path="/user/noLogin2Login"/>
             <bean class="com.vote.util.RolesInterceptor"></bean>
         </mvc:interceptor>
