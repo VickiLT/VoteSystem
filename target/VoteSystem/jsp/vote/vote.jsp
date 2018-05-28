@@ -159,13 +159,13 @@
                     {name: 'isCheckResults', hidden: true},
                     {name: 'isModifyVote', hidden: true}
                 ],
-                width: 1060,
                 caption: "投票",
                 sortname: 'createTime',
                 sortable: true,
                 sortorder: 'desc',
                 height: 270,
                 shrinkToFit: true,
+                autowidth:true,
                 gridComplete: function () {
                     var ids = $("#grid").jqGrid('getDataIDs');
                     for (var i = 0; i < ids.length; i++) {

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource name="jdbc/logger"
+              factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" auth="Container"
+              type="javax.sql.DataSource" driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/voteSystem?useUnicode=true&characterEncoding=utf-8"
+              username="root" password="123456" />
+</Context>
