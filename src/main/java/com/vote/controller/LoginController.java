@@ -13,9 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import javax.rmi.CORBA.Util;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -76,24 +76,44 @@ public class LoginController {
             model.addAttribute("msg", "*用户名或密码错误*");
             return "login";
         } else if (flag1 == 1) {
-            request.getSession().setAttribute("username", name);
-            request.getSession().setAttribute("identity",identity);
             if(identity.equals("user")){
                 Person person = userService.selectUserByName(name);
+                if(person.getStatus()==0){
+                    model.addAttribute("msg", "*用户未激活*");
+                    model.addAttribute("status", "0");
+                    return "login";
+                }
+                request.getSession().setAttribute("username", name);
+                request.getSession().setAttribute("identity",identity);
                 request.getSession().setAttribute("person",person);
                 sessionService.changeLogin4Me(person);
                 return "user/userframe";
             }else if(identity.equals("manager")){
                 Person person = managerService.selectManagerByName(name);
+                if(person.getStatus()==0){
+                    model.addAttribute("msg", "*用户未激活*");
+                    model.addAttribute("status", "0");
+                    return "login";
+                }
+                request.getSession().setAttribute("username", name);
+                request.getSession().setAttribute("identity",identity);
                 request.getSession().setAttribute("person",person);
                 sessionService.changeLogin4Me(person);
                 return "manager/managerframe";
             }else {
                 Person person = secretaryService.selectSecretaryByName(name);
+                if(person.getStatus()==0){
+                    model.addAttribute("msg", "*用户未激活*");
+                    model.addAttribute("status", "0");
+                    return "login";
+                }
+                request.getSession().setAttribute("username", name);
+                request.getSession().setAttribute("identity",identity);
                 request.getSession().setAttribute("person",person);
                 sessionService.changeLogin4Me(person);
                 return "secretary/secretaryframe";
             }
+
         }
         return "login";
     }
@@ -180,5 +200,21 @@ public class LoginController {
         map.put("message","重置成功，请到邮箱查看新密码");
         map.put("status","1");
         return map;
+    }
+
+    @RequestMapping("/activeAccount")
+    public String activeAccount(Model model,HttpServletRequest request) {
+        String code = request.getParameter("code");
+        String identity=request.getParameter("identity");
+        if(identity.equals("1")){
+            managerService.activeAccount(code);
+        }else
+        if(identity.equals("2")){
+            userService.activeAccount(code);
+        }else{
+            secretaryService.activeAccount(code);
+        }
+        model.addAttribute("msg","账户已激活！请登录");
+        return "/login";
     }
 }

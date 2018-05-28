@@ -26,4 +26,6 @@ public interface UserService {
 
     User selectUserByName(String name);
 
+    int activeAccount(String code);
+
 }

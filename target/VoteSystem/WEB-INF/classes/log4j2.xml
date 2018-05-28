@@ -32,5 +32,9 @@
         <Root level="info">
             <AppenderRef ref="Console"/>
         </Root>
+        <logger name="com.vote.dao">
+            <level value="DEBUG" />
+            <AppenderRef ref="Console" />
+        </logger>
     </Loggers>
 </Configuration>

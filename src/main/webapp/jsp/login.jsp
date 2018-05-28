@@ -28,6 +28,31 @@
         /**
          * Created by luter on 2018-5-26-0026.
          */
+        $(document).ready(function () {
+            var status='<%=request.getAttribute("status")%>';
+            console.log(status);
+            layui.use(['layer'], function () {
+                var layer = layui.layer;
+                layer.open({
+                    type: 2,
+                    area: ['400px', '360px'],
+                    shadeClose: true, //点击遮罩关闭
+                    skin: 'layui-layer-rim',
+                    closeBtn: 1,
+                    content:"用户未激活，是否重新发送激活邮件",
+                    success: function (layero, index) {
+
+
+                    },
+                    btn: ['取消',"确定"],
+                    btn2: function (index, layero) {
+                        //按钮【按钮2】的回调
+                        forgetPwCallBack(layero, index);
+                        return false;
+                    }
+                })
+            })
+        });
         function forgetPw(){
             layui.use(['layer'], function () {
                 var layer = layui.layer;

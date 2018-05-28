@@ -27,4 +27,6 @@ public interface ManagerDao {
     int updateByPrimaryKeySelective(Manager record);
 
     List<Manager> selectManager();
+
+    int updateByCode(String code);
 }

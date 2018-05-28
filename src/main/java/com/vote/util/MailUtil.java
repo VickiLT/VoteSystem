@@ -32,10 +32,11 @@ public class MailUtil {
         }
     }
     //
-   public static void sendRegisterCode(String code,String receiveMailAccount){
+   public static void sendRegisterCode(String code,String identity,String receiveMailAccount){
         try {
 
-            String body="127.0.0.1:8080/RegMail/user/regconf.do?code=" + code ;
+            String body="请点击以下连接\n"+"127.0.0.1:8080/user/activeAccount?code=" + code+
+                    "&identity="+identity ;
             sendTo("请激活你的邮箱",body,receiveMailAccount);
         }catch (Exception e){
 
@@ -65,7 +66,7 @@ public class MailUtil {
 
         // 2. 根据配置创建会话对象, 用于和邮件服务器交互
         Session session = Session.getDefaultInstance(props);
-        session.setDebug(true); // 设置为debug模式, 可以查看详细的发送 log
+        session.setDebug(false); // 设置为debug模式, 可以查看详细的发送 log
         // 4. 根据 Session 获取邮件传输对象
         Transport transport = session.getTransport();
 
