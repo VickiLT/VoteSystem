@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <% String path=request.getContextPath();
     /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
 %>
@@ -31,28 +32,51 @@
         $(document).ready(function () {
             var status='<%=request.getAttribute("status")%>';
             console.log(status);
+            if(status=='0'){
+                console.log("succe");
+                activeCount();
+            }
+
+        });
+        function activeCount(){
             layui.use(['layer'], function () {
                 var layer = layui.layer;
                 layer.open({
-                    type: 2,
-                    area: ['400px', '360px'],
+                    type: 1,
+                    area: ['400px', '200px'],
                     shadeClose: true, //点击遮罩关闭
                     skin: 'layui-layer-rim',
                     closeBtn: 1,
-                    content:"用户未激活，是否重新发送激活邮件",
-                    success: function (layero, index) {
-
-
-                    },
+                    content:"<div>用户未激活，是否重新发送激活邮件</div>",
                     btn: ['取消',"确定"],
                     btn2: function (index, layero) {
                         //按钮【按钮2】的回调
-                        forgetPwCallBack(layero, index);
+                        $.ajax({
+                            url:"/user/retrieve",
+                            data: JSON.stringify(data),
+                            dataType:"json",
+                            type: "POST",
+                            async: false,
+                            contentType: 'application/json',
+                            success:function(data){
+                                if(data.status=="1"){
+                                    alert("发送成功，请到邮箱查看");
+                                    layer.close(index);
+                                }else if(data.status=="0"){
+                                    alert("发送失败，请稍后尝试");
+                                }
+
+
+                            },
+                            error:function(data){
+                                alert("发送失败，请稍后尝试");
+                            }
+                        });
                         return false;
                     }
-                })
-            })
-        });
+                });
+            });
+        }
         function forgetPw(){
             layui.use(['layer'], function () {
                 var layer = layui.layer;
@@ -100,6 +124,7 @@
                         layer.close(index);
                     }else if(data.status=="0"){
                         alert(data.message);
+                        layer.close(index);
                     }
 
 
@@ -120,7 +145,10 @@
         欢迎来到投票系统
     </div>
     <div align="center">
-        <span style="color: red;font-size: 18px" >${msg}${param.msg}</span>
+        <div style="color: red;font-size: 18px" >${msg}${param.msg}</div>
+        <c:if test="${requestScope.status=='0'}" var="condition" scope="request">
+            　　<button class="activeCount"onclick="activeCount()">激活账户</button>
+        </c:if>
     </div>
 
     <div class="web_qr_login" id="web_qr_login" style="display: block; height: 275px;">
@@ -157,6 +185,8 @@
                         <div style="padding-left:70px;margin-top:20px;">
                             <input type="submit" value="登 录"style="width:150px;"class="button_blue"/>
                             <div class="forgetPw"onclick="forgetPw()">忘记密码</div>
+
+
                         </div>
                     </form>
                 </div>

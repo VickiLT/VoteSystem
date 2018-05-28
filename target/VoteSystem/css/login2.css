@@ -165,9 +165,9 @@ input.button_blue:hover
 }
 a.zcxy {text-decoration: underline;line-height:58px;margin-left:15px;color: #959ca8;}
 
-.web_login .login_form ,.forgetPw_form {
+/*.web_login .login_form ,.forgetPw_form {
 	margin-top:30px;
-}
+}*/
 .web_login .uinArea ,.forgetPw_form .uinArea{
 height: 60px;}
 .header{font-size: 20px;width: auto;line-height:50px;text-align: center;}
@@ -178,4 +178,13 @@ height: 60px;}
 	margin: 21px 0px 0px 14px;
 	background-color: transparent;
 	font-size: 12px;
+}
+
+.activeCount{
+	width: 70px;
+	margin: 10px auto;
+	background-color: #f6f1f1;
+	font-size: 16px;
+	height: 30px;
+	color: red;
 }
