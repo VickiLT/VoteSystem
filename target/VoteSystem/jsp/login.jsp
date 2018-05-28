@@ -7,15 +7,19 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
+<% String path=request.getContextPath();
+    /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
+%>
 <!DOCTYPE html>
 <html>
 <head>
     <title>投票系统</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
     <script type="text/javascript" src="../js/jquery.min.js"></script>
-    <script type="text/javascript" src="../../layui/layui.js"></script>
+    <script type="text/javascript" src="<%=path%>/layui/layui.js"></script>
 <%--    <script type="text/javascript" src="../js/login.js"></script>--%>
 
     <%--<script type="text/javascript" src="images/login.js"></script>--%>

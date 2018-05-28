@@ -8,21 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page isELIgnored="false" %>
+<% String path=request.getContextPath();
+    /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
+%>
 <html>
 <head>
-    <style type="text/css">
-        <!--
-        body {
-            /*background-color: #ccc;*/
-            font-size: 12pt;
-        }
-
-        -->
-        a {
-            font-size: 12pt;
-            text-decoration: none
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
 </head>
 <body>
 <a href="/frame/toMain">

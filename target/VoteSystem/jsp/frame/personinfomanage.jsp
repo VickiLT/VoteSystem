@@ -7,10 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
+<% String path=request.getContextPath();
+    /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
+%>
 <html>
-<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
-<script type="text/javascript" src="../../js/jquery.js"></script>
-<script src="../../layui/layui.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
+<link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
+<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
+<script src="<%=path%>/layui/layui.js"></script>
 <script>
     layui.use('form', function () {
         var form = layui.form;
@@ -18,18 +22,6 @@
         //各种基于事件的操作，下面会有进一步介绍
     });
 </script>
-<style type="text/css">
-    <!--
-    body {
-        /*background-color: #ccc;*/
-    }
-
-    -->
-    a {
-        font-size: 12pt;
-        text-decoration: none
-    }
-</style>
 <script type="text/javascript">
     /**
      验证手机号码是否输入合法
@@ -98,15 +90,24 @@
         window.location.href = "/frame/toChangePwd";
     }
 </script>
+<style>
+    .infoForm{
+        margin-left:10%;
+    }
+    .infoForm input{ border-color: #d1bbbb;}
+
+</style>
 <body>
 <a href="/frame/toMain">
     投票主页
-</a>>>><font style="font-size: 12pt">个人信息设置</font>
+</a>>>><span>个人信息设置</span>
+
 <br>
 <br>
+
 <br>
 <br>
-<form class="layui-form te-left" action="/frame/personalInfoChange" name="form" onsubmit="return validate()">
+<form class="layui-form te-left infoForm" action="/frame/personalInfoChange" name="form" onsubmit="return validate()">
     <input type="text" id="id" name="id" value="${person.id}" hidden="hidden">
     <div class="layui-form-item">
         <label class="layui-form-label">用户名</label>
@@ -120,10 +121,12 @@
         <div class="layui-input-block" style="width: 300px">
             <input type="password" id="password" name="password" required="required" readonly="readonly" style="opacity: 0.5" value="***"
                    class="layui-input">
-            <input type="button" class="layui-btn layui-btn-xs" value="点击修改密码" onclick="jump()" style="margin-left: 80px">
+            <input type="button" class="layui-btn" value="点击修改密码" onclick="jump()" style="margin-top:5px;margin-left: 80px">
         </div>
     </div>
-
+    <div align="center">
+        <span style="color: red;font-size: 18px" >${msg}${param.msg}</span>
+    </div>
     <div class="layui-form-item">
         <label class="layui-form-label">联系电话</label>
         <div class="layui-input-block" style="width: 300px">
@@ -139,7 +142,7 @@
     </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <input type="submit" class="layui-btn" value="修改" style="margin-left: 80px">
+            <input type="submit" class="layui-btn" value="修改个人信息" style="margin-left: 80px">
         </div>
     </div>
 </form>

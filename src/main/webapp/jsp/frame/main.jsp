@@ -1,20 +1,27 @@
 <%@ page contentType="text/html; charset=GBK" %>
 <%@page isELIgnored="false" %>
+<% String path=request.getContextPath();
+    /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
+%>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
     <style type="text/css">
-        <!--
-        body {
-            background-color: #ccc;
-        }
 
-        a {
-            font-size: 12pt;
-            text-decoration: none
+        table{
+            width: 50%;
+            min-width: 300px;
+            font-size: 20px;
+            text-align: center;
+            background-color: #354457;
+            margin: 50px;
+        }
+        table tr td{
+            padding:5px;
         }
 
         .STYLE2 {
-            color: #2A00AA
+            color: #aa0036;
         }
 
         -->
@@ -61,10 +68,7 @@
                 个开放的投票主题
             </p>
             <p>
-                其中
-            </p>
-            <p>
-                单选投票共有:
+                单选投票共有：
                 <span class="STYLE2">
 						<STRONG>${singleSum}</STRONG>
 					    </span>

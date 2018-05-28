@@ -127,8 +127,12 @@ public class PersonalInfoController {
      */
     @RequestMapping(value = "/personalInfoChange",method = {RequestMethod.POST,RequestMethod.GET})
     public  String personalInfoChange(HttpServletRequest request, HttpServletResponse response, Model model, Person person){
-          String identity = (String) request.getSession().getAttribute("identity");
-          if(identity.equals("manager")){
+        String identity = (String) request.getSession().getAttribute("identity");
+        if(person.getEmail().equals("")&&person.getTel().equals("")){
+            model.addAttribute("msg", "修改失败，邮箱和联系方式填写都为空！");
+            return "frame/personinfomanage";
+        }
+        if(identity.equals("manager")){
               Manager manager = new Manager();
               manager.setId(person.getId());
               manager.setName(person.getName());
@@ -153,6 +157,7 @@ public class PersonalInfoController {
               secretary.setTel(person.getTel());
               secretaryService.updateById(secretary);
           }
+
           return "frame/changesuccess";
     }
     @RequestMapping("/toMain")

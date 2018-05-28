@@ -6,14 +6,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% String path=request.getContextPath();
+    /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
+%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="../../css/whole.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
 
 </head>
 
-<frameset rows="*" cols="15%,*" frameborder="0" framespacing="0">
+<frameset rows="*" cols="300px,*" frameborder="0" framespacing="0">
     <frame src="/jsp/secretary/secretaryleft.jsp" name="leftFrame" noresize="noresize" id="leftFrame" title="leftFrame" />
     <frameset rows="70px,*" frameborder="0"  framespacing="0">
         <frame src="/jsp/manager/managertop.jsp" name="topFrame" noresize="noresize" id="topFrame" title="topFrame" />
