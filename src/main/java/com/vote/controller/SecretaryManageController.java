@@ -81,8 +81,6 @@ public class SecretaryManageController {
                     secretary.setIdentity("3");
                     secretary.setCode(UUID.randomUUID().toString().replace("-",""));
                     i = secretaryService.insert(secretary);
-                    MailUtil.sendRegisterCode(secretary.getCode(),secretary.getIdentity(),
-                            secretary.getEmail());
                 }
             }
         }

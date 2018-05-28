@@ -110,7 +110,6 @@ public class ManagerManageController {
                     manager.setCode(UUID.randomUUID().toString().replace("-",""));
                     LogUtils.info("姓名"+manager.getName());
                     i = managerService.insert(manager);
-                    MailUtil.sendRegisterCode(manager.getCode(),manager.getIdentity(),manager.getEmail());
                 }
             }
         }

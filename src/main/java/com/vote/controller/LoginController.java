@@ -7,6 +7,7 @@ import com.vote.service.Impl.KeyServiceImpl;
 import com.vote.util.MD5Util;
 import com.vote.util.MailUtil;
 import com.vote.util.SessionListener;
+import common.CommonResult;
 import org.aspectj.apache.bcel.verifier.VerifierFactoryObserver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -78,37 +79,40 @@ public class LoginController {
         } else if (flag1 == 1) {
             if(identity.equals("user")){
                 Person person = userService.selectUserByName(name);
+                request.getSession().setAttribute("username", name);
+                request.getSession().setAttribute("identity",identity);
                 if(person.getStatus()==0){
                     model.addAttribute("msg", "*用户未激活*");
                     model.addAttribute("status", "0");
                     return "login";
                 }
-                request.getSession().setAttribute("username", name);
-                request.getSession().setAttribute("identity",identity);
+
                 request.getSession().setAttribute("person",person);
                 sessionService.changeLogin4Me(person);
                 return "user/userframe";
             }else if(identity.equals("manager")){
                 Person person = managerService.selectManagerByName(name);
+                request.getSession().setAttribute("username", name);
+                request.getSession().setAttribute("identity",identity);
                 if(person.getStatus()==0){
                     model.addAttribute("msg", "*用户未激活*");
                     model.addAttribute("status", "0");
                     return "login";
                 }
-                request.getSession().setAttribute("username", name);
-                request.getSession().setAttribute("identity",identity);
+
                 request.getSession().setAttribute("person",person);
                 sessionService.changeLogin4Me(person);
                 return "manager/managerframe";
             }else {
                 Person person = secretaryService.selectSecretaryByName(name);
+                request.getSession().setAttribute("username", name);
+                request.getSession().setAttribute("identity",identity);
                 if(person.getStatus()==0){
                     model.addAttribute("msg", "*用户未激活*");
                     model.addAttribute("status", "0");
                     return "login";
                 }
-                request.getSession().setAttribute("username", name);
-                request.getSession().setAttribute("identity",identity);
+
                 request.getSession().setAttribute("person",person);
                 sessionService.changeLogin4Me(person);
                 return "secretary/secretaryframe";
@@ -206,15 +210,37 @@ public class LoginController {
     public String activeAccount(Model model,HttpServletRequest request) {
         String code = request.getParameter("code");
         String identity=request.getParameter("identity");
-        if(identity.equals("1")){
+        if(identity.equals("manager")){
             managerService.activeAccount(code);
         }else
-        if(identity.equals("2")){
+        if(identity.equals("user")){
             userService.activeAccount(code);
         }else{
             secretaryService.activeAccount(code);
         }
         model.addAttribute("msg","账户已激活！请登录");
-        return "/login";
+        return "activeSuccess";
+    }
+
+    @RequestMapping("/sentActiveMail")
+    @ResponseBody
+    public CommonResult<String> sentActiveMail(@RequestBody User user,Model model, HttpServletRequest request) {
+        if(user==null)
+            return new CommonResult<String>("1");
+        String identity=user.getIdentity();
+        String name=user.getName();
+        Person person=null;
+        if(identity.equals("manager")){
+            person=managerService.selectManagerByName(name);
+        }else if(identity.equals("user")){
+            person=userService.selectUserByName(name);
+        }else {
+            person=secretaryService.selectSecretaryByName(name);
+        }
+        if(person!=null) {
+            MailUtil.sendRegisterCode(person.getCode(),identity,person.getEmail());
+            return new CommonResult<String>("0");
+        }
+        return new CommonResult<String>("1");
     }
 }

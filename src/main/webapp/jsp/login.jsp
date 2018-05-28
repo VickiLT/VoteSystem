@@ -41,6 +41,10 @@
         function activeCount(){
             layui.use(['layer'], function () {
                 var layer = layui.layer;
+                var data={
+                    name:'<%=session.getAttribute("username")%>',
+                    identity:'<%=session.getAttribute("identity")%>'
+                };
                 layer.open({
                     type: 1,
                     area: ['400px', '200px'],
@@ -52,18 +56,18 @@
                     btn1: function (index, layero) {
                         //按钮【按钮2】的回调
                         $.ajax({
-                            url:"/user/retrieve",
+                            url:"/user/sentActiveMail",
                             data: JSON.stringify(data),
                             dataType:"json",
                             type: "POST",
                             async: false,
                             contentType: 'application/json',
                             success:function(data){
-                                if(data.status=="1"){
-                                    alert("发送成功，请到邮箱查看");
+                                if(data.errno=="0"){
                                     layer.close(index);
+                                    alert("发送成功，请到邮箱查看");
                                     window.location.href="<%=path%>/jsp/login.jsp";
-                                }else if(data.status=="0"){
+                                }else if(data.status=="1"){
                                     alert("发送失败，请稍后尝试");
                                 }
 

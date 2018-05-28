@@ -89,7 +89,6 @@ public class UserManageController {
                      user.setIdentity("2");
                      user.setCode(UUID.randomUUID().toString().replace("-",""));
                      i = userService.insert(user);
-                     MailUtil.sendRegisterCode(user.getCode(),user.getIdentity(),user.getEmail());
                  }
             }
         }
