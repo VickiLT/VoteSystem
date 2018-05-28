@@ -27,4 +27,6 @@ public interface UserDao {
     List<User> findAllUser();
 
     User selectUserByName(String name);
+
+    int updateByCode(String code);
 }

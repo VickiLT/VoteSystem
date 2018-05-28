@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.rmi.CORBA.Util;
 import javax.servlet.http.HttpServletRequest;
@@ -171,5 +172,21 @@ public class LoginController {
         //发送邮件
         MailUtil.sendResetPwd(random_str,person.getEmail());
         return "login";
+    }
+
+    @RequestMapping("/activeAccount")
+    public ModelAndView activeAccount(ModelAndView mv, HttpServletRequest request) {
+        String code = request.getParameter("code");
+        String identity=request.getParameter("identity");
+        if(identity.equals("1")){
+            //managerService.update()
+        }else
+        if(identity.equals("2")){
+            userService.activeAccount(code);
+        }else{
+            //secretaryService.updateById();
+        }
+        mv.setViewName("/user/log.jsp");
+        return mv;
     }
 }

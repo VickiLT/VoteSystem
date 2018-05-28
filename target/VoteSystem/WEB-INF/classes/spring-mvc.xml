@@ -20,6 +20,7 @@
             <mvc:exclude-mapping path="/user/toLogin"/>
             <mvc:exclude-mapping path="/user/retrieve"/>
             <mvc:exclude-mapping path="/favicon.ico"/>
+            <mvc:exclude-mapping path="/user/activeAccount"/>
             <bean class="com.vote.util.LoginHandlerInterceptor"></bean>
         </mvc:interceptor>
         <mvc:interceptor>
@@ -28,6 +29,7 @@
             <mvc:exclude-mapping path="/user/toLogin"/>
             <mvc:exclude-mapping path="/user/retrieve"/>
             <mvc:exclude-mapping path="/favicon.ico"/>
+            <mvc:exclude-mapping path="/user/activeAccount"/>
             <bean class="com.vote.util.SessionInterceptor"></bean>
         </mvc:interceptor>
         <!--资源权限拦截器-->
@@ -38,6 +40,7 @@
             <mvc:exclude-mapping path="/user/retrieve"/>
             <mvc:exclude-mapping path="/favicon.ico"/>
             <mvc:exclude-mapping path="/user/noLogin2Login"/>
+            <mvc:exclude-mapping path="/user/activeAccount"/>
             <bean class="com.vote.util.RolesInterceptor"></bean>
         </mvc:interceptor>
 

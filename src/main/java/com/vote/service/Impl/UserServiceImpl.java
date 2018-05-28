@@ -75,4 +75,8 @@ public class UserServiceImpl implements UserService {
         return userDao.selectUserByName(name);
     }
 
+    @Override
+    public int activeAccount(String code) {
+        return userDao.updateByCode(code);
+    }
 }

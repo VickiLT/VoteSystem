@@ -6,6 +6,7 @@ import com.vote.entity.User;
 import com.vote.entity.VoteProject;
 import com.vote.service.UserService;
 import com.vote.util.MD5Util;
+import com.vote.util.MailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by sunwe on 2018/3/21.
@@ -83,7 +85,10 @@ public class UserManageController {
                      return map;
                  }else {
                      user.setPassword(MD5Util.generate(user.getPassword()));
+                     user.setStatus(0);
+                     user.setCode(UUID.randomUUID().toString().replace("-",""));
                      i = userService.insert(user);
+                     MailUtil.sendRegisterCode(user.getCode(),user.getEmail());
                  }
             }
         }
