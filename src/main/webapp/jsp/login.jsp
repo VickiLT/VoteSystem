@@ -47,9 +47,9 @@
                     shadeClose: true, //点击遮罩关闭
                     skin: 'layui-layer-rim',
                     closeBtn: 1,
-                    content:"<div>用户未激活，是否重新发送激活邮件</div>",
-                    btn: ['取消',"确定"],
-                    btn2: function (index, layero) {
+                    content:'<div style="text-align: center;margin: 10px;font-size: 16px;">用户未激活，是否重新发送激活邮件</div>',
+                    btn: ['发送',"取消"],
+                    btn1: function (index, layero) {
                         //按钮【按钮2】的回调
                         $.ajax({
                             url:"/user/retrieve",
@@ -62,6 +62,7 @@
                                 if(data.status=="1"){
                                     alert("发送成功，请到邮箱查看");
                                     layer.close(index);
+                                    window.location.href="<%=path%>/jsp/login.jsp";
                                 }else if(data.status=="0"){
                                     alert("发送失败，请稍后尝试");
                                 }
