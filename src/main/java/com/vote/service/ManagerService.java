@@ -30,4 +30,6 @@ public interface ManagerService {
     List<Manager> selectManager();
 
     Manager selectManagerByName(String name);
+
+    int activeAccount(String code);
 }

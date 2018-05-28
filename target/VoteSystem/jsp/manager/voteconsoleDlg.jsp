@@ -6,14 +6,18 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% String path=request.getContextPath();
+    /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
+%>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
-    <script src="../../layui/layui.js"></script>
-    <script type="text/javascript" src="../../js/jquery.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../datetimepicker-master/build/jquery.datetimepicker.min.css"/>
-    <script type="text/javascript" src="../../datetimepicker-master/jquery.js"></script>
-    <script type="text/javascript" src="../../datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
+    <script src="<%=path%>/layui/layui.js"></script>
+    <script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/datetimepicker-master/build/jquery.datetimepicker.min.css"/>
+    <script type="text/javascript" src="<%=path%>/datetimepicker-master/jquery.js"></script>
+    <script type="text/javascript" src="<%=path%>/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
     <script>
         layui.use('form', function () {
             var form = layui.form;

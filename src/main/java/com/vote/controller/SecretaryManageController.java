@@ -6,6 +6,7 @@ import com.vote.entity.Manager;
 import com.vote.entity.Secretary;
 import com.vote.service.SecretaryService;
 import com.vote.util.MD5Util;
+import com.vote.util.MailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by sunwe on 2018/3/23.
@@ -75,7 +77,12 @@ public class SecretaryManageController {
                     return map;
                 } else {
                     secretary.setPassword(MD5Util.generate(secretary.getPassword()));
+                    secretary.setStatus(0);
+                    secretary.setIdentity("3");
+                    secretary.setCode(UUID.randomUUID().toString().replace("-",""));
                     i = secretaryService.insert(secretary);
+                    MailUtil.sendRegisterCode(secretary.getCode(),secretary.getIdentity(),
+                            secretary.getEmail());
                 }
             }
         }

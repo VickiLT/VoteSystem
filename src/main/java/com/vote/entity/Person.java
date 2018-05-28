@@ -12,6 +12,8 @@ public class Person {
     private String email;
     private int status;
     private String code;
+    private String identity;
+
     public String getIds() {
         return ids;
     }
@@ -74,5 +76,13 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
     }
 }

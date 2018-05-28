@@ -7,17 +7,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
+<% String path=request.getContextPath();
+    /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
+%>
 <html>
-<style type="text/css">
-    <!--
-    body {
-        background-color: #ccc;
-    }
-    -->
-    a { font-size: 12pt; text-decoration: none}
-</style>
+<head>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
+</head>
 <body>
-<a href="main.jsp">
+<a href="/frame/toMain">
     投票主页
 </a>>>>
 个人信息修改

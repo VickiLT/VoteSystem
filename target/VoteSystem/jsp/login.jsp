@@ -7,15 +7,19 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
+<% String path=request.getContextPath();
+    /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
+%>
 <!DOCTYPE html>
 <html>
 <head>
     <title>投票系统</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
     <script type="text/javascript" src="../js/jquery.min.js"></script>
-    <script type="text/javascript" src="../../layui/layui.js"></script>
+    <script type="text/javascript" src="<%=path%>/layui/layui.js"></script>
 <%--    <script type="text/javascript" src="../js/login.js"></script>--%>
 
     <%--<script type="text/javascript" src="images/login.js"></script>--%>
@@ -49,8 +53,36 @@
         }
 
         function forgetPwCallBack(layero, index) {
-            var params = window["layui-layer-iframe" + index].callbackdata();
+            var body = layer.getChildFrame('body', index);
+            var name=body.find("input#name").val();
+            var email=body.find("input#email").val();
+            var identity=body.find("select.identity").val();
+            var data={
+                name:name,
+                email:email,
+                identity:identity
+            }
+            $.ajax({
+                url:"/user/retrieve",
+                data: JSON.stringify(data),
+                dataType:"json",
+                type: "POST",
+                async: false,
+                contentType: 'application/json',
+                success:function(data){
+                    if(data.status=="1"){
+                        alert(data.message);
+                        layer.close(index);
+                    }else if(data.status=="0"){
+                        alert(data.message);
+                    }
 
+
+                },
+                error:function(data){
+                    alert(data);
+                }
+            });
         }
     </script>
 </head>

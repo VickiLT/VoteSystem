@@ -32,10 +32,11 @@ public class MailUtil {
         }
     }
     //
-   public static void sendRegisterCode(String code,String receiveMailAccount){
+   public static void sendRegisterCode(String code,String identity,String receiveMailAccount){
         try {
 
-            String body="127.0.0.1:8080/user/activeAccount?code=" + code ;
+            String body="请点击以下连接\n"+"127.0.0.1:8080/user/activeAccount?code=" + code+
+                    "&identity="+identity ;
             sendTo("请激活你的邮箱",body,receiveMailAccount);
         }catch (Exception e){
 

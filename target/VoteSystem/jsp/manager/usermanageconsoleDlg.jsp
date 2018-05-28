@@ -6,32 +6,25 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% String path=request.getContextPath();
+    /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
+%>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../../css/jquery-ui.css">
-    <script type="text/javascript" src="../../js/jquery.min.js"></script>
-    <script type="text/javascript" src="../../js/jquery-ui.js"></script>
-    <script type="text/javascript" src="../../layui/layui.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
-    <script type="text/javascript" src="../../js/jquery.js"></script>
-    <script src="../../layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
+    <script type="text/javascript" src="<%=path%>/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="<%=path%>/layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
+    <script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
+    <script src="<%=path%>/layui/layui.js"></script>
     <script>
         layui.use('form', function () {
             var form = layui.form;
 
         });
     </script>
-    <style type="text/css">
-        <!--
-        body {
-
-        }
-        -->
-        a {
-            font-size: 12pt;
-            text-decoration: none
-        }
-    </style>
     <script type="text/javascript">
         var callbackdata = function () {
             var id = $("#id").val();

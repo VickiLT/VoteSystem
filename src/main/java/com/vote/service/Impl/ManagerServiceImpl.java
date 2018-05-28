@@ -84,4 +84,9 @@ public class ManagerServiceImpl implements ManagerService {
         return managerDao.selectManagerByName(name);
     }
 
+    @Override
+    public int activeAccount(String code) {
+        return managerDao.updateByCode(code);
+
+    }
 }

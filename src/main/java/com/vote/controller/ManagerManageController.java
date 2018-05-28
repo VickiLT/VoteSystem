@@ -8,6 +8,7 @@ import com.vote.service.ManagerService;
 import com.vote.service.SecretaryService;
 import com.vote.util.LogUtils;
 import com.vote.util.MD5Util;
+import com.vote.util.MailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 /**
@@ -103,8 +105,12 @@ public class ManagerManageController {
                     return map;
                 } else {
                     manager.setPassword(MD5Util.generate(manager.getPassword()));
+                    manager.setStatus(0);
+                    manager.setIdentity("1");
+                    manager.setCode(UUID.randomUUID().toString().replace("-",""));
                     LogUtils.info("姓名"+manager.getName());
                     i = managerService.insert(manager);
+                    MailUtil.sendRegisterCode(manager.getCode(),manager.getIdentity(),manager.getEmail());
                 }
             }
         }

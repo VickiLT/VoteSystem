@@ -69,4 +69,10 @@ public class SecretaryServiceImpl implements SecretaryService {
     public Secretary selectSecretaryByName(String name) {
         return secretaryDao.selectSecretaryByName(name);
     }
+
+    @Override
+    public int activeAccount(String code) {
+
+        return secretaryDao.updateByCode(code);
+    }
 }

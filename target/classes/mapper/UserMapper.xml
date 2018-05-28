@@ -119,8 +119,8 @@
   </update>
   <update id="updateByCode" parameterType="string">
     update user
-    set status=1
-    where id= #{code}
+    set status= 1
+    where code= #{code}
   </update>
   <select id="findUserByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select

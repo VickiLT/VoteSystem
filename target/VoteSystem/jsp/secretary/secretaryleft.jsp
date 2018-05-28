@@ -7,12 +7,17 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
+<% String path=request.getContextPath();
+    /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
+%>
 <html>
 <head>
     <title>教学秘书左框架</title>
-    <link href="../../css/bootstraps.css" rel="stylesheet" media="screen">
-    <script src="../../js/jquery.js"></script>
-    <script src="../../js/bootstraps.min.js"></script>
+    <link href="<%=path%>/css/bootstraps.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
+    <link href="<%=path%>/css/manuLeft.css" rel="stylesheet" media="screen">
+    <script src="<%=path%>/js/jquery.js"></script>
+    <script src="<%=path%>/js/bootstraps.min.js"></script>
     <script type="text/javascript">
         var yes = function () {
             var r = confirm("你确定要退出吗？")
@@ -23,88 +28,6 @@
             }
         }
     </script>
-    <style>
-        body{
-            margin:0;
-            padding:0;
-            font-family: Lato,Helvetica,Arial,sans-serif;
-            font-size: 14px;
-            line-height: 1.72222;
-            color: #34495e;
-            background-color: #fff;
-        }
-        /*body {*/
-        /*background-color: #738edf;*/
-        /*font-size: 14px;*/
-        /*}*/
-        .wrap {
-            width: 100%;
-            position: absolute;
-            background: #eff3f6 bottom;
-            height: 100%;
-            overflow: hidden;
-        }
-        .left{
-            margin-left:0px;
-            position: absolute;
-            /*box-sizing: border-box;*/
-            width: 100%;
-            height: 100%;
-            background: #e3e3e3;
-            border-right:1px solid #9d9d9d;
-        }
-        .logoDiv{
-            padding-top: 10px;
-            padding-bottom: 20px;
-            height: 70px;
-            background-color: #354457;
-            font-size: 12px;
-            color: #fff;
-            vertical-align: bottom;
-        }
-        .logoTitle{
-            margin-left:15px;
-            line-height: 1.7;
-        }
-        .menu-title {
-            margin-left:15px;
-            color: #0C0C0C;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            font-size: 17px;
-            font-weight: bold;
-        }
-        .login-out{
-            color: #b97c7c;
-            font-size: 12px;
-            margin-left: 35px;
-        }
-        .panel-group{
-            margin-top:50px;
-        }
-        .manu-ul{
-            padding-left:10%;
-        }
-        .manu-ul li{
-            border-radius: 10px;
-            background-color: #462c2c2b;
-            width:80%;
-        }
-        .nav > li > a{
-            padding:6px 15px;
-        }
-        a{
-            color: #3F3F3F;
-            text-decoration: none;
-        }
-        a:hover,a:visited,a:link{
-            text-decoration: none;
-        }
-        .nav > li > a:hover, .nav > li > a:focus{
-            background-color: #462c2c2b;
-
-        }
-    </style>
 
 </head>
 <body>
@@ -114,7 +37,7 @@
         <div id="logoDiv" class="logoDiv">
             <div>
             <p id="logoTitle" class="logoTitle" align="left">
-                <img id="logo" alt="左右布局" src="../../img/cf.png"
+                <img id="logo" alt="左右布局" src="<%=path%>/img/cf.png"
                      style="height: 28px; padding-right: 5px;vertical-align: middle;">
                 <span style="font-size:12px;">欢迎你,</span>
                 <span>

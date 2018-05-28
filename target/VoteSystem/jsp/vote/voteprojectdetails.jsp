@@ -8,8 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page isELIgnored="false" %>
+<% String path=request.getContextPath();
+    /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
+%>
 <html>
-<script type="text/javascript" src="../../js/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
+<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
 <head>
     <style type="text/css">
         <!--

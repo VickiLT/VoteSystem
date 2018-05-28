@@ -7,10 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
+<% String path=request.getContextPath();
+    /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
+%>
 <html>
-<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
-<script type="text/javascript" src="../../js/jquery.js"></script>
-<script src="../../layui/layui.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
+<link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
+<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
+<script src="<%=path%>/layui/layui.js"></script>
 <script>
     layui.use('form', function () {
         var form = layui.form;

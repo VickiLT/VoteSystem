@@ -2,6 +2,7 @@ package com.vote.controller;
 
 import com.vote.entity.*;
 import com.vote.service.*;
+import com.vote.entity.User;
 import com.vote.service.Impl.KeyServiceImpl;
 import com.vote.util.MD5Util;
 import com.vote.util.MailUtil;
@@ -13,12 +14,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import javax.rmi.CORBA.Util;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -128,18 +132,18 @@ public class LoginController {
         return "login";
     }
     /**
-     * 登录
-     * @param name
-     * @param email
-     * @param identity
-     * @param model
-     * @param request
-     * @param response
-     * @return
+     *
+     *
      */
     @RequestMapping(value = "/retrieve",method = {RequestMethod.POST})
-    public String retrieve(String name, String email, String identity, Model model, HttpServletRequest request, HttpServletResponse response) {
+    @ResponseBody
+    public Map<String, Object> retrieve(@RequestBody User user) {
         Person person=null;
+        String name=user.getName();
+        String email=user.getEmail();
+        String identity=user.getIdentity();
+        Map<String,Object> map = new HashMap<String,Object>();
+        String status="1";
         if (identity.equals("user")) {
             person = userService.selectUserByName(name);
         } else if (identity.equals("manager")) {
@@ -149,13 +153,15 @@ public class LoginController {
         }
         //是否找到用户
         if(person==null){
-            model.addAttribute("msg", "*用户不存在！*");
-            return "login";
+            map.put("message","用户不存在");
+            map.put("status","0");
+            return map;
         }
         //是否输入正确邮箱
-        if(!person.getEmail().equals(email)){
-            model.addAttribute("msg", "*邮箱错误！*");
-            return "login";
+        if(!person.getEmail().equals(user.getEmail())){
+            map.put("message","邮箱错误");
+            map.put("status","0");
+            return map;
         }
         //生成随机密码
         String random_str = UUID.randomUUID().toString().replace("-","").substring(16);
@@ -171,22 +177,24 @@ public class LoginController {
         }
         //发送邮件
         MailUtil.sendResetPwd(random_str,person.getEmail());
-        return "login";
+        map.put("message","重置成功，请到邮箱查看新密码");
+        map.put("status","1");
+        return map;
     }
 
     @RequestMapping("/activeAccount")
-    public ModelAndView activeAccount(ModelAndView mv, HttpServletRequest request) {
+    public String activeAccount(Model model,HttpServletRequest request) {
         String code = request.getParameter("code");
         String identity=request.getParameter("identity");
         if(identity.equals("1")){
-            //managerService.update()
+            managerService.activeAccount(code);
         }else
         if(identity.equals("2")){
             userService.activeAccount(code);
         }else{
-            //secretaryService.updateById();
+            secretaryService.activeAccount(code);
         }
-        mv.setViewName("/user/log.jsp");
-        return mv;
+        model.addAttribute("msg","账户已激活！请登录");
+        return "/login";
     }
 }

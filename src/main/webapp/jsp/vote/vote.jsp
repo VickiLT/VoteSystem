@@ -8,28 +8,21 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
+<% String path=request.getContextPath();
+    /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
+%>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../../css/ui.jqgrid.css">
-    <link rel="stylesheet" type="text/css" href="../../css/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
-    <script type="text/javascript" src="../../js/jquery.min.js"></script>
-    <script type="text/javascript" src="../../js/jquery-ui.js"></script>
-    <script type="text/javascript" src="../../js/grid.locale-cn.js"></script>
-    <script type="text/javascript" src="../../js/jquery.jqGrid.min.js"></script>
-    <script type="text/javascript" src="../../layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/ui.jqgrid.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
+    <script type="text/javascript" src="<%=path%>/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="<%=path%>/js/grid.locale-cn.js"></script>
+    <script type="text/javascript" src="<%=path%>/js/jquery.jqGrid.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/layui/layui.js"></script>
     <style type="text/css">
-        <!--
-        body {
-            /*background-color: #ccc;*/
-            font-size: 12pt;
-        }
-
-        -->
-        a {
-            font-size: 12pt;
-            text-decoration: none
-        }
 
         ul.tabs {
             margin: 0;
