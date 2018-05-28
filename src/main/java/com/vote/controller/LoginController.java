@@ -7,6 +7,7 @@ import com.vote.service.Impl.KeyServiceImpl;
 import com.vote.util.MD5Util;
 import com.vote.util.MailUtil;
 import com.vote.util.SessionListener;
+import common.CommonResult;
 import org.aspectj.apache.bcel.verifier.VerifierFactoryObserver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -216,5 +217,15 @@ public class LoginController {
         }
         model.addAttribute("msg","账户已激活！请登录");
         return "/login";
+    }
+
+    @RequestMapping("/sentActiveMail")
+    @ResponseBody
+    public CommonResult<String> sentActiveMail(Model model, HttpServletRequest request) {
+        String code = request.getParameter("code");
+        String identity=request.getParameter("identity");
+        String email=request.getParameter("email");
+        MailUtil.sendRegisterCode(code,identity,email);
+        return new CommonResult<String>("0");
     }
 }
