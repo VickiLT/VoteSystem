@@ -18,7 +18,6 @@
     <link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
     <script type="text/javascript" src="<%=path%>/js/jquery.min.js"></script>
-    <script type="text/javascript" src="<%=path%>/js/jquery-ui.js"></script>
     <script type="text/javascript" src="<%=path%>/js/grid.locale-cn.js"></script>
     <script type="text/javascript" src="<%=path%>/js/jquery.jqGrid.min.js"></script>
     <script type="text/javascript" src="<%=path%>/layui/layui.js"></script>
@@ -55,7 +54,7 @@
                 colModel: [
                     {name: 'id', index: 'id', width: 100, key: true},
                     {
-                        name: 'voteTitle', index: 'name', width: 300, editable: true,
+                        name: 'voteTitle', index: 'name', width: 300, editable: true, title:false,
                         editoptions: {size: "20", maxlength: "30"},formatter:formattitle
                     },
                     {name: 'createTime', index: 'createTime', width: 200},
@@ -322,7 +321,7 @@
         }
         var formattitle = function (cellvalue, options, rowObject) {
             var id = rowObject.id;
-            return "<a href='/vote/showVoteProjectDetails?id=" + id + "' style='text-decoration:none;out-line:none'>"+cellvalue+"</a>";
+            return "<a href='/vote/showVoteProjectDetails?id=" + id + "' style='text-decoration:none;out-line:none' title='点击查看投票详情'>"+cellvalue+"</a>";
         }
         var unformatvode = function (cellvalue, options, rowObject) {
             if (cellvalue == "单选")

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@page isELIgnored="false" %>
 <% String path=request.getContextPath();
     /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
@@ -16,78 +17,71 @@
 <script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
 <head>
     <style type="text/css">
-        <!--
-        body {
-            /*background-color: #ccc;*/
+        .voteTitle{
+            text-align: center;
+            font-size: 30px;
         }
 
-        -->
-        a {
-            font-size: 12pt;
-            text-decoration: none
-        }
     </style>
 </head>
 <body>
 <a href="/frame/toMain">
     投票主页
-</a>>>>投票
+</a>>>>投票信息
 <br>
 <br>
 
 <div>
     <form theme="simple" id="form">
         <input type="text" hidden="hidden" id="id" name="id" value="${voteProject.id}">
-        <center>
-            <div name="voteTitle" style="font-size: 18px;">
+        <div>
+            <div name="voteTitle" class="voteTitle">
                 <label style="">${voteProject.id}.${voteProject.voteTitle}</label>
             </div>
             <br>
-            <div style="width: 80%">
-                <label style="padding-left: 5px">发布时间:${createTime}</label>
-                <labetl style="padding-left: 150px">截止时间:${voteProject.time}</labetl>
-            </div>
-        </center>
-        <div style="border: 1px dashed #000;margin-top: 10px;margin-left:200px;width: 70%;height: 100px">
-            <span style="margin-left: 5px">投票描述:${voteProject.voteExplain}</span>
+
         </div>
-        <center>
-            <c:if test="${voteProject.voteMode=='false'}">
-                <label>注意:只能选择一项</label>
-            </c:if>
+        <div style="margin: 10px auto 30px 10%;width: 80%;min-width:200px;min-height: 50px">
+            <span style="margin-left: 5px">&nbsp;&nbsp;${voteProject.voteExplain}</span>
+        </div>
+        <div style="margin: 10px auto 30px 20%">
             <c:if test="${voteProject.voteMode=='true'}">
-                <label>注意:只能选择${voteProject.selectNum}项</label>
+                <label><span style="color: red;">注意:</span>只能选择${voteProject.selectNum}项</label>
             </c:if>
-            <table>
+            <div>
                 <c:forEach items="${contentMap}" var="item">
                     <c:if test="${voteProject.voteMode=='true'}">
-                        <tr>
-                            <td>${item.key}.${item.value}</td>
-                        </tr>
+                        <div style="margin: 10px">
+                            <label for="input${item.key}">${item.key}、${item.value}</label>
+                            <input id="input${item.key}"type="checkbox" name="content" value="${item.key}"lay-skin="primary" disabled>
+                        </div>
                     </c:if>
                     <c:if test="${voteProject.voteMode=='false'}">
-                        <tr>
-                            <td>${item.key}.${item.value}</td>
-                        </tr>
+                        <div style="margin: 10px">
+                            <label for="input${item.key}">${item.key}、${item.value}</label>
+                            <input id="input${item.key}" type="radio" name="content" value="${item.key}"lay-skin="primary"disabled>
+                        </div>
                     </c:if>
                 </c:forEach>
-            </table>
-            <p/>
-            <p/>
-            <div>
-                <label>附件:</label>
-                <table>
-                <c:forEach var="me" items="${fileMap}">
-                    <tr>
-                    <c:url value="/file/downFile" var="downurl">
-                        <c:param name="filename" value="${me.value}"></c:param>
-                    </c:url>
-                        <td>${me.value}</td>
-                        <td>&nbsp;&nbsp;<a href="${downurl}">下载</a></td>
-                    </tr>
-                </c:forEach>
-                </table>
             </div>
+            <p/>
+            <p/>
+            <c:if test="${fileMap!= null &&fn:length(fileMap) != 0}">
+                <div>
+                    <table>
+                        <c:forEach var="me" items="${fileMap}">
+                            <tr>
+                                <c:url value="/file/downFile" var="downurl">
+                                    <c:param name="filename" value="${me.value}"></c:param>
+                                </c:url>
+                                <td><label>附件:</label></td>
+                                <td>${me.value}</td>
+                                <td>&nbsp;&nbsp;<a href="${downurl}">下载</a></td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+            </c:if>
             <font color="#483d8b">
                 <c:if test="${msg != null}">
                     注:*${msg}*
@@ -95,8 +89,13 @@
             </font>
             <br>
             <br>
-        </center>
+        </div>
     </form>
+    <div style="margin-left:10%;">
+        <%--<label style="padding-left: 5px">发布时间：${createTime}</label>--%>
+        <label style="color:red">注意：</label>
+        <label>截止时间：${voteProject.time}</label>
+    </div>
 </div>
 </body>
 </html>

@@ -14,29 +14,33 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
+    <style>
+        .voteTitle{
+            text-align: center;
+            font-size: 30px;
+        }
+    </style>
 </head>
 <body>
 <a href="/frame/toMain">
     投票主页
 </a>>>>查看投票结果
 <div>
+
     <form action="/vote/vote" theme="simple" id="form">
         <input type="text" hidden="hidden" id="id" name="id" value="${voteProject.id}">
-        <center>
-            <div name="voteTitle" style="font-size: 18px;">
+        <div>
+            <div name="voteTitle" class="voteTitle">
                 <label style="">${voteProject.id}.${voteProject.voteTitle}</label>
             </div>
             <br>
-            <div style="width: 80%">
-                <label style="padding-left: 5px">发布时间:${createTime}</label>
-                <labetl style="padding-left: 150px">截止时间:${voteProject.time}</labetl>
-            </div>
-        </center>
-        <div style="border: 1px dashed #000;margin-top: 10px;margin-left:200px;width: 70%;height: 100px">
-            <span style="margin-left: 5px">投票描述:${voteProject.voteExplain}</span>
+
+        </div>
+        <div style="margin: 10px auto 30px 10%;width: 80%;min-width:200px;min-height: 50px">
+            <span style="margin-left: 5px">&nbsp;&nbsp;${voteProject.voteExplain}</span>
         </div>
         <center>
-            <table style="border: 1px dashed #000">
+            <table style="border: 1px dashed #000;margin-top:50px">
                 <c:forEach items="${voteItems}" var="item">
                     <tr>
                         <td style="border: 1px dashed #000">${item.voteItemNumber}.${item.voteItemContent}</td>
@@ -48,6 +52,9 @@
             合计:${sum}票
         </center>
     </form>
+
+
+
 </div>
 </body>
 </html>

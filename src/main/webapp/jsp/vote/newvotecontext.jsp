@@ -13,9 +13,10 @@
 %>
 <html>
 
+
 <link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
 <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
-<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
+<script type="text/javascript" src="<%=path%>/js/jquery.min.js"></script>
 <script src="<%=path%>/layui/layui.js"></script>
 <script>
     layui.use('form', function () {
@@ -64,6 +65,7 @@
         var selectNum = $("#selectNum").val();
         var voteMode = $("#voteMode").val();
         var voteSum = $("#voteSum").val();
+        var voteExplain = $("#voteExplain").val();
         if (!IsNum(selectNum)) {
             alert("需选择的选项个数必须为数字！")
             return;
@@ -76,6 +78,9 @@
         } else if (voteMode == 'true' && selectNum >= voteSum) {
             alert("选择个数必须小于选项个数！")
             return;
+        }else if(voteExplain==""){
+            alert("投票描述不能为空！")
+            return;
         } else {
             document.getElementById("form").submit();
         }
@@ -86,6 +91,17 @@
         return (reNum.test(num));
     }
 </script>
+<style>
+    .layui-form-label{
+        width:25%;
+        min-width:100px;
+    }
+    .layui-input-block{
+        margin-left:35%;
+        width:30%;
+        min-width: 150px;;
+    }
+</style>
 <body>
 <a href="/frame/toMain">
     投票主页
@@ -93,33 +109,32 @@
 <br>
 <br>
 
-<form class="layui-form te-left" id="form" action="/vote/createVote/show" method="post" width="60%" enctype="multipart/form-data">
+<form class="layui-form te-left" id="form" action="/vote/createVote/show" method="post" enctype="multipart/form-data">
     <div class="layui-form-item">
-        <label class="layui-form-label">投票标题</label>
+        <label class="layui-form-label">投票标题：</label>
         <div class="layui-input-block">
             <input type="text" name="voteTitle" lay-verify="required" autocomplete="off" class="layui-input"
-                   value="${voteProject.voteTitle}" style="width: 600px">
+                   value="${voteProject.voteTitle}">
         </div>
     </div>
     <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">投票描述</label>
+        <label class="layui-form-label">投票描述：</label>
         <div class="layui-input-block">
-            <textarea name="voteExplain" id="voteExplain" placeholder="请输入内容" class="layui-textarea"
-                      style="width: 700px"></textarea>
+            <textarea name="voteExplain" id="voteExplain" placeholder="请输入内容" class="layui-textarea"></textarea>
         </div>
     </div>
     <c:forEach begin="1" end="${voteProject.voteSum}" step="1" var="i">
         <div class="layui-form-item">
-            <label class="layui-form-label">第${i}项</label>
+            <label class="layui-form-label">第${i}项：</label>
             <div class="layui-input-block">
                 <input type="text" name="content" lay-verify="required" placeholder="请输入选项内容" autocomplete="off"
-                       class="layui-input" style="width: 600px">
+                       class="layui-input">
             </div>
         </div>
     </c:forEach>
     <div class="layui-form-item">
-        <label class="layui-form-label">投票类型</label>
-        <div class="layui-input-block" style="width: 100px">
+        <label class="layui-form-label">投票类型：</label>
+        <div class="layui-input-block">
             <select name="voteMode" id="voteMode" lay-verify="required">
                 <option value="false" selected="selected">单选</option>
                 <option value="true">多选</option>
@@ -127,16 +142,16 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">输入需要选择的选项个数</label>
-        <div class="layui-input-block" style="width: 150px">
+        <label class="layui-form-label">必选项个数：</label>
+        <div class="layui-input-block">
             <input type="text" name="selectNum" lay-verify="required" value="${mode}" autocomplete="off"
-                   class="layui-input" id="selectNum" style="width:100px">
+                   class="layui-input" id="selectNum">
         </div>
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">是否允许修改所投票</label>
-        <div class="layui-input-block" style="width: 150px">
+        <label class="layui-form-label">允许修改：</label>
+        <div class="layui-input-block">
             <select name="isModifyVote" id="isModifyVote" lay-verify="required" lay-filter="test2">
                 <option value="false" selected="selected">不可修改</option>
                 <option value="true">可修改</option>
@@ -144,8 +159,8 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">是否允许查看总投票结果</label>
-        <div class="layui-input-block" style="width: 150px">
+        <label class="layui-form-label">查看总投票结果：</label>
+        <div class="layui-input-block">
             <select name="isCheckResults" id="isCheckResults" lay-verify="required" lay-filter="test1">
                 <option value="false" selected="selected">不可查看</option>
                 <option value="true">可查看</option>

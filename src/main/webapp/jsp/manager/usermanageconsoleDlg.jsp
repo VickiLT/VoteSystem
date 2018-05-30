@@ -174,8 +174,8 @@
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
-            <div class="layui-input-block" style="width: 250px">
-                <input type="text" id="password" name="password" required="required"class="layui-input"value="123456" readonly>
+            <div class="layui-input-block" style="width: 250px" >
+                <input type="text" id="password" name="password" required="required"class="layui-input"value="123456" style="color: #c3c0c0"readonly>
             </div>
         </div>
 

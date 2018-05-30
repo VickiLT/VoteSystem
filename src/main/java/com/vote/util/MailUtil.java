@@ -1,9 +1,14 @@
 package com.vote.util;
 
-import javax.mail.Session;
-import javax.mail.Transport;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
 
@@ -11,12 +16,15 @@ import java.util.Properties;
  * Created by wh on 2018/5/26.
  */
 public class MailUtil {
-    public static String myEmailAccount = "chrhh@126.com";
-    public static String myEmailPassword = "qweiop";
+    public static String myEmailAccount = "votemanager@126.com";
+    public static String myEmailPassword = "always123";
 
     // 发件人邮箱的 SMTP 服务器地址, 必须准确, 不同邮件服务器地址不同, 一般(只是一般, 绝非绝对)格式为: smtp.xxx.com
     // 网易163邮箱的 SMTP 服务器地址为: smtp.163.com
     public static String myEmailSMTPHost = "smtp.126.com";
+
+    public static String host=null;
+    public static String port=null;
 
     /**
      * 发送重置密码
@@ -33,15 +41,25 @@ public class MailUtil {
     }
     //
    public static void sendRegisterCode(String code,String identity,String receiveMailAccount){
-        try {
-
-            String body="请点击以下连接\n"+"127.0.0.1:8080/user/activeAccount?code=" + code+
-                    "&identity="+identity ;
+       if(host==null||port==null){
+           Properties pps = new Properties();
+           try {
+               //装载配置文件
+               Resource resource =  new ClassPathResource("mail.properties");
+               pps.load(new FileInputStream(resource.getURL().getPath()));
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
+           //返回获取的值
+           host=pps.getProperty("host");
+           port=pps.getProperty("port");
+       }
+       try {
+            String body="请点击以下连接\n"+"<a>http://"+host+":"+port+"/user/activeAccount?code=" + code+
+                    "&identity="+identity +"</a>";
             sendTo("请激活你的邮箱",body,receiveMailAccount);
         }catch (Exception e){
-
         }
-
    }
     public static void sendTo(String subject,String body, String receiveMailAccount) throws Exception {  //只需要传入正文和目标地址即可
         Properties props = new Properties(); // 参数配置
@@ -66,7 +84,7 @@ public class MailUtil {
 
         // 2. 根据配置创建会话对象, 用于和邮件服务器交互
         Session session = Session.getDefaultInstance(props);
-        session.setDebug(false); // 设置为debug模式, 可以查看详细的发送 log
+        session.setDebug(true); // 设置为debug模式, 可以查看详细的发送 log
         // 4. 根据 Session 获取邮件传输对象
         Transport transport = session.getTransport();
 
@@ -100,6 +118,8 @@ public class MailUtil {
         // 7. 关闭连接
         transport.close();
     }
+
+
 
     public static MimeMessage createMimeMessage(Session session,String subject, String sendMail, String receiveMail, String body)
             throws Exception {

@@ -17,8 +17,8 @@
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
-    <script type="text/javascript" src="<%=path%>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=path%>/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="<%=path%>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=path%>/js/grid.locale-cn.js"></script>
     <script type="text/javascript" src="<%=path%>/js/jquery.jqGrid.min.js"></script>
     <script type="text/javascript" src="<%=path%>/layui/layui.js"></script>
@@ -148,7 +148,7 @@
                 colModel: [
                     {name: 'id', index: 'id', width: 100, key: true},
                     {
-                        name: 'voteTitle', index: 'name', width: 200, editable: true,
+                        name: 'voteTitle', index: 'name', width: 200, editable: true,title:'点击查看详情',
                         editoptions: {size: "20", maxlength: "30"},formatter:formattitle
                     },
                     {name: 'createTime', index: 'createTime', width: 200},
@@ -315,7 +315,7 @@
         }
         var formattitle = function (cellvalue, options, rowObject) {
             var id = rowObject.id;
-            return "<a href='/vote/showVoteProjectDetails?id=" + id + "' style='text-decoration:none;out-line:none'>"+cellvalue+"</a>";
+            return "<a href='/vote/showVoteProjectDetails?id=" + id + "' style='text-decoration:none;out-line:none' title='查看投票详情'>"+cellvalue+"</a>";
         }
 
         var vote = function (id) {
@@ -376,7 +376,7 @@
     </ul>
     <div class="tab_container">
         <div id="tab1" class="tab_content" style="display: block; ">
-            <div  style="margin-bottom:10px">
+            <div style="margin-bottom:10px">
                 <form onsubmit="return false;" class="searForm">
                     投票标题:<input name="voteTitle" id="voteTitle"/>&nbsp;
                     投票类型:
