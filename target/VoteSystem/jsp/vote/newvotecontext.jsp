@@ -69,13 +69,13 @@
         if (!IsNum(selectNum)) {
             alert("需选择的选项个数必须为数字！")
             return;
-        } else if (voteMode == 'false' && selectNum != 1) {
+        } else if (voteMode == '0' && selectNum != 1) {
             alert("单选时选择个数必须等于1！")
             return;
-        } else if (voteMode == 'true' && selectNum < 2) {
+        } else if (voteMode == '1' && selectNum < 2) {
             alert("多选时选择个数必须大或等于2！")
             return;
-        } else if (voteMode == 'true' && selectNum >= voteSum) {
+        } else if (voteMode == '1' && selectNum >= voteSum) {
             alert("选择个数必须小于选项个数！")
             return;
         }else if(voteExplain==""){
@@ -136,8 +136,9 @@
         <label class="layui-form-label">投票类型：</label>
         <div class="layui-input-block">
             <select name="voteMode" id="voteMode" lay-verify="required">
-                <option value="false" selected="selected">单选</option>
-                <option value="true">多选</option>
+                <option value="0" selected="selected">单选</option>
+                <option value="1">多选</option>
+                <option value="2">排序</option>
             </select>
         </div>
     </div>

@@ -58,7 +58,7 @@
                 <ul class="panel-body nav nav-pills nav-stacked manu-ul" >
                     <li><a href="/frame/personalInfoManage" target="mainFrame">个人信息修改</a></li>
                     <li><a href="usernamage.jsp" target="mainFrame">委员管理</a></li>
-                    <li><a href="secretarymanage.jsp" target="mainFrame">教学秘书管理</a></li>
+                    <li><a href="secretarymanage.jsp" target="mainFrame">秘书管理</a></li>
                     <li><a href="managermanage.jsp" target="mainFrame">主任管理</a> </li>
                 </ul>
             </div>
@@ -72,7 +72,7 @@
             <div  id="voteList" class="collapse panel-collapse collapse">
                 <ul class="panel-body nav nav-pills nav-stacked manu-ul">
                     <li><a href="../vote/vote.jsp" target="mainFrame">投票</a></li>
-                    <li><a href="/vote/manageVote" target="mainFrame">管理投票</a></li>
+                    <li><a href="/vote/manageVote" target="mainFrame">投票事项管理</a></li>
                 </ul>
             </div>
         </div>

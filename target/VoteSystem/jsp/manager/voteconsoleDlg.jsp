@@ -33,12 +33,10 @@
         var callbackdata = function () {
             var voteTitle = $("#voteTitle").val();
             var time = $("#time").val();
-            var voteMode = $("#voteMode").val();
             var voteSum = $("#voteSum").val();
             var data = {
                 voteTitle: voteTitle,
                 time: time,
-                voteMode: voteMode,
                 voteSum: voteSum
             };
             return data;
@@ -92,15 +90,6 @@
                 <input type="text" name="voteTitle" id="voteTitle" required="required"
                        autocomplete="off"
                        class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">投票类型</label>
-            <div class="layui-input-block" style="width: 100px">
-                <select name="voteMode" id="voteMode" lay-verify="required">
-                    <option value="false" selected="selected">单选</option>
-                    <option value="true">多选</option>
-                </select>
             </div>
         </div>
         <div class="layui-form-item">
