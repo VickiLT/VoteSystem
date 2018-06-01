@@ -49,27 +49,45 @@
             $("#grid").jqGrid({
                 url: '/vote/voteProject/load',//请求数据的地址
                 datatype: "json",
-                colNames: ['投票编号', '投票主题', '创建时间', '截止时间', '投票状态', '投票类型'],
+                colNames: ['投票主题', '创建时间', '截止时间', '投票状态', '投票类型','投票结果','未投票人列表'],
                 //jqgrid主要通过下面的索引信息与后台传过来的值对应
                 colModel: [
-                    {name: 'id', index: 'id', width: 100, key: true},
                     {
                         name: 'voteTitle', index: 'name', width: 300, editable: true, title:false,
                         editoptions: {size: "20", maxlength: "30"},formatter:formattitle
                     },
                     {name: 'createTime', index: 'createTime', width: 200},
                     {name: 'endTime', index: 'endTime', width: 200, editable: true},
-                    {name: 'isClose', index: 'isClose', width: 130, formatter: formatclose, unformat: unformatclose},
-                    {name: 'voteMode', index: 'voteMode', width: 130, formatter: formatvode, unformat: unformatvode}
+                    {name: 'isClose', index: 'isClose', width: 60, formatter: formatclose, unformat: unformatclose},
+                    {name: 'voteMode', index: 'voteMode', width: 60, formatter: formatvode, unformat: unformatvode},
+                    {name: 'checkResults', width: 80, align: 'center', sortable: false},
+                    {name: 'noVoterList', width: 120, align: 'center', sortable: false},
                 ],
-                width: 1060,
+                width: 1140,
                 caption: "投票项目管理",
                 sortname: 'id',
                 sortable: true,
                 sortorder: 'asc',
                 height: 300,
                 shrinkToFit: true,
-
+                gridComplete: function () {
+                    var ids = $("#grid").jqGrid('getDataIDs');
+                    for (var i = 0; i < ids.length; i++) {
+                        var id = ids[i];
+                        var rowData = $("#grid").jqGrid('getRowData', id);
+                        var isClose = rowData.isClose;
+                        var isCheckResults = rowData.isCheckResults;
+                        var isModifyVote = rowData.isModifyVote;
+                        var identity = "${sessionScope.identity}";
+                        if (isClose == "false") {
+                                checkResults = "<a href='/vote/showVoteResults?id=" + id + "' style='color:#f60'>查看结果</a>"
+                        } else {
+                            checkResults = "<a href='javascript:return false;' style='opacity: 0.2'>查看结果</a>";
+                        }
+                        var noVoterList="<a href='/vote/showNoVoterLists?id=" + id + "' style='color:#f60'>查看</a>"
+                        jQuery("#grid").jqGrid('setRowData', ids[i], {checkResults: checkResults, noVoterList: noVoterList});
+                    }
+                },
                 //分页
                 pager: 'pager',
                 rowNum: 10,
@@ -310,7 +328,7 @@
 
             } else {
                 var params = window["layui-layer-iframe" + index].callbackdata();
-                window.location.href = 'createVote/firstStep?time=' + params.time + '&voteTitle=' + params.voteTitle + '&voteMode=' + params.voteMode + '&voteSum=' + params.voteSum;
+                window.location.href = 'createVote/firstStep?time=' + params.time + '&voteTitle=' + params.voteTitle + '&voteSum=' + params.voteSum;
             }
         }
         var formatvode = function (cellvalue, options, rowObject) {

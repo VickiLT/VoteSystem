@@ -80,7 +80,7 @@
                 </div>
                 <div  id="voteList" class="collapse panel-collapse collapse">
                     <ul class="panel-body nav nav-pills nav-stacked manu-ul">
-                        <li><a href="/vote/manageVote" target="mainFrame">管理投票</a></li>
+                        <li><a href="/vote/manageVote" target="mainFrame">投票事项管理</a></li>
                     </ul>
                 </div>
             </div>

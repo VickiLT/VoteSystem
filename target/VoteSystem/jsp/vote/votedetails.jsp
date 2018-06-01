@@ -22,7 +22,8 @@
     var validate = function () {
         var num = ${voteProject.selectNum};
         var modify = ${voteProject.isModifyVote};
-        if (num != 1) {
+        var voteMode = ${voteProject.voteMode};
+        if (voteMode= 1) {
             var length = $("input[name='content']:checked").length;
             if (length != num) {
                 alert("选择数量不符合！");
@@ -40,7 +41,7 @@
                 }
 
             }
-        } else {
+        } else if(voteMode=="0"){
             var radio = document.getElementsByName("content");
             var flag = 0;
             for (var i = 0; i < radio.length; i++) {
@@ -53,6 +54,24 @@
                 alert("请选择选项！");
                 return;
             } else {
+                if (modify == false) {
+                    var r = confirm("投票过后不得修改，你确定要投票吗？")
+                    if (r == true) {
+                        document.getElementById("form").submit();
+                    } else {
+                        return;
+                    }
+                } else {
+                    document.getElementById("form").submit();
+                }
+            }
+        }else{
+            var sort = document.getElementsByName("content");
+            var sortResult=sort.val();
+            if(sortResult.length<num){
+                alert("选择数量不符合！");
+                return;
+            }else{
                 if (modify == false) {
                     var r = confirm("投票过后不得修改，你确定要投票吗？")
                     if (r == true) {
@@ -118,21 +137,32 @@
             </c:if>
             <div>
                 <c:forEach items="${contentMap}" var="item">
-                    <c:if test="${voteProject.voteMode=='true'}">
+                    <c:if test="${voteProject.voteMode=='1'}">
                         <div style="margin: 10px">
                             <label for="input${item.key}">${item.key}、${item.value}</label>
                             <input id="input${item.key}"type="checkbox" name="content" value="${item.key}"lay-skin="primary" >
                         </div>
                     </c:if>
-                    <c:if test="${voteProject.voteMode=='false'}">
+                    <c:if test="${voteProject.voteMode=='0'}">
                         <div style="margin: 10px">
                             <label for="input${item.key}">${item.key}、${item.value}</label>
                             <input id="input${item.key}" type="radio" name="content" value="${item.key}"lay-skin="primary">
                         </div>
                     </c:if>
+                    <c:if test="${voteProject.voteMode=='2'}">
+                        <div style="margin: 10px">
+                            <label>${item.key}、${item.value}</label>
+                        </div>
+                    </c:if>
                 </c:forEach>
             </div>
             <p/>
+            <c:if test="${voteProject.voteMode=='2'}">
+                <div style="margin: 10px">
+                    <label>请按照排序优先级填写选项字母序号</label>
+                    <input class="sortResult" type="text" name="content"lay-skin="primary">
+                </div>
+            </c:if>
             <p/>
             <c:if test="${fileMap!= null &&fn:length(fileMap) != 0}">
             <div>
