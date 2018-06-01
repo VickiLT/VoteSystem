@@ -14,10 +14,7 @@ import common.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,10 +63,12 @@ public class VoteController {
 
     @RequestMapping("/createVote/firstStep")
     public String firstStep(VoteProject voteProject, Model model, HttpServletRequest request) throws UnsupportedEncodingException {
-        if (voteProject.isVoteMode() == false) {
+        if (voteProject.isVoteMode() ==1) {
             model.addAttribute("mode", 1);
-        } else {
-            model.addAttribute("mode", "");
+        } else if(voteProject.isVoteMode() ==0){
+            model.addAttribute("mode", "0");
+        }else if(voteProject.isVoteMode() ==2){
+            model.addAttribute("mode", "2");
         }
         model.addAttribute("voteProject", voteProject);
 
@@ -428,8 +427,9 @@ public class VoteController {
 
     @RequestMapping("/sentRemindEmail")
     @ResponseBody
-    public CommonResult<String> sentRemindEmail(String id, String name){
-        long projectId = Long.parseLong(id);
+    public CommonResult<String> sentRemindEmail(@RequestBody userProject userProject){
+        long projectId = Long.parseLong(userProject.getProjectId());
+        String name=userProject.getName();
         String title=voteProjectService.selectById(projectId).getVoteTitle();
         try {
             User user=userService.selectUserByName(name);
@@ -465,7 +465,8 @@ public class VoteController {
                 names.remove(voteDetails.getVoterName());
             }
         }
+        model.addAttribute("projectId", projectId);
         model.addAttribute("whoHasNotVote", names);
-        return "vote/showWhoVotes";
+        return "vote/showNoVoter";
     }
 }

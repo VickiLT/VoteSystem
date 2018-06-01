@@ -84,7 +84,7 @@
                         } else {
                             checkResults = "<a href='javascript:return false;' style='opacity: 0.2'>查看结果</a>";
                         }
-                        var noVoterList="<a href='/vote/showNoVoterLists?id=" + id + "' style='color:#f60'>查看</a>"
+                        var noVoterList="<a href='/vote/showWhoVotes?id=" + id + "' style='color:#f60'>查看</a>"
                         jQuery("#grid").jqGrid('setRowData', ids[i], {checkResults: checkResults, noVoterList: noVoterList});
                     }
                 },

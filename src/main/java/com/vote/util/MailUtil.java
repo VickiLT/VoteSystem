@@ -40,7 +40,7 @@ public class MailUtil {
         }
     }
     public static void sendRemindEmail(String title,String receiveMailAccount) throws Exception {
-        String body="关于投票："+title+"即将截止，请您尽快接票";
+        String body="关于投票："+title+"即将截止，请您尽快投票";
         sendTo("投票提醒~",body,receiveMailAccount);
     }
     //

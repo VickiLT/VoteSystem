@@ -14,7 +14,34 @@
 <html>
 <head>
     <title>未投票人列表</title>
+    <script type="text/javascript" src="<%=path%>/js/jquery.min.js"></script>
 </head>
+<script>
+    function remindVote(name){
+        var projectId='<%=request.getAttribute("projectId")%>'
+        var data={
+            projectId:projectId,
+            name:name
+        }
+        $.ajax({
+            url: "${basePath}/vote/sentRemindEmail",
+            type:'POST',
+            data: JSON.stringify(data),
+            dataType: "json",
+            async: false,
+            contentType: 'application/json',
+            success: function (data) {
+                if(data.errno==0){
+                    alert("已发送邮件提醒成功");
+                }
+
+            },
+            error: function (textStatus, e) {
+                alert("系统ajax交互错误: " + textStatus);
+            }
+        });
+    }
+</script>
 <style>
     .noVoter table{
         width:60%;
@@ -25,10 +52,10 @@
 <body>
 <div class="noVoter">
     <table>
-        <c:forEach items="${contentMap}" var="item">
+        <c:forEach items="${whoHasNotVote}" var="item" varStatus="i">
                 <tr style="margin: 10px">
-                    <td>${item.value}</td>
-                    <td>提醒他投票</td>
+                    <td>${i.count}、${item}</td>
+                    <td><button onclick="remindVote('${item}')">提醒他投票</button></td>
                 </tr>
         </c:forEach>
     </table>

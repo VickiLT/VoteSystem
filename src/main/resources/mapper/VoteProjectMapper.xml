@@ -9,7 +9,7 @@
         <result column="image" jdbcType="VARCHAR" property="image"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
-        <result column="vote_mode" jdbcType="BIT" property="voteMode"/>
+        <result column="vote_mode" jdbcType="INTEGER" property="voteMode"/>
         <result column="select_num" jdbcType="INTEGER" property="selectNum"/>
         <result column="is_check_results" jdbcType="BIT" property="isCheckResults"/>
         <result column="is_modify_vote" jdbcType="BIT" property="isModifyVote"/>

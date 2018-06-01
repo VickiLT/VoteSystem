@@ -166,9 +166,9 @@ public class PersonalInfoController {
         int singleSum = 0;
         int multiSum = 0;
         for (VoteProject vo:list) {
-            if(vo.isVoteMode()==false){
+            if(vo.isVoteMode()==0){
                 singleSum++;
-            }else if(vo.isVoteMode()==true){
+            }else if(vo.isVoteMode()==1){
                 multiSum++;
             }
         }
