@@ -393,8 +393,9 @@
             投票标题:<input name="voteTitle" id="voteTitle"/>&nbsp;
             投票类型:
             <select name="voteMode" id="voteMode">
-                <option value="false" selected="selected">单选</option>
-                <option value="true">多选</option>
+                <option value="0" selected="selected">单选</option>
+                <option value="1">多选</option>
+                <option value="2">多选</option>
             </select>&nbsp;
             投票状态:
             <select name="isClose" id="isClose">

@@ -45,26 +45,37 @@
             <span style="margin-left: 5px">&nbsp;&nbsp;${voteProject.voteExplain}</span>
         </div>
         <div style="margin: 10px auto 30px 20%">
-            <c:if test="${voteProject.voteMode=='true'}">
+            <c:if test="${voteProject.voteMode=='1'}">
                 <label><span style="color: red;">注意:</span>只能选择${voteProject.selectNum}项</label>
             </c:if>
             <div>
                 <c:forEach items="${contentMap}" var="item">
-                    <c:if test="${voteProject.voteMode=='true'}">
+                    <c:if test="${voteProject.voteMode=='1'}">
                         <div style="margin: 10px">
                             <label for="input${item.key}">${item.key}、${item.value}</label>
                             <input id="input${item.key}"type="checkbox" name="content" value="${item.key}"lay-skin="primary" disabled>
                         </div>
                     </c:if>
-                    <c:if test="${voteProject.voteMode=='false'}">
+                    <c:if test="${voteProject.voteMode=='0'}">
                         <div style="margin: 10px">
                             <label for="input${item.key}">${item.key}、${item.value}</label>
                             <input id="input${item.key}" type="radio" name="content" value="${item.key}"lay-skin="primary"disabled>
                         </div>
                     </c:if>
+                    <c:if test="${voteProject.voteMode=='2'}">
+                        <div style="margin: 10px">
+                            <label>${item.key}、${item.value}</label>
+                        </div>
+                    </c:if>
                 </c:forEach>
             </div>
             <p/>
+            <c:if test="${voteProject.voteMode=='2'}">
+            <div style="margin: 10px">
+                <label>请按照排序优先级填写选项字母序号</label>
+                <input class="sortResult" type="text" name="content"lay-skin="primary">
+            </div>
+            </c:if>
             <p/>
             <c:if test="${fileMap!= null &&fn:length(fileMap) != 0}">
                 <div>

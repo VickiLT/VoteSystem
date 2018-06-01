@@ -132,7 +132,7 @@
             <span style="margin-left: 5px">&nbsp;&nbsp;${voteProject.voteExplain}</span>
         </div>
         <div style="margin: 10px auto 30px 20%">
-            <c:if test="${voteProject.voteMode=='true'}">
+            <c:if test="${voteProject.voteMode=='1'}||${voteProject.voteMode=='2'}">
                 <label style="color: grey;"><span style="color: red;">注意:</span>只能选择${voteProject.selectNum}项</label>
             </c:if>
             <div>
