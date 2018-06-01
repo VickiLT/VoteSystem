@@ -313,15 +313,14 @@ public class VoteController {
     }
 
     @RequestMapping("/vote")
-    public String vote(Model model, @RequestParam("content") String[] content, String id, HttpServletRequest request) {
+    public String vote(Model model, @RequestParam("content") String[] content, String id, String voteMode,HttpServletRequest request) {
         String name = (String) request.getSession().getAttribute("username");
         long projectId = Long.parseLong(id);
         VoteDetails voteDetail = voteDetailsService.selectByProjectIdAndVoter(projectId, name);
         VoteItem voteItem = new VoteItem();
         StringBuffer selects = new StringBuffer();
         int vote_count=content.length;
-        String vote_type=null;
-
+        String vote_type=voteMode;
         for (String j : content) {
             selects.append(j);
             voteItem = voteItemService.selectByProjectIdAndNumber(projectId, j);

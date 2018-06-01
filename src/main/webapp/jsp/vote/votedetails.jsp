@@ -23,7 +23,7 @@
         var num = ${voteProject.selectNum};
         var modify = ${voteProject.isModifyVote};
         var voteMode = ${voteProject.voteMode};
-        if (voteMode= 1) {
+        if (voteMode== 1) {
             var length = $("input[name='content']:checked").length;
             if (length != num) {
                 alert("选择数量不符合！");
@@ -41,7 +41,7 @@
                 }
 
             }
-        } else if(voteMode=="0"){
+        } else if(voteMode==0){
             var radio = document.getElementsByName("content");
             var flag = 0;
             for (var i = 0; i < radio.length; i++) {
@@ -67,9 +67,27 @@
             }
         }else{
             var sort = document.getElementsByName("content");
-            var sortResult=sort.val();
-            if(sortResult.length<num){
-                alert("选择数量不符合！");
+            var flag1=0;
+            var flag2=0;
+            var data=new Array(sort.length);
+            for (var i = 0; i < sort.length; i++) {
+                if (sort[i].value>sort.length||sort[i].value<=0) {
+                    flag1 = 1;
+                }
+                data[i]=sort[i].value;
+            }
+            var nary=data.sort();
+
+            for(var i=0;i<nary.length;i++){
+                if (nary[i]==nary[i+1]){
+                   flag2=1;
+                }
+            }
+            if(flag1==1) {
+                alert("选填写的数字应该不大于需排序的选项个数");
+                return;
+            }else if(flag2==1){
+                alert("填写的顺序重复，请检查");
                 return;
             }else{
                 if (modify == false) {
@@ -121,6 +139,7 @@
 <div>
     <form action="/vote/vote" theme="simple" id="form">
         <input type="text" hidden="hidden" id="id" name="id" value="${voteProject.id}">
+        <input type="text" hidden="hidden" id="voteMode" name="voteMode" value="${voteProject.voteMode}">
         <div>
             <div name="voteTitle" class="voteTitle">
                 <label style="">${voteProject.id}.${voteProject.voteTitle}</label>
@@ -152,17 +171,12 @@
                     <c:if test="${voteProject.voteMode=='2'}">
                         <div style="margin: 10px">
                             <label>${item.key}、${item.value}</label>
+                            <input class="sortResult" type="number" name="content"lay-skin="primary">
                         </div>
                     </c:if>
                 </c:forEach>
             </div>
             <p/>
-            <c:if test="${voteProject.voteMode=='2'}">
-                <div style="margin: 10px">
-                    <label>请按照排序优先级填写选项字母序号</label>
-                    <input class="sortResult" type="text" name="content"lay-skin="primary">
-                </div>
-            </c:if>
             <p/>
             <c:if test="${fileMap!= null &&fn:length(fileMap) != 0}">
             <div>
