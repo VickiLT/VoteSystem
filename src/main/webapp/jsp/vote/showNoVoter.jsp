@@ -15,10 +15,22 @@
 <head>
     <title>未投票人列表</title>
 </head>
+<style>
+    .noVoter table{
+        width:60%;
+        min-width: 400px;
+        margin:auto;
+    }
+</style>
 <body>
-<div>
+<div class="noVoter">
     <table>
-        <c:forEach>
+        <c:forEach items="${contentMap}" var="item">
+                <tr style="margin: 10px">
+                    <td>${item.value}</td>
+                    <td>提醒他投票</td>
+                </tr>
+        </c:forEach>
     </table>
 </div>
 </body>

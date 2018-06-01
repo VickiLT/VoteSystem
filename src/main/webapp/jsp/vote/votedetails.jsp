@@ -22,7 +22,8 @@
     var validate = function () {
         var num = ${voteProject.selectNum};
         var modify = ${voteProject.isModifyVote};
-        if (num != 1) {
+        var voteMode = ${voteProject.voteMode};
+        if (voteMode= 1) {
             var length = $("input[name='content']:checked").length;
             if (length != num) {
                 alert("选择数量不符合！");
@@ -40,7 +41,7 @@
                 }
 
             }
-        } else {
+        } else if(voteMode=="0"){
             var radio = document.getElementsByName("content");
             var flag = 0;
             for (var i = 0; i < radio.length; i++) {
@@ -53,6 +54,24 @@
                 alert("请选择选项！");
                 return;
             } else {
+                if (modify == false) {
+                    var r = confirm("投票过后不得修改，你确定要投票吗？")
+                    if (r == true) {
+                        document.getElementById("form").submit();
+                    } else {
+                        return;
+                    }
+                } else {
+                    document.getElementById("form").submit();
+                }
+            }
+        }else{
+            var sort = document.getElementsByName("content");
+            var sortResult=sort.val();
+            if(sortResult.length<num){
+                alert("选择数量不符合！");
+                return;
+            }else{
                 if (modify == false) {
                     var r = confirm("投票过后不得修改，你确定要投票吗？")
                     if (r == true) {
