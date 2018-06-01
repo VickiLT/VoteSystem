@@ -63,15 +63,7 @@ public class VoteController {
 
     @RequestMapping("/createVote/firstStep")
     public String firstStep(VoteProject voteProject, Model model, HttpServletRequest request) throws UnsupportedEncodingException {
-        if (voteProject.isVoteMode() ==1) {
-            model.addAttribute("mode", 1);
-        } else if(voteProject.isVoteMode() ==0){
-            model.addAttribute("mode", "0");
-        }else if(voteProject.isVoteMode() ==2){
-            model.addAttribute("mode", "2");
-        }
         model.addAttribute("voteProject", voteProject);
-
         return "vote/newvotecontext";
     }
 
@@ -87,7 +79,7 @@ public class VoteController {
             vp.setVoteSum(String.valueOf(voteProject.getVoteSum()));
             vp.setIsCheckResults(voteProject.getIsCheckResults());
             vp.setIsModifyVote(voteProject.getIsModifyVote());
-            vp.setVoteMode(voteProject.isVoteMode());
+            vp.setVoteMode(voteProject.getVoteMode());
             vp.setContent(voteProject.getContent());
             vp.setCreateTime(new Date());
             vp.setEndTime(date);
@@ -327,14 +319,22 @@ public class VoteController {
         VoteDetails voteDetail = voteDetailsService.selectByProjectIdAndVoter(projectId, name);
         VoteItem voteItem = new VoteItem();
         StringBuffer selects = new StringBuffer();
+        int vote_count=content.length;
+        String vote_type=null;
+
         for (String j : content) {
             selects.append(j);
             voteItem = voteItemService.selectByProjectIdAndNumber(projectId, j);
             int poll = voteItem.getVoteItemPoll();
-            voteItem.setVoteItemPoll(poll + 1);
+            if(vote_type.equals("2")) {
+                voteItem.setVoteItemPoll(poll+(vote_count--));
+            }else
+                voteItem.setVoteItemPoll(poll + 1);
             voteItemService.update(voteItem);
         }
+
         if (voteDetail != null) {
+            vote_count=content.length;
             String[] out1 = AESUtil.decrypt(voteDetail.getId());
             //LogUtils.info(out1[1]);
             String[] select = {out1[1]};
@@ -343,7 +343,10 @@ public class VoteController {
                 voteItem = voteItemService.selectByProjectIdAndNumber(projectId, i);
                 //LogUtils.info(voteItem);
                 int poll = voteItem.getVoteItemPoll();
-                voteItem.setVoteItemPoll(poll - 1);
+                if(vote_type.equals("2"))
+                    voteItem.setVoteItemPoll(poll-(vote_count--));
+                else
+                    voteItem.setVoteItemPoll(poll - 1);
                 voteItemService.update(voteItem);
             }
             String[] out = AESUtil.encryptAndUpdate(voteDetail.getVoterName(),selects.toString(),voteDetail.getId());

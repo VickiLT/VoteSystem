@@ -30,7 +30,7 @@ public class VoteProject {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date endTime;
     //投票模式；1表示多选模式，0表示单选模式
-    private Integer voteMode;
+    private int voteMode;
     //多选模式下需要选择的个数
     private int selectNum;
     //用户是否可以查看投票结果;1可查看;0不可查看
@@ -118,11 +118,11 @@ public class VoteProject {
         this.endTime = endTime;
     }
 
-    public Integer isVoteMode() {
+    public int getVoteMode() {
         return voteMode;
     }
 
-    public void setVoteMode(Integer voteMode) {
+    public void setVoteMode(int voteMode) {
         this.voteMode = voteMode;
     }
 
