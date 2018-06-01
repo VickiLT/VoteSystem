@@ -64,4 +64,8 @@ public class VoteDetailsServiceImpl implements VoteDetailsService {
         return voteDetailsDao.insert1(details);
     }
 
+    @Override
+    public List<VoteDetails> findByProjectId(Long id) {
+        return voteDetailsDao.findByProjectId(id);
+    }
 }

@@ -26,4 +26,6 @@ public interface VoteDetailsService {
 
     int insert1(Details details);
 
+    List<VoteDetails> findByProjectId(Long id);
+
 }

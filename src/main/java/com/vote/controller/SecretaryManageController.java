@@ -4,7 +4,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.vote.entity.Manager;
 import com.vote.entity.Secretary;
+import com.vote.entity.User;
+import com.vote.service.ManagerService;
 import com.vote.service.SecretaryService;
+import com.vote.service.UserService;
 import com.vote.util.MD5Util;
 import com.vote.util.MailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,12 @@ import java.util.UUID;
 @RequestMapping("/manage/secretaryManage")
 @Controller
 public class SecretaryManageController {
+
+    @Autowired
+    private ManagerService managerService;
+
+    @Autowired
+    private UserService userService;
     @Autowired
     private SecretaryService secretaryService;
 
@@ -70,8 +79,10 @@ public class SecretaryManageController {
         int i = 0;
         if (secretary.getName() != null && !(secretary.getName().equals(""))) {
             if (secretary.getPassword() != null && !(secretary.getPassword().equals(""))) {
+                Manager manager=managerService.selectManagerByName(secretary.getName());
+                User user=userService.selectUserByName(secretary.getName());
                 Secretary secretary1 = secretaryService.selectSecretaryByName(secretary.getName());
-                if (secretary1 != null) {
+                if (manager!=null||user!=null||secretary1 != null) {
                     map.put("secretary", null);
                     map.put("message", "用户名已存在");
                     return map;

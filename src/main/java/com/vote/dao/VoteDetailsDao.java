@@ -30,4 +30,6 @@ public interface VoteDetailsDao {
     List<VoteDetails> selectByVoter(String name);
 
     int insert1(Details details);
+
+    List<VoteDetails> findByProjectId(Long id);
 }

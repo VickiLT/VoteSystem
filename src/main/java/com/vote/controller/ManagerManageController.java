@@ -4,8 +4,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.vote.entity.Manager;
 import com.vote.entity.Secretary;
+import com.vote.entity.User;
 import com.vote.service.ManagerService;
 import com.vote.service.SecretaryService;
+import com.vote.service.UserService;
 import com.vote.util.LogUtils;
 import com.vote.util.MD5Util;
 import com.vote.util.MailUtil;
@@ -33,6 +35,11 @@ public class ManagerManageController {
     @Autowired
     private ManagerService managerService;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private SecretaryService secretaryService;
     /**
      * 加载
      * @param page
@@ -99,7 +106,9 @@ public class ManagerManageController {
         if (manager.getName() != null && !(manager.getName().equals(""))) {
             if (manager.getPassword() != null && !(manager.getPassword().equals(""))) {
                 Manager manager1 = managerService.selectManagerByName(manager.getName());
-                if (manager1 != null) {
+                User user=userService.selectUserByName(manager.getName());
+                Secretary secretary=secretaryService.selectSecretaryByName(manager.getName());
+                if (manager1 != null||user!=null||secretary!=null) {
                     map.put("manager", null);
                     map.put("message", "用户名已存在");
                     return map;

@@ -9,6 +9,8 @@ import com.vote.service.Impl.KeyServiceImpl;
 import com.vote.util.AESUtil;
 import com.vote.util.FileUtil;
 import com.vote.util.LogUtils;
+import com.vote.util.MailUtil;
+import common.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,6 +54,15 @@ public class VoteController {
 
     @Autowired
     private FileDao fileDao;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private  ManagerService managerService;
+
+    @Autowired
+    private SecretaryService secretaryService;
 
     @RequestMapping("/createVote/firstStep")
     public String firstStep(VoteProject voteProject, Model model, HttpServletRequest request) throws UnsupportedEncodingException {
@@ -415,4 +426,46 @@ public class VoteController {
         return "vote/voteprojectdetails";
     }
 
+    @RequestMapping("/sentRemindEmail")
+    @ResponseBody
+    public CommonResult<String> sentRemindEmail(String id, String name){
+        long projectId = Long.parseLong(id);
+        String title=voteProjectService.selectById(projectId).getVoteTitle();
+        try {
+            User user=userService.selectUserByName(name);
+            if(user!=null)
+                MailUtil.sendRemindEmail(title,user.getEmail());
+            else {
+                Manager manager=managerService.selectManagerByName(name);
+                MailUtil.sendRemindEmail(title,manager.getEmail());
+            }
+        }catch (Exception e){
+            return new CommonResult<String>("1");
+        }
+        return new CommonResult<String>("0");
+    }
+
+
+
+    @RequestMapping("/showWhoVotes")
+    public String showWhoVotes(String id, Model model, HttpServletRequest request) {
+        long projectId = Long.valueOf(id);
+        List<User> allUser=userService.findAllUser();
+        List<Manager>allManagers =managerService.selectManager();
+        Set<String> names= new HashSet<String>();
+        for(User user:allUser){
+            names.add(user.getName());
+        }
+        for(Manager manager:allManagers){
+            names.add(manager.getName());
+        }
+        List<VoteDetails>allVoteDetails=voteDetailsService.findByProjectId(projectId);
+        for(VoteDetails voteDetails:allVoteDetails){
+            if(names.contains(voteDetails.getVoterName())){
+                names.remove(voteDetails.getVoterName());
+            }
+        }
+        model.addAttribute("whoHasNotVote", names);
+        return "vote/showWhoVotes";
+    }
 }

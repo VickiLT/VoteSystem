@@ -23,6 +23,12 @@
     from vote_details
     where vote_project_id = #{0} AND  voter_name = #{1}
   </select>
+  <select id="findByProjectId" resultMap="BaseResultMap">
+     select
+      <include refid="Base_Column_List" />
+     from vote_details
+      where vote_project_id = #{0}
+  </select>
   <select id="selectByVoter" resultMap="BaseResultMap" parameterType="java.lang.String">
     SELECT
     <include refid="Base_Column_List"/>
