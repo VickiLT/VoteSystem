@@ -76,6 +76,7 @@
                 }
                 data[i]=sort[i].value;
             }
+
             var nary=data.sort();
 
             for(var i=0;i<nary.length;i++){
