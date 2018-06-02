@@ -13,6 +13,7 @@
 %>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/ui.jqgrid.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">

@@ -171,7 +171,7 @@
                     <c:if test="${voteProject.voteMode=='2'}">
                         <div style="margin: 10px">
                             <label>${item.key}、${item.value}</label>
-                            <input class="sortResult" type="number" name="content"lay-skin="primary">
+                            <input class="sortResult" type="number" name="content" lay-skin="primary" min="1" max="${contentMap.size()}">
                         </div>
                     </c:if>
                 </c:forEach>
