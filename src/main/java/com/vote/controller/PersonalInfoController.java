@@ -165,16 +165,20 @@ public class PersonalInfoController {
         List<VoteProject> list = voteProjectService.selectByIsClose(true);
         int singleSum = 0;
         int multiSum = 0;
+        int sortSum = 0;
         for (VoteProject vo:list) {
             if(vo.getVoteMode()==0){
                 singleSum++;
             }else if(vo.getVoteMode()==1){
                 multiSum++;
+            }else{
+                sortSum++;
             }
         }
         model.addAttribute("sum",list.size());
         model.addAttribute("singleSum",singleSum);
         model.addAttribute("multiSum",multiSum);
+        model.addAttribute("sortSum",sortSum);
         return "frame/main";
     }
     @RequestMapping("/toError")

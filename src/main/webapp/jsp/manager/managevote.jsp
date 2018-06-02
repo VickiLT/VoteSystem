@@ -50,17 +50,18 @@
             $("#grid").jqGrid({
                 url: '/vote/voteProject/load',//请求数据的地址
                 datatype: "json",
-                colNames: ['投票主题', '创建时间', '截止时间', '投票状态', '投票类型','投票结果','未投票人列表'],
+                colNames: ['投票编号','投票主题', '创建时间', '截止时间', '投票状态', '投票类型','投票结果','未投票人列表'],
                 //jqgrid主要通过下面的索引信息与后台传过来的值对应
                 colModel: [
+                    {name: 'id', index: 'id', width: 100, key: true,sortable:false},
                     {
                         name: 'voteTitle', index: 'name', width: 300, editable: true, title:false,
                         editoptions: {size: "20", maxlength: "30"},formatter:formattitle
                     },
                     {name: 'createTime', index: 'createTime', width: 200},
                     {name: 'endTime', index: 'endTime', width: 200, editable: true},
-                    {name: 'isClose', index: 'isClose', width: 60, formatter: formatclose, unformat: unformatclose},
-                    {name: 'voteMode', index: 'voteMode', width: 60, formatter: formatvode, unformat: unformatvode},
+                    {name: 'isClose', index: 'isClose', width: 100, formatter: formatclose, unformat: unformatclose},
+                    {name: 'voteMode', index: 'voteMode', width: 100, formatter: formatvode, unformat: unformatvode},
                     {name: 'checkResults', width: 80, align: 'center', sortable: false},
                     {name: 'noVoterList', width: 120, align: 'center', sortable: false},
                 ],
@@ -104,7 +105,8 @@
                 autoScroll: true,
                 cellEdit: false,
                 multiselect: false,
-                rownumbers: true
+                rownumbers: true,
+
             });
 
             $("#grid").jqGrid('navGrid', '#pager', {
@@ -113,10 +115,19 @@
                 search: false,
                 refresh: true,
                 add: true,
+                view:true,
                 addfunc: openDialog4Adding,
                 delfunc: openDialog4Deleting,
                 editfunc: openDialog4Updating,
-                alerttext: "请选择需要操作的数据行!"
+                viewfunc: openDialog4Viewing,
+                alerttext: "请选择需要操作的数据行!",
+                navButtonAdd:{
+                    buttonicon: false,
+                },
+                addtext: "添加",
+                edittext: "编辑",
+                deltext: "删除",
+                refreshtext:"刷新"
 //            edit:false,add:false,del:false,search:false,refresh:false
 
             });
@@ -141,16 +152,23 @@
             })
         }
         var formatvode = function (cellvalue, options, rowObject) {
-            if (cellvalue == false)
-                return "单选";
-            else
-                return "多选";
+            if (cellvalue == '0') {
+                return '单选';
+            }else if(cellvalue == '1'){
+                return '多选';
+            }else{
+                return '排序';
+            }
+
         }
         var unformatvode = function (cellvalue, options, rowObject) {
-            if (cellvalue == "单选")
-                return false;
-            else
-                return true;
+            if (cellvalue == "单选"){
+                return "0";
+            }else if(cellvalue == "多选"){
+                return "1";
+            }else{
+                return "2";
+            }
         }
         var openDialog4Updating = function () {
             var selectedRowId = $("#grid").jqGrid("getGridParam", "selrow");
@@ -162,9 +180,8 @@
             };
             $.ajax({
                 url: "${basePath}/vote/toUpdate",
-
                 data: params,
-                dataType: "json",
+                dataType:"json",
                 cache: false,
                 success: function (data) {
 //          alert("id-->" + response.id + "; message-->" + response.message);
@@ -174,7 +191,8 @@
                             voteTitle: data.voteTitle,
                             endTime: data.endTime,
                             isCheckResults: data.isCheckResults,
-                            isModifyVote: data.isModifyVote
+                            isModifyVote: data.isModifyVote,
+                            voteExplain: data.voteExplain,
                         };
                         layui.use(['layer'], function () {
                             var layer = layui.layer;
@@ -189,6 +207,7 @@
                                     var body = layer.getChildFrame('body', index);
                                     body.contents().find("#id").val(rowData.id);
                                     body.contents().find("#voteTitle").val(dataRow.voteTitle);
+                                    body.contents().find("#voteExplain").val(dataRow.voteExplain);
                                     body.contents().find("#endTime").val(dataRow.endTime);
 //                                    if(dataRow.isCheckResults == true){
 //                                        var select = 'dd[lay-value=' + dataRow.isCheckResults + ']';
@@ -236,6 +255,10 @@
             })
 
         };
+        var openDialog4Viewing=function(cellvalue, options, rowObject){
+            var id = rowObject.id;
+            window.location.href='/vote/showVoteProjectDetails?id=' + id ;
+        }
         var loadSelectedRowData = function () {
             // 当前选中的行
             var selectedRowId = $("#grid").jqGrid("getGridParam", "selrow");
@@ -272,7 +295,7 @@
                             var dataRow = {
                                 id: data.id,
                                 voteTitle: data.voteTitle,
-                                endTime: data.endTime
+                                endTime: data.endTime,
                             };
 
                             /*
@@ -332,21 +355,10 @@
                 window.location.href = 'createVote/firstStep?time=' + params.time + '&voteTitle=' + params.voteTitle + '&voteSum=' + params.voteSum;
             }
         }
-        var formatvode = function (cellvalue, options, rowObject) {
-            if (cellvalue == false)
-                return '单选';
-            else
-                return '多选';
-        }
         var formattitle = function (cellvalue, options, rowObject) {
             var id = rowObject.id;
-            return "<a href='/vote/showVoteProjectDetails?id=" + id + "' style='text-decoration:none;out-line:none' title='点击查看投票详情'>"+cellvalue+"</a>";
-        }
-        var unformatvode = function (cellvalue, options, rowObject) {
-            if (cellvalue == "单选")
-                return "false";
-            else
-                return "true";
+            /*return "<a href='/vote/showVoteProjectDetails?id=" + id + "' style='text-decoration:none;out-line:none' title='点击查看投票详情'>"+cellvalue+"</a>";*/
+            return cellvalue;
         }
         var formatclose = function (cellvalue, options, rowObject) {
             if (cellvalue == false)
@@ -396,7 +408,7 @@
             <select name="voteMode" id="voteMode">
                 <option value="0" selected="selected">单选</option>
                 <option value="1">多选</option>
-                <option value="2">多选</option>
+                <option value="2">排序</option>
             </select>&nbsp;
             投票状态:
             <select name="isClose" id="isClose">

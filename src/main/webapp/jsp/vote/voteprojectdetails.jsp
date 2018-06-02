@@ -12,7 +12,7 @@
 <% String path=request.getContextPath();
     /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
 %>
-<htmluk>
+<html>
 <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
 <script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
 <head>

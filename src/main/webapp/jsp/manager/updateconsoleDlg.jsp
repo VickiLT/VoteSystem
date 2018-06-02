@@ -38,12 +38,14 @@
         var callbackdata = function () {
             var id = $("#id").val();
             var voteTitle = $("#voteTitle").val();
+            var voteExplain = $("#voteExplain").val();
             var endTime = $("#endTime").val();
             var isCheckResults = $("#isCheckResults").val();
             var isModifyVote = $("#isModifyVote").val();
             var data = {
                 id: id,
                 voteTitle: voteTitle,
+                voteExplain: voteExplain,
                 endTime: endTime,
                 isCheckResults: isCheckResults,
                 isModifyVote: isModifyVote
@@ -58,6 +60,10 @@
             var time = params.endTime;
             if (params.voteTitle == "") {
                 alert("投票标题不能为空！")
+                return false;
+            }
+            if (params.voteExplain== "") {
+                alert("投票描述不能为空！")
                 return false;
             }
 //            if (time == null) {
@@ -85,6 +91,14 @@
             <label class="layui-form-label">投票主题</label>
             <div class="layui-input-block" style="width: 200px">
                 <input type="text" name="voteTitle" id="voteTitle" required="required"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">投票描述</label>
+            <div class="layui-input-block" style="width: 200px">
+                <input type="text" name="voteExplain" id="voteExplain" required="required"
                        autocomplete="off"
                        class="layui-input">
             </div>

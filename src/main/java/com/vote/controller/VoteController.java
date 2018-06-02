@@ -11,6 +11,7 @@ import com.vote.util.FileUtil;
 import com.vote.util.LogUtils;
 import com.vote.util.MailUtil;
 import common.CommonResult;
+import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -265,6 +266,7 @@ public class VoteController {
         voteProject1.setVoteTitle(voteProject.getVoteTitle());
         voteProject1.setIsCheckResults(voteProject.getIsCheckResults());
         voteProject1.setIsModifyVote(voteProject.getIsModifyVote());
+        voteProject1.setVoteExplain(voteProject.getVoteExplain());
         voteProjectService.update(voteProject1);
         return voteProject1;
     }
@@ -323,7 +325,12 @@ public class VoteController {
         String vote_type=voteMode;
         for (String j : content) {
             selects.append(j);
-            voteItem = voteItemService.selectByProjectIdAndNumber(projectId, j);
+            if(vote_type.equals("2")){
+                char x=(char)(Integer.parseInt(j)+64);
+                voteItem = voteItemService.selectByProjectIdAndNumber(projectId, x+"");
+            }else {
+                voteItem = voteItemService.selectByProjectIdAndNumber(projectId, j);
+            }
             int poll = voteItem.getVoteItemPoll();
             if(vote_type.equals("2")) {
                 voteItem.setVoteItemPoll(poll+(vote_count--));
@@ -339,7 +346,13 @@ public class VoteController {
             String[] select = {out1[1]};
             //LogUtils.info(select[0]);
             for (String i : select) {
-                voteItem = voteItemService.selectByProjectIdAndNumber(projectId, i);
+                if(vote_type.equals("2")) {
+                    char x=(char)(Integer.parseInt(i)+64);
+                    voteItem=voteItemService.selectByProjectIdAndNumber(projectId,x+"");
+                }
+                else {
+                    voteItem = voteItemService.selectByProjectIdAndNumber(projectId, i);
+                }
                 //LogUtils.info(voteItem);
                 int poll = voteItem.getVoteItemPoll();
                 if(vote_type.equals("2"))

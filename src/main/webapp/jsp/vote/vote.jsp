@@ -289,16 +289,23 @@
             });
         })
         var formatvode = function (cellvalue, options, rowObject) {
-            if (cellvalue == false)
-                return '单选';
-            else
+            if (cellvalue == '0') {
+            return '单选';
+            }else if(cellvalue == '1'){
                 return '多选';
+            }else{
+                return '排序';
+            }
+
         }
         var unformatvode = function (cellvalue, options, rowObject) {
-            if (cellvalue == "单选")
-                return "false";
-            else
-                return "true";
+            if (cellvalue == "单选"){
+                return "0";
+            }else if(cellvalue == "多选"){
+                return "1";
+            }else{
+                return "2";
+            }
         }
         var formatclose = function (cellvalue, options, rowObject) {
             if (cellvalue == false)

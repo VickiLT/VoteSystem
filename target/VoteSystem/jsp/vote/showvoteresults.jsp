@@ -44,7 +44,7 @@
                 <c:forEach items="${voteItems}" var="item">
                     <tr>
                         <td style="border: 1px dashed #000">${item.voteItemNumber}.${item.voteItemContent}</td>
-                        <td style="border: 1px dashed #000">&nbsp;&nbsp;&nbsp;${item.voteItemPoll}票</td>
+                        <td style="border: 1px dashed #000">&nbsp;&nbsp;&nbsp;${item.voteItemPoll}</td>
                     </tr>
                 </c:forEach>
             </table>

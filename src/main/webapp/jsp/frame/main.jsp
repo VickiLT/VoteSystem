@@ -79,6 +79,12 @@
 						<STRONG>${multiSum}</STRONG>
 					    </span>
             </p>
+            <p>
+                ≈≈–ÚÕ∂∆±π≤”–£∫
+                <span class="STYLE2">
+						<STRONG>${sortSum}</STRONG>
+					    </span>
+            </p>
         </td>
     </tr>
     <tr>
