@@ -18,6 +18,20 @@
     <link rel="stylesheet" type="text/css" href="<%=path%>/datetimepicker-master/build/jquery.datetimepicker.min.css"/>
     <script type="text/javascript" src="<%=path%>/datetimepicker-master/jquery.js"></script>
     <script type="text/javascript" src="<%=path%>/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+    <style>
+        .layui-form-label{
+            width:25%;
+            min-width:110px;
+        }
+        .layui-input-block{
+            margin-left:35%;
+            width:50%;
+            min-width: 150px;;
+        }
+        .layui-input{
+            border-color:#c2cd96;
+        }
+    </style>
     <script type="text/javascript">
         var isCheckResults;
         var isModifyVote;
@@ -89,7 +103,7 @@
         <input type="text" id="id" name="id" hidden="hidden">
         <div class="layui-form-item">
             <label class="layui-form-label">投票主题</label>
-            <div class="layui-input-block" style="width: 200px">
+            <div class="layui-input-block">
                 <input type="text" name="voteTitle" id="voteTitle" required="required"
                        autocomplete="off"
                        class="layui-input">
@@ -97,35 +111,36 @@
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">投票描述</label>
-            <div class="layui-input-block" style="width: 200px">
-                <input type="text" name="voteExplain" id="voteExplain" required="required"
-                       autocomplete="off"
-                       class="layui-input">
+            <div class="layui-input-block">
+                <textarea name="voteExplain" id="voteExplain" placeholder="请输入内容" class="layui-textarea"></textarea>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">截止时间</label>
-            <div class="layui-input-block" style="width: 200px">
+            <div class="layui-input-block">
                 <input type="text" name="endTime" id="endTime" required="required" class="layui-input">
             </div>
         </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">允许修改</label>
+            <div class="layui-input-block">
+                <select name="isModifyVote" id="isModifyVote" lay-verify="required">
+                    <option value="false" selected="selected">不可修改</option>
+                    <option value="true">可修改</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">允许查看结果</label>
+            <div class="layui-input-block">
+                <select name="isCheckResults" id="isCheckResults" lay-verify="required" >
+                    <option value="false" selected="selected">不可查看</option>
+                    <option value="true">可查看</option>
+                </select>
+            </div>
+        </div>
     </form>
-    <br>
-    <div>
-        <label>是否允许修改所投票</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <select name="isModifyVote" id="isModifyVote">
-            <option value="false" selected="selected">不可修改</option>
-            <option value="true">可修改</option>
-        </select>
-    </div>
-    <br>
-    <div style="margin-top: 10px">
-        <label>是否允许查看总投票结果</label>
-        <select name="isCheckResults" id="isCheckResults">
-            <option value="false">不可查看</option>
-            <option value="true">可查看</option>
-        </select>
-    </div>
 </div>
 </body>
 </html>

@@ -20,6 +20,13 @@
             text-align: center;
             font-size: 30px;
         }
+        table th,table td{
+            text-align: center;
+        }
+        a{
+            text-decoration: none;
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -41,8 +48,8 @@
             <span style="margin-left: 5px">&nbsp;&nbsp;${voteProject.voteExplain}</span>
         </div>
         <center>
-            <table class="table table-striped"style="border: 1px solid #000;margin-top:50px;width:50%;min-width: 200px">
-                <thead>
+            <table class="table table-striped table-bordered table-hover"style="margin-top:50px;width:50%;min-width: 200px">
+                <thead style="background: #5848482b">
                     <th>选项</th>
                     <th>结果统计</th>
                 </thead>

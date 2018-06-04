@@ -123,6 +123,7 @@
                 $("ul.tabs li").removeClass("active"); //Remove any "active" class
                 $(this).addClass("active"); //Add "active" class to selected tab
                 $(".tab_content").hide(); //Hide all tab content
+                $("#grid1").setGridWidth($(".tab_container").width()*0.95);
                 var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
                 $(activeTab).fadeIn(); //Fade in the active content
                 return false;
@@ -151,7 +152,7 @@
                 sortorder: 'desc',
                 height: 270,
                 shrinkToFit: true,
-                width:"90%",
+                width:"100%",
                 autowidth:true,
                 gridComplete: function () {
                     var ids = $("#grid").jqGrid('getDataIDs');
@@ -213,16 +214,17 @@
                     {name: 'voteMode', index: 'voteMode', width: 100,align: 'center', formatter: formatvode, unformat: unformatvode,sortable:false},
                     {name: 'vote', width: 80, align: 'center', sortable: false},
                     {name: 'checkResults', width: 80, align: 'center', sortable: false},
-                    {name: 'isCheckResults', hidden: true},
-                    {name: 'isModifyVote',hidden: true}
+                    {name: 'isCheckResults', width: 0,hidden: true},
+                    {name: 'isModifyVote',width: 0,hidden: true}
                 ],
-                width: "100%",
-                autowidth:true,
+
                 sortname: 'createTime',
                 sortable: true,
                 sortorder: 'desc',
                 height: 270,
                 shrinkToFit: true,
+                width: "100%",
+                autowidth:true,
                 gridComplete: function () {
                     var ids = $("#grid1").jqGrid('getDataIDs');
                     for (var i = 0; i < ids.length; i++) {
@@ -311,7 +313,8 @@
         }
         var formattitle = function (cellvalue, options, rowObject) {
             var id = rowObject.id;
-            return "<a href='/vote/showVoteProjectDetails?id=" + id + "' style='text-decoration:none;out-line:none' title='查看投票详情'>"+cellvalue+"</a>";
+            /*return "<a href='/vote/showVoteProjectDetails?id=" + id + "' style='text-decoration:none;out-line:none' title='查看投票详情'>"+cellvalue+"</a>";*/
+            return cellvalue;
         }
 
         var vote = function (id) {

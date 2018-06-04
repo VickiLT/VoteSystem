@@ -101,6 +101,9 @@
         width:30%;
         min-width: 150px;;
     }
+    .layui-input{
+        border-color:#c2cd96;
+    }
 </style>
 <body>
 <a href="/frame/toMain">
@@ -160,7 +163,7 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">查看总投票结果：</label>
+        <label class="layui-form-label">允许查看结果：</label>
         <div class="layui-input-block">
             <select name="isCheckResults" id="isCheckResults" lay-verify="required" lay-filter="test1">
                 <option value="false" selected="selected">不可查看</option>

@@ -401,7 +401,7 @@ public class VoteController {
     public String showVoteResults(String id, Model model, HttpServletRequest request) {
         long projectId = Long.valueOf(id);
         VoteProject voteProject = voteProjectService.selectById(projectId);
-        if (voteProject.getIsCheckResults() == false && !(request.getSession().getAttribute("identity").equals("manager"))) {
+        if (voteProject.getIsCheckResults() == false && (request.getSession().getAttribute("identity").equals("user"))) {
             return "roleserror";
         }
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

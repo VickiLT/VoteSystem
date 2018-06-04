@@ -14,6 +14,8 @@
 <html>
 <head>
     <title>未投票人列表</title>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
     <script type="text/javascript" src="<%=path%>/js/jquery.min.js"></script>
 </head>
 <script>
@@ -46,16 +48,30 @@
     .noVoter table{
         width:60%;
         min-width: 400px;
-        margin:auto;
+        margin:50px auto;
+    }
+    table th,table td{
+        text-align: center;
+    }
+    a{
+        color: #333;
+        text-decoration: none;
+    }
+    table thead{
+        background-color: #5848482b;
     }
 </style>
 <body>
 <div class="noVoter">
-    <table>
+    <table class="table table-striped table-bordered table-responsive">
+        <thead>
+            <th>未投票委员列表</th>
+            <th>发送邮件提醒</th>
+        </thead>
         <c:forEach items="${whoHasNotVote}" var="item" varStatus="i">
                 <tr style="margin: 10px">
                     <td>${i.count}、${item}</td>
-                    <td><button onclick="remindVote('${item}')">提醒他投票</button></td>
+                    <td><button class="btn btn-primary"onclick="remindVote('${item}')">提醒他投票</button></td>
                 </tr>
         </c:forEach>
     </table>
