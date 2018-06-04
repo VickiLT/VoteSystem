@@ -363,8 +363,7 @@
         }
         var formattitle = function (cellvalue, options, rowObject) {
             var id = rowObject.id;
-            /*return "<a href='/vote/showVoteProjectDetails?id=" + id + "' style='text-decoration:none;out-line:none' title='点击查看投票详情'>"+cellvalue+"</a>";*/
-            return cellvalue;
+            return "<a href='/vote/showVoteProjectDetails?id=" + id + "' style='text-decoration:none;out-line:none' title='点击查看投票详情'>"+cellvalue+"</a>";
         }
         var formatclose = function (cellvalue, options, rowObject) {
             if (cellvalue == false)

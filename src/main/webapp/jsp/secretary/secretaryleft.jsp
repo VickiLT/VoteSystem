@@ -75,13 +75,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading menu-title">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#manage-menu" href="#voteList">投票管理</a>
+                        <a href="/vote/manageVote" target="mainFrame">投票事项管理</a>
                     </h4>
-                </div>
-                <div  id="voteList" class="collapse panel-collapse collapse">
-                    <ul class="panel-body nav nav-pills nav-stacked manu-ul">
-                        <li><a href="/vote/manageVote" target="mainFrame">投票事项管理</a></li>
-                    </ul>
                 </div>
             </div>
         </div>

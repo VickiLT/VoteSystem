@@ -13,6 +13,7 @@
 %>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
     <style>
         .voteTitle{
@@ -40,11 +41,15 @@
             <span style="margin-left: 5px">&nbsp;&nbsp;${voteProject.voteExplain}</span>
         </div>
         <center>
-            <table style="border: 1px dashed #000;margin-top:50px">
+            <table class="table table-striped"style="border: 1px solid #000;margin-top:50px;width:50%;min-width: 200px">
+                <thead>
+                    <th>选项</th>
+                    <th>结果统计</th>
+                </thead>
                 <c:forEach items="${voteItems}" var="item">
                     <tr>
-                        <td style="border: 1px dashed #000">${item.voteItemNumber}.${item.voteItemContent}</td>
-                        <td style="border: 1px dashed #000">&nbsp;&nbsp;&nbsp;${item.voteItemPoll}</td>
+                        <td>${item.voteItemNumber}.${item.voteItemContent}</td>
+                        <td>&nbsp;&nbsp;&nbsp;${item.voteItemPoll}</td>
                     </tr>
                 </c:forEach>
             </table>
