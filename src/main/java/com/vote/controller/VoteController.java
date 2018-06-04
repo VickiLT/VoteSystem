@@ -182,9 +182,13 @@ public class VoteController {
         if (search_title != null && search_title.length() == 0)
             search_title = null;
         searchParams.put("voteTitle", search_title);
-        searchParams.put("voteMode", Boolean.valueOf(search_mode));
-        if (search_close == null) {
-            searchParams.put("isClose", search_close);
+        if(!search_mode.equals("-1")) {
+            searchParams.put("voteMode", Integer.valueOf(search_mode));
+        }else{
+            searchParams.put("voteMode",null);
+        }
+        if (search_close == null||search_close.isEmpty()) {
+            searchParams.put("isClose", null);
         } else {
             searchParams.put("isClose", Boolean.valueOf(search_close));
         }
@@ -203,9 +207,13 @@ public class VoteController {
         if (search_title != null && search_title.length() == 0)
             search_title = null;
         searchParams.put("voteTitle", search_title);
-        searchParams.put("voteMode", Boolean.valueOf(search_mode));
-        if (search_close == null) {
-            searchParams.put("isClose", search_close);
+        if(!search_mode.equals("-1")) {
+            searchParams.put("voteMode", Integer.valueOf(search_mode));
+        }else{
+            searchParams.put("voteMode",null);
+        }
+         if (search_close == null||search_close.isEmpty()) {
+            searchParams.put("isClose", null);
         } else {
             searchParams.put("isClose", Boolean.valueOf(search_close));
         }
@@ -226,9 +234,13 @@ public class VoteController {
         if (search_title != null && search_title.length() == 0)
             search_title = null;
         searchParams.put("voteTitle", search_title);
-        searchParams.put("voteMode", Boolean.valueOf(search_mode));
-        if (search_close == null) {
-            searchParams.put("isClose", search_close);
+        if(!search_mode.equals("-1")) {
+            searchParams.put("voteMode", Integer.valueOf(search_mode));
+        }else{
+            searchParams.put("voteMode",null);
+        }
+        if (search_close == null||search_close.isEmpty()) {
+            searchParams.put("isClose", null);
         } else {
             searchParams.put("isClose", Boolean.valueOf(search_close));
         }
