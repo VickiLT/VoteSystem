@@ -118,7 +118,6 @@
                 search: false,
                 refresh: true,
                 add: true,
-                view:true,
                 addfunc: openDialog4Adding,
                 delfunc: openDialog4Deleting,
                 editfunc: openDialog4Updating,
@@ -130,7 +129,6 @@
                 addtext: "添加",
                 edittext: "编辑",
                 deltext: "删除",
-                viewtext:"查看",
                 refreshtext:"刷新"
 //            edit:false,add:false,del:false,search:false,refresh:false
 

@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e902902a-f394-46ab-9d8e-b1c7898d0931" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/css/jqGrid.bootstrap.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/css/jqgird-table.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/VoteSystem.war" afterPath="$PROJECT_DIR$/target/VoteSystem.war" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/jsp/manager/managermanage.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/manager/managermanage.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/jsp/manager/managevote.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/manager/managevote.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/jsp/manager/secretarymanage.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/manager/secretarymanage.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/jsp/manager/usernamage.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/manager/usernamage.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/jsp/vote/vote.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/vote/vote.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/VoteSystem/jsp/manager/managermanage.jsp" afterPath="$PROJECT_DIR$/target/VoteSystem/jsp/manager/managermanage.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/VoteSystem/jsp/manager/managevote.jsp" afterPath="$PROJECT_DIR$/target/VoteSystem/jsp/manager/managevote.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/VoteSystem/jsp/manager/secretarymanage.jsp" afterPath="$PROJECT_DIR$/target/VoteSystem/jsp/manager/secretarymanage.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/VoteSystem/jsp/manager/usernamage.jsp" afterPath="$PROJECT_DIR$/target/VoteSystem/jsp/manager/usernamage.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/VoteSystem/jsp/vote/vote.jsp" afterPath="$PROJECT_DIR$/target/VoteSystem/jsp/vote/vote.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -43,66 +43,79 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jqGrid.bootstrap.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/css/jqGrid.bootstrap.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="managermanage.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/manager/managermanage.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+            <state relative-caret-position="400">
+              <caret line="67" column="72" selection-start-line="67" selection-start-column="56" selection-end-line="67" selection-end-column="72" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="managevote.jsp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="managevote.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/manager/managevote.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="81" />
+            <state relative-caret-position="350">
+              <caret line="130" column="30" selection-start-line="130" selection-start-column="30" selection-end-line="130" selection-end-column="30" />
               <folding>
                 <element signature="e#3897#5012#0#HTML" expanded="false" />
                 <element signature="e#5197#5475#0#HTML" expanded="false" />
-                <element signature="e#6511#7115#0#HTML" expanded="false" />
-                <element signature="e#7459#7664#0#HTML" expanded="false" />
-                <element signature="e#7711#11492#0#HTML" expanded="false" />
-                <marker date="1528104688224" expanded="true" signature="4544:4554" placeholder="..." />
-                <marker date="1528104688224" expanded="true" signature="4685:4697" placeholder="..." />
-                <marker date="1528104688224" expanded="true" signature="4827:4837" placeholder="..." />
-                <marker date="1528104688224" expanded="true" signature="16402:16436" placeholder="..." />
+                <element signature="e#6453#7057#0#HTML" expanded="false" />
+                <element signature="e#7401#7606#0#HTML" expanded="false" />
+                <element signature="e#7653#11434#0#HTML" expanded="false" />
+                <marker date="1528112579431" expanded="true" signature="4544:4554" placeholder="..." />
+                <marker date="1528112579431" expanded="true" signature="4685:4697" placeholder="..." />
+                <marker date="1528112579431" expanded="true" signature="4827:4837" placeholder="..." />
+                <marker date="1528112579431" expanded="true" signature="16344:16378" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vote.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="secretarymanage.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/manager/secretarymanage.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="355" column="5" selection-start-line="355" selection-start-column="5" selection-end-line="355" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="usernamage.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/manager/usernamage.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="21" selection-end-column="81" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vote.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/vote/vote.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="234" column="29" selection-start-line="234" selection-start-column="29" selection-end-line="234" selection-end-column="29" />
+            <state relative-caret-position="-3465">
+              <caret line="146" column="52" selection-start-line="146" selection-start-column="52" selection-end-line="146" selection-end-column="52" />
               <folding>
-                <element signature="e#5168#8358#0#HTML" expanded="false" />
-                <element signature="e#8836#10011#0#HTML" expanded="false" />
-                <element signature="e#10319#12096#0#HTML" expanded="false" />
-                <element signature="e#12283#12561#0#HTML" expanded="false" />
+                <element signature="e#3037#3830#0#HTML" expanded="false" />
+                <element signature="e#9769#11546#0#HTML" expanded="false" />
+                <element signature="e#11733#12011#0#HTML" expanded="false" />
+                <element signature="e#12436#12640#0#HTML" expanded="false" />
+                <element signature="e#12709#12914#0#HTML" expanded="false" />
+                <element signature="e#13837#14424#0#HTML" expanded="false" />
+                <element signature="e#14460#15052#0#HTML" expanded="false" />
                 <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <marker date="1528106020072" expanded="true" signature="7357:7369" placeholder="..." />
-                <marker date="1528106020072" expanded="true" signature="7500:7510" placeholder="..." />
-                <marker date="1528106020072" expanded="true" signature="10967:10977" placeholder="..." />
-                <marker date="1528106020072" expanded="true" signature="11207:11217" placeholder="..." />
-                <marker date="1528106020072" expanded="true" signature="11356:11368" placeholder="..." />
-                <marker date="1528106020072" expanded="true" signature="11530:11542" placeholder="..." />
-                <marker date="1528106020072" expanded="true" signature="11709:11721" placeholder="..." />
-                <marker date="1528106020072" expanded="true" signature="11853:11863" placeholder="..." />
-                <marker date="1528106020072" expanded="true" signature="14001:14035" placeholder="..." />
+                <marker date="1528111810061" expanded="true" signature="6879:6891" placeholder="..." />
+                <marker date="1528111810061" expanded="true" signature="7022:7032" placeholder="..." />
+                <marker date="1528111810061" expanded="true" signature="10417:10427" placeholder="..." />
+                <marker date="1528111810061" expanded="true" signature="10657:10667" placeholder="..." />
+                <marker date="1528111810061" expanded="true" signature="10806:10818" placeholder="..." />
+                <marker date="1528111810061" expanded="true" signature="10980:10992" placeholder="..." />
+                <marker date="1528111810061" expanded="true" signature="11159:11171" placeholder="..." />
+                <marker date="1528111810061" expanded="true" signature="11303:11313" placeholder="..." />
+                <marker date="1528111810061" expanded="true" signature="13488:13522" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -195,7 +208,6 @@
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/roleserror.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/vote/addvotesuccess.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/vote/votesuccess.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/jsp/manager/secretarymanage.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/manager/voteconsoleDlg.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/secretary/secretaryleft.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/manager/managerleft.jsp" />
@@ -224,7 +236,6 @@
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/activeSuccess.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/vote/controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/manager/usermanageconsoleDlg.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/jsp/manager/usernamage.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/vote/newvotecontext.jsp" />
         <option value="$PROJECT_DIR$/src/main/resources/mail.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/vote/util/MailUtil.java" />
@@ -236,10 +247,12 @@
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/vote/showvoteresults.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/vote/controller/VoteController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/manager/updateconsoleDlg.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/jsp/manager/managermanage.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/css/jqgird-table.css" />
-        <option value="$PROJECT_DIR$/src/main/webapp/jsp/manager/managevote.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/vote/vote.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/jsp/manager/managermanage.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/jsp/manager/usernamage.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/jsp/manager/secretarymanage.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/jsp/manager/managevote.jsp" />
       </list>
     </option>
   </component>
@@ -266,9 +279,10 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="53" />
-    <option name="width" value="1872" />
-    <option name="height" value="1048" />
+    <option name="x" value="46" />
+    <option name="y" value="19" />
+    <option name="width" value="1699" />
+    <option name="height" value="896" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -1543,7 +1557,7 @@
       <workItem from="1527842448915" duration="2675000" />
       <workItem from="1527901647726" duration="4254000" />
       <workItem from="1527906675759" duration="5332000" />
-      <workItem from="1528081907469" duration="10742000" />
+      <workItem from="1528081907469" duration="15718000" />
     </task>
     <task id="LOCAL-00001" summary="vote">
       <created>1527313028154</created>
@@ -1556,7 +1570,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="629212000" />
+    <option name="totallyTimeSpent" value="634188000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1568,7 +1582,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="53" y="0" width="1872" height="1048" extended-state="0" />
+    <frame x="46" y="19" width="1699" height="896" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1583,17 +1597,17 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290398" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15661253" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946634" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19859813" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19800569" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.086666666" sideWeight="0.845815" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32145053" sideWeight="0.845815" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23542117" sideWeight="0.15418503" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19789228" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14387465" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1931,13 +1945,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/manager/usernamage.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/js/jquery1.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -2021,14 +2028,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1408">
           <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/manager/secretarymanage.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1536">
-          <caret line="48" column="39" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2239,14 +2238,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/manager/managermanage.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/css/jqgird-table.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -2255,43 +2246,70 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/manager/managevote.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/vote/vote.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="81" />
+        <state relative-caret-position="-3465">
+          <caret line="146" column="52" selection-start-line="146" selection-start-column="52" selection-end-line="146" selection-end-column="52" />
           <folding>
-            <element signature="e#3897#5012#0#HTML" expanded="false" />
-            <element signature="e#5197#5475#0#HTML" expanded="false" />
-            <element signature="e#6511#7115#0#HTML" expanded="false" />
-            <element signature="e#7459#7664#0#HTML" expanded="false" />
-            <element signature="e#7711#11492#0#HTML" expanded="false" />
-            <marker date="1528104688224" expanded="true" signature="4544:4554" placeholder="..." />
-            <marker date="1528104688224" expanded="true" signature="4685:4697" placeholder="..." />
-            <marker date="1528104688224" expanded="true" signature="4827:4837" placeholder="..." />
-            <marker date="1528104688224" expanded="true" signature="16402:16436" placeholder="..." />
+            <element signature="e#3037#3830#0#HTML" expanded="false" />
+            <element signature="e#9769#11546#0#HTML" expanded="false" />
+            <element signature="e#11733#12011#0#HTML" expanded="false" />
+            <element signature="e#12436#12640#0#HTML" expanded="false" />
+            <element signature="e#12709#12914#0#HTML" expanded="false" />
+            <element signature="e#13837#14424#0#HTML" expanded="false" />
+            <element signature="e#14460#15052#0#HTML" expanded="false" />
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <marker date="1528111810061" expanded="true" signature="6879:6891" placeholder="..." />
+            <marker date="1528111810061" expanded="true" signature="7022:7032" placeholder="..." />
+            <marker date="1528111810061" expanded="true" signature="10417:10427" placeholder="..." />
+            <marker date="1528111810061" expanded="true" signature="10657:10667" placeholder="..." />
+            <marker date="1528111810061" expanded="true" signature="10806:10818" placeholder="..." />
+            <marker date="1528111810061" expanded="true" signature="10980:10992" placeholder="..." />
+            <marker date="1528111810061" expanded="true" signature="11159:11171" placeholder="..." />
+            <marker date="1528111810061" expanded="true" signature="11303:11313" placeholder="..." />
+            <marker date="1528111810061" expanded="true" signature="13488:13522" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/vote/vote.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/manager/usernamage.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="234" column="29" selection-start-line="234" selection-start-column="29" selection-end-line="234" selection-end-column="29" />
+        <state relative-caret-position="225">
+          <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="21" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/manager/secretarymanage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="355" column="5" selection-start-line="355" selection-start-column="5" selection-end-line="355" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/manager/managermanage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="67" column="72" selection-start-line="67" selection-start-column="56" selection-end-line="67" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/manager/managevote.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="130" column="30" selection-start-line="130" selection-start-column="30" selection-end-line="130" selection-end-column="30" />
           <folding>
-            <element signature="e#5168#8358#0#HTML" expanded="false" />
-            <element signature="e#8836#10011#0#HTML" expanded="false" />
-            <element signature="e#10319#12096#0#HTML" expanded="false" />
-            <element signature="e#12283#12561#0#HTML" expanded="false" />
-            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <marker date="1528106020072" expanded="true" signature="7357:7369" placeholder="..." />
-            <marker date="1528106020072" expanded="true" signature="7500:7510" placeholder="..." />
-            <marker date="1528106020072" expanded="true" signature="10967:10977" placeholder="..." />
-            <marker date="1528106020072" expanded="true" signature="11207:11217" placeholder="..." />
-            <marker date="1528106020072" expanded="true" signature="11356:11368" placeholder="..." />
-            <marker date="1528106020072" expanded="true" signature="11530:11542" placeholder="..." />
-            <marker date="1528106020072" expanded="true" signature="11709:11721" placeholder="..." />
-            <marker date="1528106020072" expanded="true" signature="11853:11863" placeholder="..." />
-            <marker date="1528106020072" expanded="true" signature="14001:14035" placeholder="..." />
+            <element signature="e#3897#5012#0#HTML" expanded="false" />
+            <element signature="e#5197#5475#0#HTML" expanded="false" />
+            <element signature="e#6453#7057#0#HTML" expanded="false" />
+            <element signature="e#7401#7606#0#HTML" expanded="false" />
+            <element signature="e#7653#11434#0#HTML" expanded="false" />
+            <marker date="1528112579431" expanded="true" signature="4544:4554" placeholder="..." />
+            <marker date="1528112579431" expanded="true" signature="4685:4697" placeholder="..." />
+            <marker date="1528112579431" expanded="true" signature="4827:4837" placeholder="..." />
+            <marker date="1528112579431" expanded="true" signature="16344:16378" placeholder="..." />
           </folding>
         </state>
       </provider>

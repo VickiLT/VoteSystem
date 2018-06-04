@@ -13,10 +13,13 @@
 %>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/ui.jqgrid.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/jqGrid.bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/jqgird-table.css">
     <script type="text/javascript" src="<%=path%>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=path%>/js/jquery-ui.js"></script>
     <script type="text/javascript" src="<%=path%>/js/grid.locale-cn.js"></script>
@@ -55,19 +58,19 @@
                 colNames: ['用户编号', '用户名', '', '联系电话', '联系邮箱'],
                 //jqgrid主要通过下面的索引信息与后台传过来的值对应
                 colModel: [
-                    {name: 'id', index: 'id', width: 200, key: true},
+                    {name: 'id', index: 'id', hidden:true,width: 0, key: true},
                     {
-                        name: 'name', index: 'name', width: 200, editable: true,
+                        name: 'name', index: 'name',align: 'center', width: 200, editable: true,
                         editoptions: {size: "20", maxlength: "30"}
                     },
-                    {name: 'password', index: 'password', width: 200,hidden:true},
-                    {name: 'tel', index: 'tel', width: 230, editable: true},
-                    {name: 'email', index: 'email', width: 230},
+                    {name: 'password', index: 'password',align: 'center', width: 200,hidden:true},
+                    {name: 'tel', index: 'tel',align: 'center', width: 230, editable: true},
+                    {name: 'email', index: 'email',align: 'center', width: 230},
 
                 ],
 
-                width: 1060,
-                caption: "委员账号管理",
+                width: "90%" ,
+                autowidth:true,
                 sortname: 'id',
                 sortable: true,
                 sortorder: 'asc',
@@ -90,6 +93,7 @@
                 cellEdit: false,
                 multiselect: false,
                 rownumbers: true,
+                styleUI: 'Bootstrap',
 //                loadComplete:function (xhr) {
 //                   var s = xhr.getResponseHeader("REDIRECT");
 //               }
@@ -114,7 +118,13 @@
                 addfunc: openDialog4Adding,
                 delfunc: openDialog4Deleting,
                 //editfunc: openDialog4Updating,
-                alerttext: "请选择需要操作的数据行!"
+                alerttext: "请选择需要操作的数据行!",
+                addtext: "添加",
+                deltext: "删除",
+                refreshtext:"刷新",
+                navButtonAdd:{
+                    buttonicon: false,
+                }
 //            edit:false,add:false,del:false,search:false,refresh:false
 
             });
@@ -363,10 +373,13 @@
 <br>
 <br>
 <div>
-    <div style="margin-bottom:10px">
-        <form onsubmit="return false;">
-            用户名:<input name="name" id="name"/>&nbsp;
-            <button type="button" value="查询" id="searchBtn" onclick="search()">查询</button>
+    <div style="margin-bottom:15px">
+        <form class="form-search form-inline" onsubmit="return false;">
+            <div class="form-group">
+                <label>用户名:</label>
+                <input class="form-control input-medium search-query" type="text" name="name" id="name"placeholder="请输入用户名"/>
+            </div>
+            <button class="btn btn-primary" type="button" value="查询" id="searchBtn" onclick="search()">查询</button>
         </form>
     </div>
     <table id="grid"></table>

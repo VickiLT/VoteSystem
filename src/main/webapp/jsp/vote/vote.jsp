@@ -28,56 +28,41 @@
     <style type="text/css">
 
         ul.tabs {
-            margin: 0;
-            padding: 0;
-            float: left;
+            margin-bottom: 20px;
+            padding: 20px;
             list-style: none;
-            height: 32px;
-            border-bottom: 1px solid #999;
-            border-left: 1px solid #999;
+            height: 45px;
             width: 100%;
         }
 
         ul.tabs li {
             float: left;
             margin: 0;
-            padding: 0;
-            height: 31px;
-            line-height: 31px;
-            border: 1px solid #999;
-            border-left: none;
-            margin-bottom: -1px;
+            padding: 0 20px;
+            text-align: center;
+            vertical-align: middle;
             background: #e0e0e0;
-            overflow: hidden;
             position: relative;
+            height: 45px;
+            border-radius: 6px;
         }
 
         ul.tabs li a {
             text-decoration: none;
-            color: #000;
-            display: block;
             font-size: 1.2em;
-            padding: 0 20px;
-            border: 1px solid #fff;
             outline: none;
+            height: 45px;
+            color:#000;
         }
-
-        ul.tabs li a:hover {
-            background: #ccc;
+        html ul.tabs li.active{
+            background-color: #337ab7;
         }
-
-        html ul.tabs li.active, html ul.tabs li.active a:hover {
-            background: #fff;
-            border-bottom: 1px solid #fff;
+        html ul.tabs li.active a{
+            color:white;
         }
 
         .tab_container {
-            border: 1px solid #999;
-            border-top: none;
-            clear: both;
-            float: left;
             width: 100%;
-            background: #fff;
             -moz-border-radius-bottomright: 5px;
             -khtml-border-radius-bottomright: 5px;
             -webkit-border-bottom-right-radius: 5px;
@@ -88,7 +73,6 @@
 
         .tab_content {
             padding: 20px;
-            font-size: 1.2em;
         }
 
         .tab_content h2 {
@@ -159,10 +143,9 @@
                     {name: 'isClose', index: 'isClose', width: 100, align: 'center',  formatter: formatclose, unformat: unformatclose},
                     {name: 'voteMode', index: 'voteMode', width: 100, align: 'center',  formatter: formatvode, unformat: unformatvode},
                     {name: 'vote', width: 80, align: 'center', sortable: false},
-                    {name: 'isCheckResults', hidden: true},
-                    {name: 'isModifyVote', hidden: true}
+                    {name: 'isCheckResults',width: 0, hidden: true},
+                    {name: 'isModifyVote', width: 0,hidden: true}
                 ],
-                caption: "投票",
                 sortname: 'createTime',
                 sortable: true,
                 sortorder: 'desc',
@@ -204,6 +187,7 @@
                 cellEdit: false,
                 multiselect: false,
                 rownumbers: true,
+                styleUI: 'Bootstrap'
             });
 
             $("#grid").jqGrid('navGrid', '#pager', {
@@ -218,10 +202,10 @@
                 colNames: ['投票编号', '投票主题', '创建时间', '截止时间', '投票状态', '投票类型', '投票', '查看结果', '', ''],
                 //jqgrid主要通过下面的索引信息与后台传过来的值对应
                 colModel: [
-                    {name: 'id', index: 'id', hidden: true,width: 0, key: true,sortable:false},
+                    {name: 'id', index: 'id', hidden: true,width: 0, key: true},
                     {
                         name: 'voteTitle', index: 'name', width: 200, editable: true,
-                        editoptions: {size: "20", maxlength: "30"},sortable:false,formatter:formattitle
+                        editoptions: {size: "20", maxlength: "30"},formatter:formattitle
                     },
                     {name: 'createTime', index: 'createTime', width: 200,align: 'center'},
                     {name: 'endTime', index: 'endTime', width: 200, align: 'center',editable: true},
@@ -229,12 +213,11 @@
                     {name: 'voteMode', index: 'voteMode', width: 100,align: 'center', formatter: formatvode, unformat: unformatvode,sortable:false},
                     {name: 'vote', width: 80, align: 'center', sortable: false},
                     {name: 'checkResults', width: 80, align: 'center', sortable: false},
-                    {name: 'isCheckResults', width: 0,hidden: true,sortable:false},
-                    {name: 'isModifyVote', width: 0,hidden: true,sortable:false}
+                    {name: 'isCheckResults', hidden: true},
+                    {name: 'isModifyVote',hidden: true}
                 ],
-                width: "90%",
+                width: "100%",
                 autowidth:true,
-                caption: "投票",
                 sortname: 'createTime',
                 sortable: true,
                 sortorder: 'desc',
@@ -285,6 +268,7 @@
                 cellEdit: false,
                 multiselect: false,
                 rownumbers: true,
+                styleUI: 'Bootstrap'
             });
 
             $("#grid1").jqGrid('navGrid', '#pager', {
