@@ -13,11 +13,14 @@
 %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="<%=path%>/css/ui.jqgrid.css">
+
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/ui.jqgrid.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/jqGrid.bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
-    <script type="text/javascript" src="<%=path%>/js/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/jqgird-table.css">
     <script type="text/javascript" src="<%=path%>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=path%>/js/grid.locale-cn.js"></script>
     <script type="text/javascript" src="<%=path%>/js/jquery.jqGrid.min.js"></script>
@@ -146,15 +149,15 @@
                 colNames: ['投票编号', '投票主题', '创建时间', '截止时间', '投票状态', '投票类型', '投票', '', ''],
                 //jqgrid主要通过下面的索引信息与后台传过来的值对应
                 colModel: [
-                    {name: 'id', index: 'id', width: 100, key: true},
+                    {name: 'id', index: 'id', hidden: true,width: 0, key: true},
                     {
                         name: 'voteTitle', index: 'name', width: 200, editable: true,title:'点击查看详情',
                         editoptions: {size: "20", maxlength: "30"},formatter:formattitle
                     },
-                    {name: 'createTime', index: 'createTime', width: 200},
-                    {name: 'endTime', index: 'endTime', width: 200, editable: true},
-                    {name: 'isClose', index: 'isClose', width: 100, formatter: formatclose, unformat: unformatclose},
-                    {name: 'voteMode', index: 'voteMode', width: 100, formatter: formatvode, unformat: unformatvode},
+                    {name: 'createTime', index: 'createTime', width: 200, align: 'center'},
+                    {name: 'endTime', index: 'endTime', width: 200, align: 'center',  editable: true},
+                    {name: 'isClose', index: 'isClose', width: 100, align: 'center',  formatter: formatclose, unformat: unformatclose},
+                    {name: 'voteMode', index: 'voteMode', width: 100, align: 'center',  formatter: formatvode, unformat: unformatvode},
                     {name: 'vote', width: 80, align: 'center', sortable: false},
                     {name: 'isCheckResults', hidden: true},
                     {name: 'isModifyVote', hidden: true}
@@ -165,6 +168,7 @@
                 sortorder: 'desc',
                 height: 270,
                 shrinkToFit: true,
+                width:"90%",
                 autowidth:true,
                 gridComplete: function () {
                     var ids = $("#grid").jqGrid('getDataIDs');
@@ -199,7 +203,7 @@
                 autoScroll: true,
                 cellEdit: false,
                 multiselect: false,
-                rownumbers: false
+                rownumbers: true,
             });
 
             $("#grid").jqGrid('navGrid', '#pager', {
@@ -214,21 +218,22 @@
                 colNames: ['投票编号', '投票主题', '创建时间', '截止时间', '投票状态', '投票类型', '投票', '查看结果', '', ''],
                 //jqgrid主要通过下面的索引信息与后台传过来的值对应
                 colModel: [
-                    {name: 'id', index: 'id', width: 100, key: true,sortable:false},
+                    {name: 'id', index: 'id', hidden: true,width: 0, key: true,sortable:false},
                     {
                         name: 'voteTitle', index: 'name', width: 200, editable: true,
                         editoptions: {size: "20", maxlength: "30"},sortable:false,formatter:formattitle
                     },
-                    {name: 'createTime', index: 'createTime', width: 200},
-                    {name: 'endTime', index: 'endTime', width: 200, editable: true},
-                    {name: 'isClose', index: 'isClose', width: 100, formatter: formatclose, unformat: unformatclose,sortable:false},
-                    {name: 'voteMode', index: 'voteMode', width: 100, formatter: formatvode, unformat: unformatvode,sortable:false},
+                    {name: 'createTime', index: 'createTime', width: 200,align: 'center'},
+                    {name: 'endTime', index: 'endTime', width: 200, align: 'center',editable: true},
+                    {name: 'isClose', index: 'isClose', width: 100, align: 'center',formatter: formatclose, unformat: unformatclose,sortable:false},
+                    {name: 'voteMode', index: 'voteMode', width: 100,align: 'center', formatter: formatvode, unformat: unformatvode,sortable:false},
                     {name: 'vote', width: 80, align: 'center', sortable: false},
                     {name: 'checkResults', width: 80, align: 'center', sortable: false},
-                    {name: 'isCheckResults', hidden: true,sortable:false},
-                    {name: 'isModifyVote', hidden: true,sortable:false}
+                    {name: 'isCheckResults', width: 0,hidden: true,sortable:false},
+                    {name: 'isModifyVote', width: 0,hidden: true,sortable:false}
                 ],
-                width: 1060,
+                width: "90%",
+                autowidth:true,
                 caption: "投票",
                 sortname: 'createTime',
                 sortable: true,
@@ -279,7 +284,7 @@
                 autoScroll: true,
                 cellEdit: false,
                 multiselect: false,
-                rownumbers: false
+                rownumbers: true,
             });
 
             $("#grid1").jqGrid('navGrid', '#pager', {
@@ -375,7 +380,7 @@
 <a href="/frame/toMain">投票主页
 </a>>>>投票
 <br>
-<div class="container">
+<div>
 
     <ul class="tabs">
         <li class="active"><a href="#tab1">未投的投票事项</a></li>
@@ -383,20 +388,30 @@
     </ul>
     <div class="tab_container">
         <div id="tab1" class="tab_content" style="display: block; ">
-            <div style="margin-bottom:10px">
-                <form onsubmit="return false;" class="searForm">
-                    投票标题:<input name="voteTitle" id="voteTitle"/>&nbsp;
-                    投票类型:
-                    <select name="voteMode" id="voteMode">
-                        <option value="false" selected="selected">单选</option>
-                        <option value="true">多选</option>
-                    </select>&nbsp;
-                    投票状态:
-                    <select name="isClose" id="isClose">
-                        <option value="false">关闭</option>
-                        <option value="true">开放</option>
-                    </select>&nbsp;
-                    <button type="button" value="查询" id="searchBtn" onclick="search()">查询</button>
+            <div style="margin-bottom:15px">
+                <form onsubmit="return false;" class="form-inline">
+                    <div class="form-group">
+                        <label for="voteTitle">投票标题</label>
+                        <input type="text" class="form-control"name="voteTitle" id="voteTitle"placeholder="请输入投票标题">
+                    </div>
+                    <div class="form-group">
+                        <label>投票类型</label>
+                        <select name="voteMode" id="voteMode" class="form-control">
+                            <option value="-1" selected="selected">不限</option>
+                            <option value="0">单选</option>
+                            <option value="1">多选</option>
+                            <option value="2">排序</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>投票状态</label>
+                        <select name="isClose" id="isClose"class="form-control">
+                            <option value="">不限</option>
+                            <option value="false">关闭</option>
+                            <option value="true">开放</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" type="button" value="查询" id="searchBtn" onclick="search()">查询</button>
                 </form>
             </div>
             <table id="grid"></table>
@@ -405,21 +420,30 @@
         </div>
 
         <div id="tab2" class="tab_content" style="display: none; ">
-            <div>
-                <form onsubmit="return false;" class="searForm">
-                    投票标题:<input name="voteTitle" id="voteTitle1"/>&nbsp;
-                    投票类型:
-                    <select name="voteMode" id="voteMode1">
-                        <option value="0" selected="selected">单选</option>
-                        <option value="1">多选</option>
-                        <option value="2">排序</option>
-                    </select>&nbsp;
-                    投票状态:
-                    <select name="isClose" id="isClose1">
-                        <option value="false">关闭</option>
-                        <option value="true">开放</option>
-                    </select>&nbsp;
-                    <button type="button" value="查询" id="searchBtn1" onclick="search1()">查询</button>
+            <div  style="margin-bottom:15px">
+                <form onsubmit="return false;" class="form-inline">
+                    <div class="form-group">
+                        <label for="voteTitle">投票标题</label>
+                        <input type="text" class="form-control"name="voteTitle" id="voteTitle1"placeholder="请输入投票标题">
+                    </div>
+                    <div class="form-group">
+                        <label>投票类型</label>
+                        <select name="voteMode" id="voteMode1" class="form-control">
+                            <option value="-1" selected="selected">不限</option>
+                            <option value="0">单选</option>
+                            <option value="1">多选</option>
+                            <option value="2">排序</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>投票状态</label>
+                        <select name="isClose" id="isClose1"class="form-control">
+                            <option value="">不限</option>
+                            <option value="false">关闭</option>
+                            <option value="true">开放</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" type="button" value="查询"  id="searchBtn1" onclick="search1()">查询</button>
                 </form>
             </div>
             <table id="grid1"></table>

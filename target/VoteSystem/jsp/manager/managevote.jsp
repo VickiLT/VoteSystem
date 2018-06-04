@@ -13,11 +13,13 @@
 %>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/ui.jqgrid.css">
-    <link rel="stylesheet" type="text/css" href="<%=path%>/css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/jqGrid.bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/css/jqgird-table.css">
     <script type="text/javascript" src="<%=path%>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=path%>/js/grid.locale-cn.js"></script>
     <script type="text/javascript" src="<%=path%>/js/jquery.jqGrid.min.js"></script>
@@ -53,24 +55,24 @@
                 colNames: ['投票编号','投票主题', '创建时间', '截止时间', '投票状态', '投票类型','投票结果','未投票人列表'],
                 //jqgrid主要通过下面的索引信息与后台传过来的值对应
                 colModel: [
-                    {name: 'id', index: 'id', width: 100, key: true,sortable:false},
+                    {name: 'id', index: 'id',hidden: true,width: 0, key: true,sortable:false},
                     {
                         name: 'voteTitle', index: 'name', width: 300, editable: true, title:false,
                         editoptions: {size: "20", maxlength: "30"},formatter:formattitle
                     },
-                    {name: 'createTime', index: 'createTime', width: 200},
-                    {name: 'endTime', index: 'endTime', width: 200, editable: true},
-                    {name: 'isClose', index: 'isClose', width: 100, formatter: formatclose, unformat: unformatclose},
-                    {name: 'voteMode', index: 'voteMode', width: 100, formatter: formatvode, unformat: unformatvode},
+                    {name: 'createTime', index: 'createTime', width: 200, align : 'center'},
+                    {name: 'endTime', index: 'endTime', width: 200,  align : 'center',editable: true},
+                    {name: 'isClose', index: 'isClose', width: 100, align : 'center',formatter: formatclose, unformat: unformatclose},
+                    {name: 'voteMode', index: 'voteMode', width: 100,align : 'center', formatter: formatvode, unformat: unformatvode},
                     {name: 'checkResults', width: 80, align: 'center', sortable: false},
                     {name: 'noVoterList', width: 120, align: 'center', sortable: false},
                 ],
-                width: 1140,
-                caption: "投票项目管理",
+                width: "90%",
+                autowidth : true,
                 sortname: 'id',
                 sortable: true,
                 sortorder: 'asc',
-                height: 300,
+                height: 400,
                 shrinkToFit: true,
                 gridComplete: function () {
                     var ids = $("#grid").jqGrid('getDataIDs');
@@ -106,6 +108,7 @@
                 cellEdit: false,
                 multiselect: false,
                 rownumbers: true,
+                styleUI: 'Bootstrap'
 
             });
 
@@ -127,6 +130,7 @@
                 addtext: "添加",
                 edittext: "编辑",
                 deltext: "删除",
+                viewtext:"查看",
                 refreshtext:"刷新"
 //            edit:false,add:false,del:false,search:false,refresh:false
 
@@ -255,10 +259,14 @@
             })
 
         };
-        var openDialog4Viewing=function(cellvalue, options, rowObject){
-            var id = rowObject.id;
-            window.location.href='/vote/showVoteProjectDetails?id=' + id ;
-        }
+        var openDialog4Viewing=function(){
+            var consoleDlg = $("#consoleDlg");
+            var selectedRowId = $("#grid").jqGrid("getGridParam", "selrow");
+            //获得当前行各项属性
+            var rowData = $("#grid").jqGrid("getRowData", selectedRowId);
+            var id = rowData.id;
+            window.location.href='vote/showVoteProjectDetails?id=' + id ;
+        };
         var loadSelectedRowData = function () {
             // 当前选中的行
             var selectedRowId = $("#grid").jqGrid("getGridParam", "selrow");
@@ -397,25 +405,36 @@
 <body>
 <div style="margin-left: 10px">
 <a href="/frame/toMain">投票主页
-</a>>>>管理投票
+</a>>>>投票事项管理
 <br>
 <br>
 <div>
-    <div style="margin-bottom:10px">
-        <form onsubmit="return false;">
-            投票标题:<input name="voteTitle" id="voteTitle"/>&nbsp;
-            投票类型:
-            <select name="voteMode" id="voteMode">
-                <option value="0" selected="selected">单选</option>
-                <option value="1">多选</option>
-                <option value="2">排序</option>
-            </select>&nbsp;
-            投票状态:
-            <select name="isClose" id="isClose">
-                <option value="false">关闭</option>
-                <option value="true">开放</option>
-            </select>&nbsp;
-            <button type="button" value="查询" id="searchBtn" onclick="search()">查询</button>
+    <div style="margin-bottom:20px">
+        <form onsubmit="return false;" class="form-inline">
+            <div class="form-group">
+                <label for="voteTitle">投票标题</label>
+                <input type="text" class="form-control"name="voteTitle" id="voteTitle"placeholder="请输入投票标题">
+            </div>
+            <div class="form-group">
+                <label>投票类型</label>
+                <select name="voteMode" id="voteMode" class="form-control">
+                    <option value="-1" selected="selected">不限</option>
+                    <option value="0">单选</option>
+                    <option value="1">多选</option>
+                    <option value="2">排序</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>投票状态</label>
+                <select name="isClose" id="isClose"class="form-control">
+                    <option value="">不限</option>
+                    <option value="false">关闭</option>
+                    <option value="true">开放</option>
+                </select>
+            </div>
+
+
+            <button class="btn btn-primary" type="button" value="查询" id="searchBtn" onclick="search()">查询</button>
         </form>
     </div>
     <div id="main">

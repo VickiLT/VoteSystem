@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
     <script type="text/javascript" src="<%=path%>/js/jquery.min.js"></script>
-    <script type="text/javascript" src="<%=path%>/js/jquery-ui.js"></script>
+
     <script type="text/javascript" src="<%=path%>/js/grid.locale-cn.js"></script>
     <script type="text/javascript" src="<%=path%>/js/jquery.jqGrid.min.js"></script>
     <script type="text/javascript" src="<%=path%>/layui/layui.js"></script>
