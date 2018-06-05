@@ -16,13 +16,14 @@
     body {
         background-color: #354457;
     }
-    p { color: #f5fffa; font-size: 20px; text-decoration: none}
+    div.top-title{
+        color: white;
+        font-size: 35px
+    }
 </style>
 <body>
-<div>
-    <p align="center">
+<div class="top-title" align="center">
         专用投票系统
-    </p>
 </div>
 </body>
 </html>

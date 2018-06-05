@@ -394,7 +394,8 @@ public class VoteController {
             voteDetailsService.updateByPrimaryKey(voteDetails);
 
         }
-        return "vote/votesuccess";
+        model.addAttribute("voteSuccess","0");
+        return "vote/vote";
     }
 
     @RequestMapping("/showVoteResults")

@@ -27,6 +27,16 @@
      验证手机号码是否输入合法
      验证规则：11位数字，以1开头
      */
+    $(document).ready(function () {
+        isChangeReturn();
+    });
+    function isChangeReturn(){
+        var changeSuccess='<%=request.getAttribute("changeSuccess")%>';
+        if(changeSuccess=="0"){
+            alert("修改个人信息成功!");
+        }
+
+    }
     function checkMobile(str) {
         var re = /^1\d{10}$/;
         if (re.test(str)) {

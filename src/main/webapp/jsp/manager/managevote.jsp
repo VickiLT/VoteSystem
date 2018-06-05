@@ -140,7 +140,7 @@
                 var layer = layui.layer;
                 layer.open({
                     type: 2,
-                    area: ['400px', '360px'],
+                    area: ['500px', '400px'],
                     shadeClose: true, //点击遮罩关闭
                     closeBtn: 1,
                     content: '/vote/consoleDlg',

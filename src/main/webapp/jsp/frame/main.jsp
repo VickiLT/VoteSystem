@@ -30,7 +30,7 @@
 <body>
 <center>
 <table width="35%">
-    <tr>
+   <%-- <tr>
         <td>&nbsp;</td>
     </tr>
     <tr>
@@ -49,7 +49,7 @@
             <%= strdate%>
             <br>
         </td>
-    </tr>
+    </tr>--%>
     <tr>
         <td>&nbsp;</td>
     </tr>

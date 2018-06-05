@@ -157,8 +157,8 @@ public class PersonalInfoController {
               secretary.setTel(person.getTel());
               secretaryService.updateById(secretary);
           }
-
-          return "frame/changesuccess";
+            model.addAttribute("changeSuccess","0");
+          return "frame/personinfomanage";
     }
     @RequestMapping("/toMain")
     public String toMain(Model model){

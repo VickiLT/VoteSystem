@@ -118,6 +118,9 @@
             $("ul.tabs li:first").addClass("active").show(); //Activate first tab
             $(".tab_content:first").show(); //Show first tab content
 
+
+            //判断是否是从投票页面返回的
+            isVoteReturn();
             //On Click Event
             $("ul.tabs li").click(function () {
                 $("ul.tabs li").removeClass("active"); //Remove any "active" class
@@ -128,6 +131,9 @@
                 $(activeTab).fadeIn(); //Fade in the active content
                 return false;
             });
+
+
+
             $("#grid").jqGrid({
                 url: '/vote/voteProject/tab1Load',//请求数据的地址
                 datatype: "json",
@@ -359,6 +365,15 @@
                 }).trigger("reloadGrid");
 
         };
+
+
+        function isVoteReturn(){
+                var voteSuccess='<%=request.getAttribute("voteSuccess")%>';
+                if(voteSuccess=="0"){
+                    alert("投票成功!");
+                }
+
+        }
     </script>
 </head>
 
