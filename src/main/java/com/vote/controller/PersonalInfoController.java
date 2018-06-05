@@ -6,11 +6,13 @@ import com.vote.service.SecretaryService;
 import com.vote.service.UserService;
 import com.vote.service.VoteProjectService;
 import com.vote.util.MD5Util;
+import common.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -126,11 +128,12 @@ public class PersonalInfoController {
      * @return
      */
     @RequestMapping(value = "/personalInfoChange",method = {RequestMethod.POST,RequestMethod.GET})
-    public  String personalInfoChange(HttpServletRequest request, HttpServletResponse response, Model model, Person person){
+    @ResponseBody
+    public CommonResult<String> personalInfoChange(HttpServletRequest request, HttpServletResponse response, Model model, Person person){
         String identity = (String) request.getSession().getAttribute("identity");
         if(person.getEmail().equals("")&&person.getTel().equals("")){
             model.addAttribute("msg", "修改失败，邮箱和联系方式填写都为空！");
-            return "frame/personinfomanage";
+            return new CommonResult<String>("1");
         }
         if(identity.equals("manager")){
               Manager manager = new Manager();
@@ -158,7 +161,7 @@ public class PersonalInfoController {
               secretaryService.updateById(secretary);
           }
 
-          return "frame/changesuccess";
+          return new CommonResult<String>("0");
     }
     @RequestMapping("/toMain")
     public String toMain(Model model){

@@ -327,7 +327,8 @@ public class VoteController {
     }
 
     @RequestMapping("/vote")
-    public String vote(Model model, @RequestParam("content") String[] content, String id, String voteMode,HttpServletRequest request) {
+    @ResponseBody
+    public CommonResult<String> vote(Model model, @RequestParam("content") String[] content, String id, String voteMode,HttpServletRequest request) {
         String name = (String) request.getSession().getAttribute("username");
         long projectId = Long.parseLong(id);
         VoteDetails voteDetail = voteDetailsService.selectByProjectIdAndVoter(projectId, name);
@@ -394,7 +395,7 @@ public class VoteController {
             voteDetailsService.updateByPrimaryKey(voteDetails);
 
         }
-        return "vote/votesuccess";
+        return new CommonResult<String>("0");
     }
 
     @RequestMapping("/showVoteResults")
