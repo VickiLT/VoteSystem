@@ -85,15 +85,17 @@
         function forgetPw(){
             layui.use(['layer'], function () {
                 var layer = layui.layer;
+                var username=$("#uArea input").val();
                 layer.open({
                     type: 2,
                     area: ['400px', '360px'],
                     shadeClose: true, //点击遮罩关闭
                     skin: 'layui-layer-rim',
                     closeBtn: 1,
-                    content:"/jsp/forgetPw.jsp",
+                    content:"/jsp/forgetAdminPw.jsp",
                     success: function (layero, index) {
-
+                        var body = layer.getChildFrame('body', index);
+                        body.contents().find("#name").val(username);
 
                     },
                     btn: ['取消',"确定"],
@@ -110,7 +112,7 @@
             var body = layer.getChildFrame('body', index);
             var name=body.find("input#name").val();
             var email=body.find("input#email").val();
-            var identity=body.find("select.identity").val();
+            var identity=body.find("input#identity").val();
             var data={
                 name:name,
                 email:email,
@@ -158,7 +160,7 @@
         <div class="web_login" id="web_login">
             <div class="login-box">
                 <div class="login_form">
-                    <form action="/user/login" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm"
+                    <form action="/user/adminLogin" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm"
                           method="post">
                         <input type="hidden" name="did" value="0"/>
                         <input type="hidden" name="to" value="log"/>

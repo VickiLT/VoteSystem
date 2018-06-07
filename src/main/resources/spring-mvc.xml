@@ -25,6 +25,7 @@
             <mvc:exclude-mapping path="/user/activePassword"/>
             <mvc:exclude-mapping path="/user/sentActiveMail"/>
             <mvc:exclude-mapping path="/user/firstLogin"/>
+            <mvc:exclude-mapping path="/user/admin"/>
             <bean class="com.vote.util.LoginHandlerInterceptor"></bean>
         </mvc:interceptor>
         <mvc:interceptor>
@@ -38,6 +39,7 @@
             <mvc:exclude-mapping path="/user/activePassword"/>
             <mvc:exclude-mapping path="/user/sentActiveMail"/>
             <mvc:exclude-mapping path="/user/firstLogin"/>
+            <mvc:exclude-mapping path="/user/admin"/>
             <bean class="com.vote.util.SessionInterceptor"></bean>
         </mvc:interceptor>
         <!--资源权限拦截器-->
@@ -53,6 +55,7 @@
             <mvc:exclude-mapping path="/user/activePassword"/>
             <mvc:exclude-mapping path="/user/sentActiveMail"/>
             <mvc:exclude-mapping path="/user/firstLogin"/>
+            <mvc:exclude-mapping path="/user/admin"/>
             <bean class="com.vote.util.RolesInterceptor"></bean>
         </mvc:interceptor>
 

@@ -14,13 +14,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/bootstrap.min.css">
+    <style>
+
+    </style>
 </head>
 
 <frameset rows="*" cols="300,*" frameborder="0" framespacing="0">
-    <frame src="/jsp/manager/adminLeft.jsp" name="leftFrame" noresize="noresize" id="leftFrame" title="leftFrame" />
+    <frame src="/jsp/admin/adminLeft.jsp" name="leftFrame" noresize="noresize" id="leftFrame" title="leftFrame" />
     <frameset rows="70px,*" frameborder="0"  framespacing="0">
         <frame src="/jsp/manager/managertop.jsp" name="topFrame" noresize="noresize" id="topFrame" title="topFrame" />
-        <frame src="/jsp/frame/tomain.jsp" name="mainFrame" id="mainFrame" title="mainFrame" />
+        <frame src="/frame/personalInfoManage" name="mainFrame" id="mainFrame" title="mainFrame" />
     </frameset>
 </frameset>
 </html>

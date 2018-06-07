@@ -349,8 +349,11 @@
 
 <body>
 <div style="margin-left: 10px">
-<a href="/frame/toMain">投票主页
-</a>>>>秘书管理
+    <c:if test="${sessionScope.identity!='admin'}">
+        <a class="voteMain" href="/frame/toMain">投票主页
+        </a>
+    </c:if>
+    >>>秘书管理
 <br>
 <br>
 <div>

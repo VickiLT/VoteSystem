@@ -30,4 +30,14 @@ public class AdminServiceImpl implements AdminService{
     public Admin selectAdminByName(String name) {
         return adminDao.selectAdminByName(name);
     }
+
+    @Override
+    public int update(Admin record) {
+        return adminDao.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public Admin selectAdminByCode(String code) {
+        return adminDao.selectAdminByCode(code);
+    }
 }

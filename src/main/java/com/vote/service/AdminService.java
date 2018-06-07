@@ -8,5 +8,7 @@ import com.vote.entity.Admin;
 public interface AdminService {
 
     boolean  login(String name,String pwd);
+    int update(Admin record);
     Admin selectAdminByName(String name);
+    Admin selectAdminByCode(String code);
 }

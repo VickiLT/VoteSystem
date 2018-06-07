@@ -59,7 +59,7 @@
                     <li><a href="/frame/personalInfoManage" target="mainFrame">个人信息修改</a></li>
                     <li><a href="usernamage.jsp" target="mainFrame">委员管理</a></li>
                     <li><a href="secretarymanage.jsp" target="mainFrame">秘书管理</a></li>
-                    <li><a href="managermanage.jsp" target="mainFrame">主任管理</a> </li>
+                   <%-- <li><a href="managermanage.jsp" target="mainFrame">主任管理</a> </li>--%>
                 </ul>
             </div>
         </div>

@@ -56,9 +56,9 @@
                 </div>
                 <div  id="personList" class="collapse panel-collapse collapse in">
                     <ul class="panel-body nav nav-pills nav-stacked manu-ul" >
-                        <li><a href="/frame/personalInfoManage" target="mainFrame">个人信息修改</a></li>
-                        <li><a href="secretarymanage.jsp" target="mainFrame">秘书管理</a></li>
-                        <li><a href="managermanage.jsp" target="mainFrame">主任管理</a> </li>
+                        <li><a href="<%=path%>/frame/personalInfoManage" target="mainFrame">个人信息修改</a></li>
+                        <li><a href="<%=path%>/jsp/manager/secretarymanage.jsp" target="mainFrame">秘书管理</a></li>
+                        <li><a href="<%=path%>/jsp/manager/managermanage.jsp" target="mainFrame">主任管理</a> </li>
                     </ul>
                 </div>
             </div>

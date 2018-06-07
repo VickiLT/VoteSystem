@@ -1,10 +1,7 @@
 package com.vote.controller;
 
 import com.vote.entity.*;
-import com.vote.service.ManagerService;
-import com.vote.service.SecretaryService;
-import com.vote.service.UserService;
-import com.vote.service.VoteProjectService;
+import com.vote.service.*;
 import com.vote.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +29,8 @@ public class PersonalInfoController {
     @Autowired
     private UserService userService;
     @Autowired
+    private AdminService adminService;
+    @Autowired
     private VoteProjectService voteProjectService;
 
     /**
@@ -50,6 +49,9 @@ public class PersonalInfoController {
         } else if (identity.equals("secretary")) {
             Secretary secretary = secretaryService.selectSecretaryByName(name);
             model.addAttribute("person", secretary);
+        } else if(identity.equals("admin")){
+            Admin admin=adminService.selectAdminByName(name);
+            model.addAttribute("person",admin);
         } else {
             User user = userService.selectUserByName(name);
             model.addAttribute("person", user);
@@ -103,6 +105,16 @@ public class PersonalInfoController {
                 secretary.setPassword(md5);
                 secretaryService.updateById(secretary);
             }
+        }else if(identity.equals("admin")){
+            Admin admin=adminService.selectAdminByName(name);
+            if(!MD5Util.verify(oldPwd,admin.getPassword())){
+                model.addAttribute("msg", "旧密码错误,请重新输入");
+                return "frame/changepassword";
+            }else{
+                String md5=MD5Util.generate(newPwd);
+                admin.setPassword(md5);
+                adminService.update(admin);
+            }
         } else {
             User user = userService.selectUserByName(name);
             if (!MD5Util.verify(oldPwd,user.getPassword())) {
@@ -148,6 +160,13 @@ public class PersonalInfoController {
             user.setEmail(person.getEmail());
             user.setTel(person.getTel());
             userService.updateById(user);
+        }else if(identity.equals("admin")){
+            Admin admin=new Admin();
+            admin.setName(person.getName());
+            admin.setId(person.getId());
+            admin.setEmail(person.getEmail());
+            admin.setTel(person.getTel());
+            adminService.update(admin);
         }else {
             Secretary secretary = new Secretary();
             secretary.setId(person.getId());

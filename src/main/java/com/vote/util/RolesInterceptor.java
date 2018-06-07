@@ -25,7 +25,11 @@ public class RolesInterceptor implements HandlerInterceptor {
             identityId = "1";
         else if(identity.equals("user"))
             identityId = "2";
-        else identityId = "3";
+        else if(identity.equals("secretary"))
+            identityId = "3";
+        else if(identity.equals("admin"))
+            identityId ="4";
+
         int pos = requestURI.indexOf("?");
         String matchUrl = requestURI;
         if(pos!=-1){
@@ -35,7 +39,9 @@ public class RolesInterceptor implements HandlerInterceptor {
         if(matchUrl.contains("/frame")){
             return true;
         }else if(matchUrl.contains("/manage/")){
-            if(identityId.equals("1"))
+            if(identityId.equals("1")&&matchUrl.contains("managerManage"))
+                return false;
+            if(identityId.equals("1")||identityId.equals("4"))
                 return true;
             else {
                 if (httpServletRequest.getHeader("x-requested-with") != null && httpServletRequest.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")){ //如果是ajax请求响应头会有x-requested-with

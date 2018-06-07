@@ -156,6 +156,7 @@ public class LoginController {
     @RequestMapping("/loginOut")
     public void loginOut(HttpServletRequest request,HttpServletResponse response,Model model,String msg){
         Person person = (Person) request.getSession().getAttribute("person");
+        String identity = (String) request.getSession().getAttribute("identity");
         request.getSession().removeAttribute("username");
         request.getSession().removeAttribute("identity");
         request.getSession().removeAttribute("person");
@@ -164,13 +165,17 @@ public class LoginController {
         if(msg==null)
             msg="";
         try {
-            response.getWriter().write("<script>window.top.location.href=\"/jsp/login.jsp?msg="+msg+"\"</script>");
+            if(identity!=null&&identity.equals("admin"))
+                response.getWriter().write("<script>window.top.location.href=\"/jsp/adminLogin.jsp?msg="+msg+"\"</script>");
+            else
+                response.getWriter().write("<script>window.top.location.href=\"/jsp/login.jsp?msg="+msg+"\"</script>");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     @RequestMapping("/toLogin")
     public String toLogin(Model model){
+
         model.addAttribute("msg","用户已在别处登录，您已被迫下线！");
         return "login";
     }
@@ -196,7 +201,9 @@ public class LoginController {
             person = userService.selectUserByName(name);
         } else if (identity.equals("manager")) {
             person= managerService.selectManagerByName(name);
-        } else {
+        } else if(identity.equals("admin")){
+            person= adminService.selectAdminByName(name);
+        }else {
             person = secretaryService.selectSecretaryByName(name);
         }
         //是否找到用户
@@ -210,18 +217,6 @@ public class LoginController {
             map.put("message","邮箱错误");
             map.put("status","0");
             return map;
-        }
-        //生成随机密码
-        String random_str = UUID.randomUUID().toString().replace("-","").substring(16);
-        String random_pwd= MD5Util.generate(random_str);
-        person.setPassword(random_pwd);
-        //修改密码
-        if(identity.equals("user")){
-            userService.updateById((User)person);
-        }else if(identity.equals("manager")){
-            managerService.update((Manager)person);
-        }else {
-            secretaryService.updateById((Secretary)person);
         }
         //发送邮件
         String msg="请重置你的密码";
@@ -241,6 +236,8 @@ public class LoginController {
             person=managerService.selectManagerByCode(code);
         }else if(identity.equals("user")){
             person=userService.selectUserByCode(code);
+        }else if(identity.equals("admin")){
+            person= adminService.selectAdminByCode(code);
         }else{
             person=secretaryService.selectSecretaryByCode(code);
         }
@@ -328,9 +325,10 @@ public class LoginController {
         Person person=null;
         if(identity.equals("manager")){
             person=managerService.selectManagerByName(name);
-        }else
-        if(identity.equals("user")){
+        }else if(identity.equals("user")){
             person=userService.selectUserByName(name);
+        }else if(identity.equals("admin")){
+            person=adminService.selectAdminByName(name);
         }else{
             person=secretaryService.selectSecretaryByName(name);
         }
@@ -345,6 +343,10 @@ public class LoginController {
             userService.updateById((User)person);
         }else if(identity.equals("manager")){
             managerService.update((Manager)person);
+        }else if(identity.equals("admin")){
+            adminService.update((Admin)person);
+            model.addAttribute("msg","设置密码成功，请登录");
+            return "adminLogin";
         }else {
             secretaryService.updateById((Secretary)person);
         }
@@ -357,13 +359,20 @@ public class LoginController {
 
         //登录失败
         if(!adminService.login(name,password)){
-            return "admin";
+            model.addAttribute("msg","用户名或密码错误");
+            return "adminLogin";
         }
 
         Person person=adminService.selectAdminByName(name);
         request.getSession().setAttribute("username", name);
         request.getSession().setAttribute("person",person);
+        request.getSession().setAttribute("identity","admin");
+        model.addAttribute("identity","admin");
         sessionService.changeLogin4Me(person);
-        return "admin";
+        return "admin/adminframe";
+    }
+    @RequestMapping("/admin")
+    public String admin(Model model){
+        return "adminLogin";
     }
 }

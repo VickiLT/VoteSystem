@@ -6,7 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page isELIgnored="false" %>
+
 <% String path=request.getContextPath();
     /*String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";*/
 %>
@@ -108,10 +110,13 @@
 
 </style>
 <body>
-<a href="/frame/toMain">
-    投票主页
-</a>>>><span>个人信息设置</span>
-
+<div>
+<c:if test="${sessionScope.identity!='admin'}">
+    <a class="voteMain" href="/frame/toMain">投票主页
+    </a>
+</c:if>
+>>><span>个人信息设置</span>
+</div>
 <br>
 <br>
 

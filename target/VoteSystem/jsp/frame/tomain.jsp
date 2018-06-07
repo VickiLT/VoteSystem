@@ -12,10 +12,19 @@
 <html>
 <head>
     <script type="text/javascript">
-        window.onload=function()//用window的onload事件，窗体加载完毕的时候
-        {
-            window.location.href='/frame/toMain';
+        var identity=<%=session.getAttribute("identity")%>;
+        if(identity=="admin"){
+            window.onload=function()//用window的onload事件，窗体加载完毕的时候
+            {
+                window.location.href='/frame/personalInfoManage';
+            }
+        }else{
+            window.onload=function()//用window的onload事件，窗体加载完毕的时候
+            {
+                window.location.href='/frame/toMain';
+            }
         }
+
     </script>
 </head>
 <body>
