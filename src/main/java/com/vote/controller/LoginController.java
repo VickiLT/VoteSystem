@@ -235,16 +235,17 @@ public class LoginController {
         Person person=null;
         if(identity.equals("manager")){
             person=managerService.selectManagerByCode(code);
-            if(person!=null) managerService.activeAccount(code);
+            if(person!=null&&person.getStatus()==0)
+                managerService.activeAccount(code);
         }else
         if(identity.equals("user")){
             person=userService.selectUserByCode(code);
-            if(person!=null) userService.activeAccount(code);
+            if(person!=null&&person.getStatus()==0)userService.activeAccount(code);
         }else{
             person=secretaryService.selectSecretaryByCode(code);
-            if(person!=null) secretaryService.activeAccount(code);
+            if(person!=null&&person.getStatus()==0)secretaryService.activeAccount(code);
         }
-        if(person!=null) {
+        if(person!=null&&person.getStatus()==0) {
             model.addAttribute("msg", "请设置你的密码");
             model.addAttribute("username", person.getName());
             model.addAttribute("identity", identity);
@@ -252,7 +253,7 @@ public class LoginController {
             model.addAttribute("errno","0");
         }else
         {
-            model.addAttribute("msg", "系统错误");
+            model.addAttribute("msg", "此链接无效");
             model.addAttribute("errno","1");
         }
         return "activeSuccess";
