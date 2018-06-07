@@ -133,6 +133,14 @@
             }
         }
     </script>
+    <style>
+        .layui-form-label{
+            width:90px;
+        }
+        .layui-input-block{
+            margin-left: 130px;
+        }
+    </style>
 </head>
 <body>
 <div id="consoleDlg">
@@ -167,7 +175,7 @@
     <form class="layui-form te-left" name="consoleForm" id="consoleForm">
         <input type="text" id="id" name="id" hidden="hidden">
         <div class="layui-form-item">
-            <label class="layui-form-label">用户名</label>
+            <label class="layui-form-label"><font color='red'>*</font>用户名</label>
             <div class="layui-input-block" style="width: 250px">
                 <input type="text" name="name"id="name" required="required" autocomplete="off"
                        class="layui-input">
@@ -187,7 +195,7 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">联系邮箱</label>
+            <label class="layui-form-label"><font color='red'>*</font>联系邮箱</label>
             <div class="layui-input-block" style="width: 250px">
                 <input type="text" name="email" id="email" lay-verify="required" class="layui-input">
             </div>

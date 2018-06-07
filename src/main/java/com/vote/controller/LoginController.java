@@ -86,6 +86,13 @@ public class LoginController {
                     model.addAttribute("msg", "*用户未激活*");
                     model.addAttribute("status", "0");
                     return "login";
+                }else if(person.getStatus()==1){
+                    model.addAttribute("msg", "请设置你的密码");
+                    model.addAttribute("username", person.getName());
+                    model.addAttribute("identity", identity);
+                    model.addAttribute("code", person.getCode());
+                    model.addAttribute("errno","0");
+                    return "activeSuccess";
                 }
 
                 request.getSession().setAttribute("person",person);
@@ -99,6 +106,13 @@ public class LoginController {
                     model.addAttribute("msg", "*用户未激活*");
                     model.addAttribute("status", "0");
                     return "login";
+                }else if(person.getStatus()==1){
+                    model.addAttribute("msg", "请设置你的密码");
+                    model.addAttribute("username", person.getName());
+                    model.addAttribute("identity", identity);
+                    model.addAttribute("code", person.getCode());
+                    model.addAttribute("errno","0");
+                    return "activeSuccess";
                 }
 
                 request.getSession().setAttribute("person",person);
@@ -267,7 +281,7 @@ public class LoginController {
     }
 
     @RequestMapping("/firstLogin")
-    public CommonResult<String> firstLogin(Model model, HttpServletRequest request) {
+    public String firstLogin(Model model, HttpServletRequest request) {
         String name= request.getParameter("username");
         String pwd= request.getParameter("newPassword");
         String code = request.getParameter("code");
@@ -281,10 +295,12 @@ public class LoginController {
         }else{
             person=secretaryService.selectSecretaryByName(name);
         }
-        if(person==null||!person.getCode().equals(code))
-            return new CommonResult<String>("1");
-
+        if(person==null||!person.getCode().equals(code)){
+            model.addAttribute("msg","初始化密码出错，请联系管理员");
+            return "login";
+        }
         person.setPassword(MD5Util.generate(pwd));
+
         person.setStatus(2);
         if(identity.equals("user")){
             userService.updateById((User)person);
@@ -294,6 +310,6 @@ public class LoginController {
             secretaryService.updateById((Secretary)person);
         }
 
-        return new CommonResult<String>("0");
+        return "login";
     }
 }

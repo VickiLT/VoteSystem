@@ -68,7 +68,7 @@
                     {name: 'endTime', index: 'endTime', width: 200,  align : 'center',editable: true},
                     {name: 'isClose', index: 'isClose', width: 100, align : 'center',formatter: formatclose, unformat: unformatclose},
                     {name: 'voteMode', index: 'voteMode', width: 100,align : 'center', formatter: formatvode, unformat: unformatvode},
-                    {name: 'checkResults', width: 80, align: 'center', sortable: false},
+                    {name: 'checkResults', width: 100, align: 'center', sortable: false},
                     {name: 'noVoterList', width: 120, align: 'center', sortable: false},
                 ],
                 width: "90%",

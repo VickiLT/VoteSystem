@@ -63,22 +63,25 @@ body{
 }
 .manu-ul li{
     border-radius: 10px;
-    background-color: #5848482b;
+    background-color: #e3e3e3;
     width: 90%;
     font-size: 18px;
     margin-bottom: 10px;
 }
 .nav > li > a{
     padding:6px 15px;
+    border-radius: 10px;
 }
 a{
     color: #3F3F3F;
     text-decoration: none;
+    border-radius: 8px;
 }
 a:hover,a:visited,a:link{
     text-decoration: none;
 }
 .nav > li > a:hover, .nav > li > a:focus{
-    background-color: #c334342b;
+    background-color:#337ab7;
+    color:#fff;
 
 }
