@@ -15,6 +15,7 @@
     <title>初始化密码</title>
     <link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
+    <link href="../css/login2.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
     <script src="<%=path%>/layui/layui.js"></script>
     <script>
@@ -55,17 +56,11 @@
 </head>
 
 <body>
-<a href="/frame/toMain">
-    投票主页
-</a>>>>修改密码
-<br>
-<br>
-<br>
-<br>
-<font color="red" style="margin-left:100px">
-    ${msg}
-</font>
-<form class="layui-form te-left" action="/frame/changePwd" name="form" onsubmit="return validate()" method="post">
+<h1>投票系统<sup>V2018</sup></h1>
+<form class="layui-form te-left" action="/user/firstLogin" name="form" onsubmit="return validate()" method="post">
+    <input type="hidden" name="username" value="${username}"/>
+    <input type="hidden" name="code" value="${code}"/>
+    <input type="hidden" name="identity" value="${identity}"/>
     <div class="layui-form-item">
         <label class="layui-form-label">输入新密码:</label>
         <div class="layui-input-block">
@@ -87,20 +82,5 @@
         </div>
     </div>
 </form>
-</body>
-</html>
-
-
-
-<html>
-<head>
-    <title>激活成功</title>
-    <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
-</head>
-<body>
-<div style="text-align: center">
-    <h1>已激活，您可以登录系统了</h1>
-    <h1><a href="<%=path%>\jsp\login.jsp">点击跳转</a></h1>
-</div>
 </body>
 </html>
