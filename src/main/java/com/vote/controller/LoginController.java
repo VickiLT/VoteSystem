@@ -86,6 +86,13 @@ public class LoginController {
                     model.addAttribute("msg", "*用户未激活*");
                     model.addAttribute("status", "0");
                     return "login";
+                }else if(person.getStatus()==1){
+                    model.addAttribute("msg", "请设置你的密码");
+                    model.addAttribute("username", person.getName());
+                    model.addAttribute("identity", identity);
+                    model.addAttribute("code", person.getCode());
+                    model.addAttribute("errno","0");
+                    return "activeSuccess";
                 }
 
                 request.getSession().setAttribute("person",person);
@@ -99,6 +106,13 @@ public class LoginController {
                     model.addAttribute("msg", "*用户未激活*");
                     model.addAttribute("status", "0");
                     return "login";
+                }else if(person.getStatus()==1){
+                    model.addAttribute("msg", "请设置你的密码");
+                    model.addAttribute("username", person.getName());
+                    model.addAttribute("identity", identity);
+                    model.addAttribute("code", person.getCode());
+                    model.addAttribute("errno","0");
+                    return "activeSuccess";
                 }
 
                 request.getSession().setAttribute("person",person);
@@ -112,6 +126,13 @@ public class LoginController {
                     model.addAttribute("msg", "*用户未激活*");
                     model.addAttribute("status", "0");
                     return "login";
+                }else if(person.getStatus()==1){
+                    model.addAttribute("msg", "请设置你的密码");
+                    model.addAttribute("username", person.getName());
+                    model.addAttribute("identity", identity);
+                    model.addAttribute("code", person.getCode());
+                    model.addAttribute("errno","0");
+                    return "activeSuccess";
                 }
 
                 request.getSession().setAttribute("person",person);
@@ -279,6 +300,8 @@ public class LoginController {
             return "login";
         }
         person.setPassword(MD5Util.generate(pwd));
+
+        person.setStatus(2);
         if(identity.equals("user")){
             userService.updateById((User)person);
         }else if(identity.equals("manager")){
