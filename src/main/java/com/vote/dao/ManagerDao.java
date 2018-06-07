@@ -19,7 +19,7 @@ public interface ManagerDao {
     Manager selectByPrimaryKey(Integer id);
 
     Manager selectManagerByName(String name);
-
+    Manager selectManagerByCode(String code);
     List<Manager> findManagerByName(String name);
 
     int updateByPrimaryKey(Manager record);

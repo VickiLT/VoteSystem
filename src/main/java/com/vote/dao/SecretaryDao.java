@@ -25,6 +25,6 @@ public interface SecretaryDao {
     List<Secretary> selectSecretary();
 
     Secretary selectSecretaryByName(String name);
-
+    Secretary selectSecretaryByCode(String code);
     int updateByCode(String code);
 }

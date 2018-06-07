@@ -6,13 +6,11 @@ import com.vote.service.SecretaryService;
 import com.vote.service.UserService;
 import com.vote.service.VoteProjectService;
 import com.vote.util.MD5Util;
-import common.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -128,40 +126,39 @@ public class PersonalInfoController {
      * @return
      */
     @RequestMapping(value = "/personalInfoChange",method = {RequestMethod.POST,RequestMethod.GET})
-    @ResponseBody
-    public CommonResult<String> personalInfoChange(HttpServletRequest request, HttpServletResponse response, Model model, Person person){
+    public  String personalInfoChange(HttpServletRequest request, HttpServletResponse response, Model model, Person person){
         String identity = (String) request.getSession().getAttribute("identity");
         if(person.getEmail().equals("")&&person.getTel().equals("")){
             model.addAttribute("msg", "修改失败，邮箱和联系方式填写都为空！");
-            return new CommonResult<String>("1");
+            return "frame/personinfomanage";
         }
         if(identity.equals("manager")){
-              Manager manager = new Manager();
-              manager.setId(person.getId());
-              manager.setName(person.getName());
-              //manager.setPassword(person.getPassword());
-              manager.setTel(person.getTel());
-              manager.setEmail(person.getEmail());
-              managerService.update(manager);
-          }else if(identity.equals("user")){
-              User user = new User();
-              user.setId(person.getId());
-              //user.setPassword(person.getPassword());
-              user.setName(person.getName());
-              user.setEmail(person.getEmail());
-              user.setTel(person.getTel());
-              userService.updateById(user);
+            Manager manager = new Manager();
+            manager.setId(person.getId());
+            manager.setName(person.getName());
+            //manager.setPassword(person.getPassword());
+            manager.setTel(person.getTel());
+            manager.setEmail(person.getEmail());
+            managerService.update(manager);
+        }else if(identity.equals("user")){
+            User user = new User();
+            user.setId(person.getId());
+            //user.setPassword(person.getPassword());
+            user.setName(person.getName());
+            user.setEmail(person.getEmail());
+            user.setTel(person.getTel());
+            userService.updateById(user);
         }else {
-              Secretary secretary = new Secretary();
-              secretary.setId(person.getId());
-              //secretary.setPassword(person.getPassword());
-              secretary.setEmail(person.getEmail());
-              secretary.setName(person.getName());
-              secretary.setTel(person.getTel());
-              secretaryService.updateById(secretary);
-          }
-
-          return new CommonResult<String>("0");
+            Secretary secretary = new Secretary();
+            secretary.setId(person.getId());
+            //secretary.setPassword(person.getPassword());
+            secretary.setEmail(person.getEmail());
+            secretary.setName(person.getName());
+            secretary.setTel(person.getTel());
+            secretaryService.updateById(secretary);
+        }
+        model.addAttribute("changeSuccess","0");
+        return "frame/personinfomanage";
     }
     @RequestMapping("/toMain")
     public String toMain(Model model){

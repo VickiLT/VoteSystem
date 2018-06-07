@@ -75,4 +75,9 @@ public class SecretaryServiceImpl implements SecretaryService {
 
         return secretaryDao.updateByCode(code);
     }
+
+    @Override
+    public Secretary selectSecretaryByCode(String code) {
+        return secretaryDao.selectSecretaryByCode(code);
+    }
 }

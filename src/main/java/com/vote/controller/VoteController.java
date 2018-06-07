@@ -120,7 +120,8 @@ public class VoteController {
                 }
             }
         }
-        return "vote/addvotesuccess";
+        model.addAttribute("createVoteSuccess","0");
+        return "manager/managevote";
     }
 
     @RequestMapping("/manageVote")
@@ -212,7 +213,7 @@ public class VoteController {
         }else{
             searchParams.put("voteMode",null);
         }
-         if (search_close == null||search_close.isEmpty()) {
+        if (search_close == null||search_close.isEmpty()) {
             searchParams.put("isClose", null);
         } else {
             searchParams.put("isClose", Boolean.valueOf(search_close));
@@ -327,8 +328,7 @@ public class VoteController {
     }
 
     @RequestMapping("/vote")
-    @ResponseBody
-    public CommonResult<String> vote(Model model, @RequestParam("content") String[] content, String id, String voteMode,HttpServletRequest request) {
+    public String vote(Model model, @RequestParam("content") String[] content, String id, String voteMode,HttpServletRequest request) {
         String name = (String) request.getSession().getAttribute("username");
         long projectId = Long.parseLong(id);
         VoteDetails voteDetail = voteDetailsService.selectByProjectIdAndVoter(projectId, name);
@@ -385,17 +385,18 @@ public class VoteController {
             voteDetails.setVoteSelects(selects.toString());
             voteDetails.setVoteTime(new Date());
             voteDetailsService.insert(voteDetails);
-            Details details = new Details();
+ /*           Details details = new Details();
             details.setVoteProjectId(projectId);
             details.setVoter(name);
-            voteDetailsService.insert1(details);
+            voteDetailsService.insert1(details);*/
             Long ID = voteDetails.getId();
             String[] out = AESUtil.encryptAndInsert(voteDetails.getVoterName(),voteDetails.getVoteSelects(),ID);
             voteDetails.setVoteSelects(out[1]);
             voteDetailsService.updateByPrimaryKey(voteDetails);
 
         }
-        return new CommonResult<String>("0");
+        model.addAttribute("voteSuccess","0");
+        return "vote/vote";
     }
 
     @RequestMapping("/showVoteResults")

@@ -21,7 +21,6 @@
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/jqgird-table.css">
     <script type="text/javascript" src="<%=path%>/js/jquery.min.js"></script>
-
     <script type="text/javascript" src="<%=path%>/js/grid.locale-cn.js"></script>
     <script type="text/javascript" src="<%=path%>/js/jquery.jqGrid.min.js"></script>
     <script type="text/javascript" src="<%=path%>/layui/layui.js"></script>

@@ -34,10 +34,12 @@
             var voteTitle = $("#voteTitle").val();
             var time = $("#time").val();
             var voteSum = $("#voteSum").val();
+            var voteMode = $("#voteMode").val();
             var data = {
                 voteTitle: voteTitle,
                 time: time,
-                voteSum: voteSum
+                voteSum: voteSum,
+                voteMode: voteMode
             };
             return data;
         }
@@ -86,22 +88,32 @@
     <form class="layui-form te-left" action="/vote/createVote/firstStep" name="consoleForm" id="consoleForm">
         <div class="layui-form-item">
             <label class="layui-form-label">投票主题</label>
-            <div class="layui-input-block" style="width: 200px">
-                <input type="text" name="voteTitle" id="voteTitle" required="required"
+            <div class="layui-input-block" style="width: 340px">
+                <input type="text" name="voteTitle" id="voteTitle" required="required" placeholder="请输入内容"
                        autocomplete="off"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">投票类型</label>
+            <div class="layui-input-block"style="width: 340px">
+                <select name="voteMode" id="voteMode">
+                    <option value="0"selected="selected">单选</option>
+                    <option value="1">多选</option>
+                    <option value="2">排序</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">选项个数</label>
-            <div class="layui-input-block" style="width: 200px">
-                <input type="text" id="voteSum" name="voteSum" required="required" class="layui-input">
+            <div class="layui-input-block" style="width: 340px">
+                <input type="number" id="voteSum" name="voteSum" required="required" class="layui-input" placeholder="请输入内容">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">截止时间</label>
-            <div class="layui-input-block" style="width: 200px">
-                <input type="text" name="time" id="time" required="required" class="layui-input">
+            <div class="layui-input-block" style="width: 340px">
+                <input type="text" name="time" id="time" required="required" class="layui-input"placeholder="点击选择时间">
             </div>
         </div>
     </form>

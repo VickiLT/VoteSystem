@@ -134,4 +134,10 @@
     from manager
     where name = #{name,jdbcType=VARCHAR}
   </select>
+  <select id="selectManagerByCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from manager
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
 </mapper>

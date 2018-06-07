@@ -89,4 +89,10 @@ public class ManagerServiceImpl implements ManagerService {
         return managerDao.updateByCode(code);
 
     }
+
+    @Override
+    public Manager selectManagerByCode(String code) {
+
+        return managerDao.selectManagerByCode(code);
+    }
 }

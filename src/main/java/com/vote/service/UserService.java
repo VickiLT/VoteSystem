@@ -25,7 +25,7 @@ public interface UserService {
     List<User> findAllUser();
 
     User selectUserByName(String name);
-
+    User selectUserByCode(String code);
     int activeAccount(String code);
 
 }

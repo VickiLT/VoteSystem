@@ -27,6 +27,16 @@
      验证手机号码是否输入合法
      验证规则：11位数字，以1开头
      */
+    $(document).ready(function () {
+        isChangeReturn();
+    });
+    function isChangeReturn(){
+        var changeSuccess='<%=request.getAttribute("changeSuccess")%>';
+        if(changeSuccess=="0"){
+            alert("修改个人信息成功!");
+        }
+
+    }
     function checkMobile(str) {
         var re = /^1\d{10}$/;
         if (re.test(str)) {
@@ -121,7 +131,7 @@
         <div class="layui-input-block" style="width: 300px">
             <input type="password" id="password" name="password" required="required" readonly="readonly" style="opacity: 0.5" value="***"
                    class="layui-input">
-            <input type="button" class="layui-btn" value="点击修改密码" onclick="jump()" style="margin-top:5px;margin-left: 80px">
+            <input type="button" class="layui-btn" value="点击修改密码" onclick="jump()" style="margin-top:20px;margin-left: 80px">
         </div>
     </div>
     <div align="center">

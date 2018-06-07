@@ -28,9 +28,6 @@
             width:50%;
             min-width: 150px;;
         }
-        .layui-input{
-            border-color:#c2cd96;
-        }
     </style>
     <script type="text/javascript">
         var isCheckResults;

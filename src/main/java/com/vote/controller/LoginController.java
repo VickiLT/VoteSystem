@@ -9,6 +9,7 @@ import com.vote.util.MailUtil;
 import com.vote.util.SessionListener;
 import common.CommonResult;
 import org.aspectj.apache.bcel.verifier.VerifierFactoryObserver;
+import org.aspectj.weaver.patterns.PerObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -210,15 +211,29 @@ public class LoginController {
     public String activeAccount(Model model,HttpServletRequest request) {
         String code = request.getParameter("code");
         String identity=request.getParameter("identity");
+        Person person=null;
         if(identity.equals("manager")){
-            managerService.activeAccount(code);
+            person=managerService.selectManagerByCode(code);
+            if(person!=null) managerService.activeAccount(code);
         }else
         if(identity.equals("user")){
-            userService.activeAccount(code);
+            person=userService.selectUserByCode(code);
+            if(person!=null) userService.activeAccount(code);
         }else{
-            secretaryService.activeAccount(code);
+            person=secretaryService.selectSecretaryByCode(code);
+            if(person!=null) secretaryService.activeAccount(code);
         }
-        model.addAttribute("msg","账户已激活！请登录");
+        if(person!=null) {
+            model.addAttribute("msg", "请设置你的密码");
+            model.addAttribute("username", person.getName());
+            model.addAttribute("identity", identity);
+            model.addAttribute("code", code);
+            model.addAttribute("errno","0");
+        }else
+        {
+            model.addAttribute("msg", "系统错误");
+            model.addAttribute("errno","1");
+        }
         return "activeSuccess";
     }
 
@@ -242,5 +257,36 @@ public class LoginController {
             return new CommonResult<String>("0");
         }
         return new CommonResult<String>("1");
+    }
+
+    @RequestMapping("/firstLogin")
+    public CommonResult<String> firstLogin(Model model, HttpServletRequest request) {
+        String name= request.getParameter("username");
+        String pwd= request.getParameter("newPassword");
+        String code = request.getParameter("code");
+        String identity=request.getParameter("identity");
+        Person person=null;
+        if(identity.equals("manager")){
+            person=managerService.selectManagerByName(name);
+        }else
+        if(identity.equals("user")){
+            person=userService.selectUserByName(name);
+        }else{
+            person=secretaryService.selectSecretaryByName(name);
+        }
+        if(person==null||!person.getCode().equals(code))
+            return new CommonResult<String>("1");
+
+        person.setPassword(MD5Util.generate(pwd));
+
+        if(identity.equals("user")){
+            userService.updateById((User)person);
+        }else if(identity.equals("manager")){
+            managerService.update((Manager)person);
+        }else {
+            secretaryService.updateById((Secretary)person);
+        }
+
+        return new CommonResult<String>("0");
     }
 }

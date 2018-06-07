@@ -189,7 +189,7 @@
                         </div>
                         <div style="padding-left:70px;margin-top:20px;">
                             <input type="submit" value="登 录"style="width:150px;"class="button_blue"/>
-                            <div class="forgetPw"onclick="forgetPw()">忘记密码</div>
+                            <div class="forgetPw"onclick="forgetPw()"><a>忘记密码</a></div>
 
 
                         </div>
