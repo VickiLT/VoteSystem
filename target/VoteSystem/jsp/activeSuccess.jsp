@@ -57,7 +57,7 @@
             width: 100px;
         }
         .init-pw-title{
-            margin: 40px  auto 30px -25px;
+            margin-bottom: 40px;
             text-align:center;
             color:#4d2578;
             font-size:20px;
@@ -70,8 +70,9 @@
 
 <body>
 <h1>投票系统<sup>V2018</sup></h1>
-<h3 class="init-pw-title">初始化你的密码</h3>
+
 <form class="layui-form te-left" action="/user/firstLogin" name="form" onsubmit="return validate()" method="post">
+    <h3 class="init-pw-title">初始化你的密码</h3>
     <input type="hidden" name="username" value="${username}"/>
     <input type="hidden" name="code" value="${code}"/>
     <input type="hidden" name="identity" value="${identity}"/>
