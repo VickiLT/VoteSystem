@@ -53,6 +53,8 @@ public class LoginController {
     @Autowired
     private SessionService sessionService;
 
+    @Autowired
+    private AdminService adminService;
     /**
      * 登录
      * @param name
@@ -348,5 +350,20 @@ public class LoginController {
         }
         model.addAttribute("msg","设置密码成功，请登录");
         return "login";
+    }
+    @RequestMapping("/adminLogin")
+    public String adminLogin(String name, String password,Model model, HttpServletRequest request, HttpServletResponse response){
+
+
+        //登录失败
+        if(!adminService.login(name,password)){
+            return "admin";
+        }
+
+        Person person=adminService.selectAdminByName(name);
+        request.getSession().setAttribute("username", name);
+        request.getSession().setAttribute("person",person);
+        sessionService.changeLogin4Me(person);
+        return "admin";
     }
 }
