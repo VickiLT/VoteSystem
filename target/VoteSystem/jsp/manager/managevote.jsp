@@ -49,6 +49,10 @@
             }
         });
         $(document).ready(function () {
+            //检查是否创建投票成功返回
+            isCreateVoteReturn();
+
+
             $("#grid").jqGrid({
                 url: '/vote/voteProject/load',//请求数据的地址
                 datatype: "json",
@@ -358,7 +362,7 @@
 
             } else {
                 var params = window["layui-layer-iframe" + index].callbackdata();
-                window.location.href = 'createVote/firstStep?time=' + params.time + '&voteTitle=' + params.voteTitle + '&voteSum=' + params.voteSum;
+                window.location.href = 'createVote/firstStep?time=' + params.time + '&voteTitle=' + params.voteTitle + '&voteMode=' + params.voteMode+'&voteSum=' + params.voteSum;
             }
         }
         var formattitle = function (cellvalue, options, rowObject) {
@@ -396,6 +400,15 @@
                 }).trigger("reloadGrid");
 
         };
+
+
+        function isCreateVoteReturn(){
+            var createSuccess='<%=request.getAttribute("createVoteSuccess")%>';
+            if(createSuccess=="0"){
+                alert("添加投票事项成功!");
+            }
+
+        }
     </script>
 </head>
 

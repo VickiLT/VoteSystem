@@ -57,7 +57,7 @@
         <include refid="Base_Column_List"/>
         from vote_project
         WHERE id NOT IN
-        (SELECT vote_project_id from vote_details where voter = #{name,jdbcType=VARCHAR})
+        (SELECT vote_project_id from vote_details where voter_name = #{name,jdbcType=VARCHAR})
         <if test="voteTitle!=null">
             AND vote_title LIKE CONCAT('%',#{voteTitle},'%')
         </if>
@@ -73,7 +73,7 @@
         <include refid="Base_Column_List"/>
         from vote_project
         WHERE id IN
-        (SELECT vote_project_id from vote_details where voter = #{name,jdbcType=VARCHAR})
+        (SELECT vote_project_id from vote_details where voter_name = #{name,jdbcType=VARCHAR})
         <if test="voteTitle!=null">
             AND vote_title LIKE CONCAT('%',#{voteTitle},'%')
         </if>

@@ -120,7 +120,8 @@ public class VoteController {
                 }
             }
         }
-        return "vote/addvotesuccess";
+        model.addAttribute("createVoteSuccess","0");
+        return "manager/managevote";
     }
 
     @RequestMapping("/manageVote")
@@ -384,10 +385,10 @@ public class VoteController {
             voteDetails.setVoteSelects(selects.toString());
             voteDetails.setVoteTime(new Date());
             voteDetailsService.insert(voteDetails);
-            Details details = new Details();
+ /*           Details details = new Details();
             details.setVoteProjectId(projectId);
             details.setVoter(name);
-            voteDetailsService.insert1(details);
+            voteDetailsService.insert1(details);*/
             Long ID = voteDetails.getId();
             String[] out = AESUtil.encryptAndInsert(voteDetails.getVoterName(),voteDetails.getVoteSelects(),ID);
             voteDetails.setVoteSelects(out[1]);

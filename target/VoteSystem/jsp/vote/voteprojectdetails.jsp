@@ -45,7 +45,7 @@
             <span style="margin-left: 5px">&nbsp;&nbsp;${voteProject.voteExplain}</span>
         </div>
         <div style="margin: 10px auto 30px 20%">
-            <c:if test="${voteProject.voteMode==1}">
+            <c:if test="${voteProject.voteMode=='1'||voteProject.selectNum<voteProject.voteSum}">
                 <label><span style="color: red;">注意:</span>只能选择${voteProject.selectNum}项</label>
             </c:if>
             <div>
@@ -70,12 +70,6 @@
                 </c:forEach>
             </div>
             <p/>
-            <c:if test="${voteProject.voteMode==2}">
-            <div style="margin: 10px">
-                <label>请按照排序优先级填写选项字母序号</label>
-                <input class="sortResult" type="text" name="content"lay-skin="primary">
-            </div>
-            </c:if>
             <p/>
             <c:if test="${fileMap!= null &&fn:length(fileMap) != 0}">
                 <div>

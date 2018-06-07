@@ -64,9 +64,13 @@ input[type="text"]:focus, input[type="password"]:focus {
 .web_login .selectOuter,.forgetPw-box .selectOuter{
 	width:200px;
 	height:42px;
-	margin-top:20px;
+	margin-top:15px;
 	float:left;
 
+}
+.web_login .selectOuter select{
+	width:70px;
+	height:30px;
 }
 .web_login .inputstyle,.forgetPw-box .inputstyle{
 	width:200px;
@@ -108,7 +112,14 @@ input[type="text"]:focus, input[type="password"]:focus {
 	background-color:#ffffff;
 }
 
-h1{margin:80px auto 50px auto;text-align:center;color:#fff;margin-left:-25px;font-size:35px;font-weight: bold;text-shadow: 0px 1px 1px #555;}
+h1{
+	margin: 40px  auto 30px -25px;
+	text-align:center;
+	color:#4d2578;
+	font-size:35px;
+	font-weight: bold;
+	text-shadow: 0px 1px 1px #555;
+}
 h1 sup{
     font-size: 18px;
     font-style: normal;
@@ -134,7 +145,7 @@ margin-bottom: 10px;border:1px solid #eee;border-radius:3px;
 .web_login input.inputstyle:focus,
 .forgetPw-box input.inputstyle2:focus,
 .forgetPw-box input.inputstyle:focus{
-border: 1px solid #5796f;
+border: 1px solid #57966f;
 box-shadow: 0 0 0;
 }
 .web_login .reg_form {

@@ -25,7 +25,7 @@
         var voteMode = ${voteProject.voteMode};
         if (voteMode== 1) {
             var length = $("input[name='content']:checked").length;
-            if (length != num) {
+            if (length > num) {
                 alert("选择数量不符合！");
                 return;
             } else {
@@ -138,41 +138,46 @@
 <br>
 
 <div>
-    <form action="/vote/vote" theme="simple" id="form">
+    <div name="voteTitle" class="voteTitle">
+        <label style="">${voteProject.id}.${voteProject.voteTitle}</label>
+    </div>
+    <div style="margin: 10px auto 30px 10%;width: 80%;min-width:200px;min-height: 50px">
+        <span style="margin-left: 5px">&nbsp;&nbsp;${voteProject.voteExplain}</span>
+    </div>
+        <br>
+    <form class="form-horizontal" action="/vote/vote" theme="simple" id="form">
         <input type="text" hidden="hidden" id="id" name="id" value="${voteProject.id}">
         <input type="text" hidden="hidden" id="voteMode" name="voteMode" value="${voteProject.voteMode}">
-        <div>
-            <div name="voteTitle" class="voteTitle">
-                <label style="">${voteProject.id}.${voteProject.voteTitle}</label>
-            </div>
-            <br>
-
-        </div>
-        <div style="margin: 10px auto 30px 10%;width: 80%;min-width:200px;min-height: 50px">
-            <span style="margin-left: 5px">&nbsp;&nbsp;${voteProject.voteExplain}</span>
-        </div>
         <div style="margin: 10px auto 30px 20%">
-            <c:if test="${voteProject.voteMode=='1'}||${voteProject.voteMode=='2'}">
-                <label style="color: grey;"><span style="color: red;">注意:</span>只能选择${voteProject.selectNum}项</label>
+            <c:if test="${voteProject.voteMode=='1'&&voteProject.selectNum<voteProject.voteSum}">
+                <label style="color: grey;"><span style="color: red;">注意:</span>最多选择${voteProject.selectNum}项</label>
             </c:if>
-            <div>
+            <c:if test="${voteProject.voteMode=='2'}">
+                    <label style="color: grey;"><span style="color: red;">注意:</span>请在选项输入框中填写或者点击三角图标选择优先级数字</label>
+            </c:if>
+            <div class="form-group">
                 <c:forEach items="${contentMap}" var="item">
                     <c:if test="${voteProject.voteMode=='1'}">
-                        <div style="margin: 10px">
-                            <label for="input${item.key}">${item.key}、${item.value}</label>
-                            <input id="input${item.key}"type="checkbox" name="content" value="${item.key}"lay-skin="primary" >
+                        <div class="checkbox" style="margin: 10px">
+                            <label for="input${item.key}">
+                                <input id="input${item.key}"type="checkbox" name="content" value="${item.key}" >
+                                ${item.key}、${item.value}
+                            </label>
                         </div>
                     </c:if>
                     <c:if test="${voteProject.voteMode=='0'}">
-                        <div style="margin: 10px">
-                            <label for="input${item.key}">${item.key}、${item.value}</label>
-                            <input id="input${item.key}" type="radio" name="content" value="${item.key}"lay-skin="primary">
+                        <div class="radio" style="margin: 10px">
+                            <label for="input${item.key}">
+                                <input id="input${item.key}" type="radio" name="content" value="${item.key}"lay-skin="primary">
+                                    ${item.key}、${item.value}
+                            </label>
                         </div>
                     </c:if>
                     <c:if test="${voteProject.voteMode=='2'}">
                         <div style="margin: 10px">
-                            <label>${item.key}、${item.value}</label>
-                            <input class="sortResult" type="number" name="content" lay-skin="primary" min="1" max="${contentMap.size()}">
+                            <input class="sortResult form-control" type="number" name="content" lay-skin="primary" min="1" max="${contentMap.size()}"style="display:inline;width:70px">
+                            <label class="control-label">${item.key}、${item.value}</label>
+
                         </div>
                     </c:if>
                 </c:forEach>

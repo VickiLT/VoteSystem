@@ -1,10 +1,16 @@
 body{
     font-size:20px;
 }
-
+a{
+    cursor: pointer;
+}
 #mainFrame{
     padding:20px;
 }
 .layui-input{
     border-color:#c2cd96;
+}
+.layui-layer-btn a:hover{
+    color: #ffffff;
+    background-color: #1E9FFF;
 }

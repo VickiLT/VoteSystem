@@ -131,7 +131,7 @@
         <div class="layui-input-block" style="width: 300px">
             <input type="password" id="password" name="password" required="required" readonly="readonly" style="opacity: 0.5" value="***"
                    class="layui-input">
-            <input type="button" class="layui-btn" value="点击修改密码" onclick="jump()" style="margin-top:5px;margin-left: 80px">
+            <input type="button" class="layui-btn" value="点击修改密码" onclick="jump()" style="margin-top:20px;margin-left: 80px">
         </div>
     </div>
     <div align="center">
