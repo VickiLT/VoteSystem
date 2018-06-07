@@ -135,7 +135,7 @@
                 var layer = layui.layer;
                 layer.open({
                     type: 2,
-                    area: ['400px', '360px'],
+                    area: ['450px', '360px'],
                     shadeClose: true, //点击遮罩关闭
                     skin: 'layui-layer-rim',
                     closeBtn: 1,
