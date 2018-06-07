@@ -134,4 +134,10 @@
     from user
     where name = #{name,jdbcType=VARCHAR}
   </select>
+  <select id="selectUserByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
 </mapper>
