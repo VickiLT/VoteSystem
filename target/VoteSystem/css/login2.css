@@ -68,7 +68,7 @@ input[type="text"]:focus, input[type="password"]:focus {
 	float:left;
 
 }
-.web_login .selectOuter select{
+.web_login .selectOuter select,.forgetPw_form .selectOuter select{
 	width:70px;
 	height:30px;
 }

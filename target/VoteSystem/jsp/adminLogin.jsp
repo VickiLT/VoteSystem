@@ -21,7 +21,7 @@
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
     <script type="text/javascript" src="../js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=path%>/layui/layui.js"></script>
-<%--    <script type="text/javascript" src="../js/login.js"></script>--%>
+    <%--    <script type="text/javascript" src="../js/login.js"></script>--%>
 
     <%--<script type="text/javascript" src="images/login.js"></script>--%>
     <link href="../css/login2.css" rel="stylesheet" type="text/css"/>
@@ -84,7 +84,6 @@
         }
         function forgetPw(){
             layui.use(['layer'], function () {
-                var username=$("#uArea input").val();
                 var layer = layui.layer;
                 layer.open({
                     type: 2,
@@ -94,8 +93,7 @@
                     closeBtn: 1,
                     content:"/jsp/forgetPw.jsp",
                     success: function (layero, index) {
-                        var body = layer.getChildFrame('body', index);
-                        body.contents().find("#name").val(username);
+
 
                     },
                     btn: ['取消',"确定"],
@@ -153,9 +151,6 @@
     </div>
     <div align="center">
         <div style="color: red;font-size: 18px" >${msg}${param.msg}</div>
-        <c:if test="${requestScope.status=='0'}" var="condition" scope="request">
-            　　<button class="activeCount"onclick="activeCount()">激活账户</button>
-        </c:if>
     </div>
 
     <div class="web_qr_login" id="web_qr_login" style="display: block; height: 275px;">
@@ -177,16 +172,6 @@
                             <label class="input-tips">密码：</label>
                             <div class="inputOuter" id="pArea">
                                 <input type="password" id="password" name="password" class="inputstyle"/>
-                            </div>
-                        </div>
-                        <div class="pwdArea">
-                            <label class="input-tips">身份：</label>
-                            <div class="selectOuter" id="identity">
-                                <select name="identity">
-                                    <option value="user">委员</option>
-                                    <option value="manager">主任</option>
-                                    <option value="secretary">秘书</option>
-                                </select>
                             </div>
                         </div>
                         <div style="padding-left:70px;margin-top:20px;">

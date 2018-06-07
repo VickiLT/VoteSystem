@@ -84,6 +84,7 @@
         }
         function forgetPw(){
             layui.use(['layer'], function () {
+                var username=$("#uArea input").val();
                 var layer = layui.layer;
                 layer.open({
                     type: 2,
@@ -93,7 +94,8 @@
                     closeBtn: 1,
                     content:"/jsp/forgetPw.jsp",
                     success: function (layero, index) {
-
+                        var body = layer.getChildFrame('body', index);
+                        body.contents().find("#name").val(username);
 
                     },
                     btn: ['取消',"确定"],

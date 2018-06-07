@@ -17,6 +17,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/user/adminLogin"/>
             <mvc:exclude-mapping path="/user/toLogin"/>
             <mvc:exclude-mapping path="/user/retrieve"/>
             <mvc:exclude-mapping path="/favicon.ico"/>
@@ -29,6 +30,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/user/adminLogin"/>
             <mvc:exclude-mapping path="/user/toLogin"/>
             <mvc:exclude-mapping path="/user/retrieve"/>
             <mvc:exclude-mapping path="/favicon.ico"/>
@@ -42,6 +44,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/user/adminLogin"/>
             <mvc:exclude-mapping path="/user/toLogin"/>
             <mvc:exclude-mapping path="/user/retrieve"/>
             <mvc:exclude-mapping path="/favicon.ico"/>
