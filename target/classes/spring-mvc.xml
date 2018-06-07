@@ -21,6 +21,7 @@
             <mvc:exclude-mapping path="/user/retrieve"/>
             <mvc:exclude-mapping path="/favicon.ico"/>
             <mvc:exclude-mapping path="/user/activeAccount"/>
+            <mvc:exclude-mapping path="/user/activePassword"/>
             <mvc:exclude-mapping path="/user/sentActiveMail"/>
             <mvc:exclude-mapping path="/user/firstLogin"/>
             <bean class="com.vote.util.LoginHandlerInterceptor"></bean>
@@ -32,6 +33,7 @@
             <mvc:exclude-mapping path="/user/retrieve"/>
             <mvc:exclude-mapping path="/favicon.ico"/>
             <mvc:exclude-mapping path="/user/activeAccount"/>
+            <mvc:exclude-mapping path="/user/activePassword"/>
             <mvc:exclude-mapping path="/user/sentActiveMail"/>
             <mvc:exclude-mapping path="/user/firstLogin"/>
             <bean class="com.vote.util.SessionInterceptor"></bean>
@@ -45,6 +47,7 @@
             <mvc:exclude-mapping path="/favicon.ico"/>
             <mvc:exclude-mapping path="/user/noLogin2Login"/>
             <mvc:exclude-mapping path="/user/activeAccount"/>
+            <mvc:exclude-mapping path="/user/activePassword"/>
             <mvc:exclude-mapping path="/user/sentActiveMail"/>
             <mvc:exclude-mapping path="/user/firstLogin"/>
             <bean class="com.vote.util.RolesInterceptor"></bean>

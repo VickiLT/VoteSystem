@@ -44,7 +44,7 @@ public class MailUtil {
         sendTo("投票提醒~",body,receiveMailAccount);
     }
     //
-   public static void sendRegisterCode(String code,String identity,String receiveMailAccount){
+   public static void sendRegisterCode(String code,String identity,String receiveMailAccount,String msg,String method){
        if(host==null||port==null){
            Properties pps = new Properties();
            try {
@@ -59,9 +59,9 @@ public class MailUtil {
            port=pps.getProperty("port");
        }
        try {
-            String body="请点击以下连接\n"+"<a>http://"+host+":"+port+"/user/activeAccount?code=" + code+
+            String body="请点击以下连接\n"+"<a>http://"+host+":"+port+"/user/"+method+"?code=" + code+
                     "&identity="+identity +"</a>";
-            sendTo("请激活你的邮箱",body,receiveMailAccount);
+            sendTo(msg,body,receiveMailAccount);
         }catch (Exception e){
         }
    }

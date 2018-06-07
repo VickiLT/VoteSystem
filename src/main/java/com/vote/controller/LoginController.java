@@ -87,7 +87,7 @@ public class LoginController {
                     model.addAttribute("status", "0");
                     return "login";
                 }else if(person.getStatus()==1){
-                    model.addAttribute("msg", "请设置你的密码");
+                    model.addAttribute("msg", "这是你第一次登录系统，请初始化你的密码");
                     model.addAttribute("username", person.getName());
                     model.addAttribute("identity", identity);
                     model.addAttribute("code", person.getCode());
@@ -107,7 +107,7 @@ public class LoginController {
                     model.addAttribute("status", "0");
                     return "login";
                 }else if(person.getStatus()==1){
-                    model.addAttribute("msg", "请设置你的密码");
+                    model.addAttribute("msg", "这是你第一次登录系统，请初始化你的密码");
                     model.addAttribute("username", person.getName());
                     model.addAttribute("identity", identity);
                     model.addAttribute("code", person.getCode());
@@ -127,7 +127,7 @@ public class LoginController {
                     model.addAttribute("status", "0");
                     return "login";
                 }else if(person.getStatus()==1){
-                    model.addAttribute("msg", "请设置你的密码");
+                    model.addAttribute("msg", "这是你第一次登录系统，请初始化你的密码");
                     model.addAttribute("username", person.getName());
                     model.addAttribute("identity", identity);
                     model.addAttribute("code", person.getCode());
@@ -222,11 +222,44 @@ public class LoginController {
             secretaryService.updateById((Secretary)person);
         }
         //发送邮件
-        MailUtil.sendResetPwd(random_str,person.getEmail());
-        map.put("message","重置成功，请到邮箱查看新密码");
+        String msg="请重置你的密码";
+        String method="activePassword";
+        MailUtil.sendRegisterCode(person.getCode(),identity,person.getEmail(),msg,method);
+        map.put("message","邮件发送成功，请到邮箱查看邮件，重置密码");
         map.put("status","1");
         return map;
     }
+
+    @RequestMapping("/activePassword")
+    public String activePassword(Model model,HttpServletRequest request) {
+        String code = request.getParameter("code");
+        String identity=request.getParameter("identity");
+        Person person=null;
+        if(identity.equals("manager")){
+            person=managerService.selectManagerByCode(code);
+        }else if(identity.equals("user")){
+            person=userService.selectUserByCode(code);
+        }else{
+            person=secretaryService.selectSecretaryByCode(code);
+        }
+        if(person!=null) {
+            model.addAttribute("msg", "请重置你的密码");
+            model.addAttribute("username", person.getName());
+            model.addAttribute("identity", identity);
+            model.addAttribute("code", code);
+            model.addAttribute("errno","0");
+        }else
+        {
+            model.addAttribute("msg", "此重置密码链接无效,请联系管理员");
+            model.addAttribute("errno","1");
+            return "login";
+        }
+        return "activeSuccess";
+    }
+
+
+
+
 
     @RequestMapping("/activeAccount")
     public String activeAccount(Model model,HttpServletRequest request) {
@@ -246,15 +279,16 @@ public class LoginController {
             if(person!=null&&person.getStatus()==0)secretaryService.activeAccount(code);
         }
         if(person!=null&&person.getStatus()==0) {
-            model.addAttribute("msg", "请设置你的密码");
+            model.addAttribute("msg", "这是你第一次登录系统，请初始化你的密码");
             model.addAttribute("username", person.getName());
             model.addAttribute("identity", identity);
             model.addAttribute("code", code);
             model.addAttribute("errno","0");
         }else
         {
-            model.addAttribute("msg", "此链接无效");
+            model.addAttribute("msg", "此激活链接无效,请联系管理员");
             model.addAttribute("errno","1");
+            return "login";
         }
         return "activeSuccess";
     }
@@ -274,8 +308,10 @@ public class LoginController {
         }else {
             person=secretaryService.selectSecretaryByName(name);
         }
+        String msg="请激活你的投票系统账户";
+        String method="activeAccount";
         if(person!=null) {
-            MailUtil.sendRegisterCode(person.getCode(),identity,person.getEmail());
+            MailUtil.sendRegisterCode(person.getCode(),identity,person.getEmail(),msg,method);
             return new CommonResult<String>("0");
         }
         return new CommonResult<String>("1");
@@ -297,7 +333,7 @@ public class LoginController {
             person=secretaryService.selectSecretaryByName(name);
         }
         if(person==null||!person.getCode().equals(code)){
-            model.addAttribute("msg","初始化密码出错，请联系管理员");
+            model.addAttribute("msg","设置密码出错，请联系管理员");
             return "login";
         }
         person.setPassword(MD5Util.generate(pwd));
@@ -310,7 +346,7 @@ public class LoginController {
         }else {
             secretaryService.updateById((Secretary)person);
         }
-
+        model.addAttribute("msg","设置密码成功，请登录");
         return "login";
     }
 }
