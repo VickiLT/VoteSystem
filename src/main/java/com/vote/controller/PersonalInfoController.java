@@ -133,32 +133,32 @@ public class PersonalInfoController {
             return "frame/personinfomanage";
         }
         if(identity.equals("manager")){
-              Manager manager = new Manager();
-              manager.setId(person.getId());
-              manager.setName(person.getName());
-              //manager.setPassword(person.getPassword());
-              manager.setTel(person.getTel());
-              manager.setEmail(person.getEmail());
-              managerService.update(manager);
-          }else if(identity.equals("user")){
-              User user = new User();
-              user.setId(person.getId());
-              //user.setPassword(person.getPassword());
-              user.setName(person.getName());
-              user.setEmail(person.getEmail());
-              user.setTel(person.getTel());
-              userService.updateById(user);
+            Manager manager = new Manager();
+            manager.setId(person.getId());
+            manager.setName(person.getName());
+            //manager.setPassword(person.getPassword());
+            manager.setTel(person.getTel());
+            manager.setEmail(person.getEmail());
+            managerService.update(manager);
+        }else if(identity.equals("user")){
+            User user = new User();
+            user.setId(person.getId());
+            //user.setPassword(person.getPassword());
+            user.setName(person.getName());
+            user.setEmail(person.getEmail());
+            user.setTel(person.getTel());
+            userService.updateById(user);
         }else {
-              Secretary secretary = new Secretary();
-              secretary.setId(person.getId());
-              //secretary.setPassword(person.getPassword());
-              secretary.setEmail(person.getEmail());
-              secretary.setName(person.getName());
-              secretary.setTel(person.getTel());
-              secretaryService.updateById(secretary);
-          }
-            model.addAttribute("changeSuccess","0");
-          return "frame/personinfomanage";
+            Secretary secretary = new Secretary();
+            secretary.setId(person.getId());
+            //secretary.setPassword(person.getPassword());
+            secretary.setEmail(person.getEmail());
+            secretary.setName(person.getName());
+            secretary.setTel(person.getTel());
+            secretaryService.updateById(secretary);
+        }
+        model.addAttribute("changeSuccess","0");
+        return "frame/personinfomanage";
     }
     @RequestMapping("/toMain")
     public String toMain(Model model){

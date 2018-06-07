@@ -213,7 +213,7 @@ public class VoteController {
         }else{
             searchParams.put("voteMode",null);
         }
-         if (search_close == null||search_close.isEmpty()) {
+        if (search_close == null||search_close.isEmpty()) {
             searchParams.put("isClose", null);
         } else {
             searchParams.put("isClose", Boolean.valueOf(search_close));

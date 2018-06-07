@@ -16,5 +16,7 @@ public interface SecretaryService {
     List<Secretary> findSecretaryByName(String name);
     List<Secretary> selectSecretary();
     Secretary selectSecretaryByName(String name);
+    Secretary selectSecretaryByCode(String code);
     int activeAccount(String code);
+
 }

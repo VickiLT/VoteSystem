@@ -27,6 +27,6 @@ public interface UserDao {
     List<User> findAllUser();
 
     User selectUserByName(String name);
-
+    User selectUserByCode(String code);
     int updateByCode(String code);
 }
