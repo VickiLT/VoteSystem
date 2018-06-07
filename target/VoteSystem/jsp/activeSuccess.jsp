@@ -15,6 +15,7 @@
     <title>初始化密码</title>
     <link rel="stylesheet" type="text/css" href="<%=path%>/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/whole.css">
+    <link href="../css/login2.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
     <script src="<%=path%>/layui/layui.js"></script>
     <script>
@@ -35,14 +36,17 @@
 
     <style type="text/css">
         .layui-form-label{
-            width:150px;
+            width:90px;
         }
         .layui-input-block{
-            margin-left:190px;
+            margin-left:125px;
             width:300px;
         }
         form{
-            margin: 50px 10%;
+            margin: 50px auto;
+            width: 430px;
+            background-color: #fff;
+            padding: 30px;
         }
         .layui-form-item{
             margin-bottom: 25px;
@@ -50,18 +54,27 @@
         .layui-btn{
             width: 100px;
         }
+        .init-pw-title{
+            margin: 40px  auto 30px -25px;
+            text-align:center;
+            color:#4d2578;
+            font-size:20px;
+            font-weight: bold;
+            text-shadow: 0px 1px 1px #555;
+        }
 
     </style>
 </head>
 
 <body>
 <h1>投票系统<sup>V2018</sup></h1>
+<h3 class="init-pw-title">初始化你的密码</h3>
 <form class="layui-form te-left" action="/user/firstLogin" name="form" onsubmit="return validate()" method="post">
     <input type="hidden" name="username" value="${username}"/>
     <input type="hidden" name="code" value="${code}"/>
     <input type="hidden" name="identity" value="${identity}"/>
     <div class="layui-form-item">
-        <label class="layui-form-label">输入新密码:</label>
+        <label class="layui-form-label">新密码:</label>
         <div class="layui-input-block">
             <input type="password" id="newPassword" name="newPassword" required="required"
                    class="layui-input">
@@ -69,7 +82,7 @@
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">再次输入新密码:</label>
+        <label class="layui-form-label">确认新密码:</label>
         <div class="layui-input-block">
             <input type="password" id="newPasswordAgain" name="newPasswordAgain" required="required"
                    class="layui-input">
