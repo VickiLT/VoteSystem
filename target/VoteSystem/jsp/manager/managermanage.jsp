@@ -353,7 +353,7 @@
         <a class="voteMain" href="/frame/toMain">投票主页
         </a>
     </c:if>
->>>主任管理
+>>主任管理
 <br>
 <br>
 <div>

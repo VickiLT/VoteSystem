@@ -105,7 +105,7 @@
 <body>
 <a href="/frame/toMain">
     投票主页
-</a>>>><font style="font-size: 12pt">创建投票</font>
+</a>>><font style="font-size: 12pt">创建投票</font>
 <br>
 <br>
 

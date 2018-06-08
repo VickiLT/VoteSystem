@@ -23,6 +23,7 @@ public class SessionInterceptor implements HandlerInterceptor {
         SessionServiceImpl sessionService = new SessionServiceImpl();
         HttpSession session = httpServletRequest.getSession();
         Person person = (Person) session.getAttribute("person");
+        String identity=(String)session.getAttribute("identity");
         Boolean flag  = sessionService.checkLoginIsMe(person);
         //获取当前请求的路径
         String basePath = httpServletRequest.getScheme() + "://" + httpServletRequest.getServerName() + ":"  + httpServletRequest.getServerPort()+httpServletRequest.getContextPath();
@@ -35,9 +36,15 @@ public class SessionInterceptor implements HandlerInterceptor {
                 httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 return false;
             }else {
+
                 session.invalidate();
                 String msg = "用户已在别处登录，您已被迫下线！";
-                httpServletResponse.getWriter().write("<script>window.top.location.href=\"/jsp/login.jsp?msg=" + msg + "\"</script>");
+                if(identity.equals("admin")){
+                    httpServletResponse.getWriter().write("<script>window.top.location.href=\"/jsp/adminLogin.jsp?msg=" + msg + "\"</script>");
+                }else{
+                    httpServletResponse.getWriter().write("<script>window.top.location.href=\"/jsp/login.jsp?msg=" + msg + "\"</script>");
+                }
+
                 return false;
             }
         }

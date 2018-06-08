@@ -53,7 +53,7 @@
 <body>
 <a href="/frame/toMain">
     投票主页
-</a>>>>修改密码
+</a>>>修改密码
 <br>
 <br>
 <br>

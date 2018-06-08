@@ -133,7 +133,7 @@
 <body>
 <a href="/frame/toMain">
     投票主页
-</a>>>>投票
+</a>>>投票
 <br>
 <br>
 

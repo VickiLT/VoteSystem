@@ -27,7 +27,7 @@
 <body>
 <a href="/frame/toMain">
     投票主页
-</a>>>>投票信息
+</a>>>投票信息
 <br>
 <br>
 

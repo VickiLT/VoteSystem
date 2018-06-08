@@ -415,7 +415,7 @@
 <body>
 <div style="margin-left: 10px">
 <a href="/frame/toMain">投票主页
-</a>>>>投票事项管理
+</a>>>投票事项管理
 <br>
 <br>
 <div>

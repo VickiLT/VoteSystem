@@ -369,7 +369,7 @@
 <body>
 <div style="margin-left: 10px">
 <a href="/frame/toMain">投票主页
-</a>>>>委员管理
+</a>>>委员管理
 <br>
 <br>
 <div>

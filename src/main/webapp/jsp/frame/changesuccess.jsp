@@ -17,7 +17,7 @@
 <body>
 <a href="/frame/toMain">
     投票主页
-</a>>>>
+</a>>>
 个人信息修改
 <br>
 <br>

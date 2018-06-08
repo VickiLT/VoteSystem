@@ -32,7 +32,7 @@
 <body>
 <a href="/frame/toMain">
     投票主页
-</a>>>>查看投票结果
+</a>>>查看投票结果
 <div>
 
     <form action="/vote/vote" theme="simple" id="form">

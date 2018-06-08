@@ -115,7 +115,7 @@
     <a class="voteMain" href="/frame/toMain">投票主页
     </a>
 </c:if>
->>><span>个人信息设置</span>
+>><span>个人信息设置</span>
 </div>
 <br>
 <br>
