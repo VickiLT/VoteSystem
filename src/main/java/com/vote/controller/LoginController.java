@@ -337,7 +337,7 @@ public class LoginController {
             return "login";
         }
         person.setPassword(MD5Util.generate(pwd));
-
+        person.setCode(UUID.randomUUID().toString().replace("-",""));
         person.setStatus(2);
         if(identity.equals("user")){
             userService.updateById((User)person);

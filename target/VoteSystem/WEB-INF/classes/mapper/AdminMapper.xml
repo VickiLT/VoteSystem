@@ -109,6 +109,9 @@
             <if test ="status!=null">
                 status = #{status,jdbcType=VARCHAR},
             </if>
+            <if test="code != null">
+                code= #{code,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
