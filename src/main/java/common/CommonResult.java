@@ -15,7 +15,7 @@ public class CommonResult<T> {
      */
     private String errorMsg;
     /**
-     * 操作结果数据集，用来存储要返回给前端的数据，可以是对象、集合等等
+     * 操作结果数据集，用来存储要返回给前端的数据，可以是对象.集合等等
      */
     private T data;
 

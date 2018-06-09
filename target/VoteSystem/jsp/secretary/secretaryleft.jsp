@@ -69,6 +69,7 @@
                 <div  id="personList" class="collapse panel-collapse collapse in">
                     <ul class="panel-body nav nav-pills nav-stacked manu-ul" >
                         <li><a href="/frame/personalInfoManage" target="mainFrame">个人信息修改</a></li>
+                        <li><a href="<%=path%>/jsp/manager/usernamage.jsp" target="mainFrame">委员管理</a></li>
                     </ul>
                 </div>
             </div>

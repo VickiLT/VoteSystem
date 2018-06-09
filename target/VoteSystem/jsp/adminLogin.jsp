@@ -48,7 +48,7 @@
                 layer.open({
                     type: 1,
                     area: ['400px', '200px'],
-                    shadeClose: true, //点击遮罩关闭
+                    shadeClose: false, //点击遮罩关闭
                     skin: 'layui-layer-rim',
                     closeBtn: 1,
                     content:'<div style="text-align: center;margin: 10px;font-size: 16px;">用户未激活，是否重新发送激活邮件</div>',
@@ -89,7 +89,7 @@
                 layer.open({
                     type: 2,
                     area: ['400px', '360px'],
-                    shadeClose: true, //点击遮罩关闭
+                    shadeClose: false, //点击遮罩关闭
                     skin: 'layui-layer-rim',
                     closeBtn: 1,
                     content:"/jsp/forgetAdminPw.jsp",

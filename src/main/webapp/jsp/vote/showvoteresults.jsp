@@ -60,8 +60,8 @@
                     </tr>
                 </c:forEach>
             </table>
-            <br>
-            合计:${sum}票
+          <%--  <br>
+            合计:${sum}票--%>
         </center>
     </form>
 

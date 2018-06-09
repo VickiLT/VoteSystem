@@ -311,7 +311,16 @@ public class VoteController {
         String msg = null;
         if (voteDetails != null) {
             String[] out = AESUtil.decrypt(voteDetails.getId());
-            msg = "你已投过票，上次所投选项为" + out[1];
+            if(voteProject.getVoteMode()==2) {
+                char[] result = new char[out[1].length()];
+                for (int i = 0; i < out[1].length(); i++) {
+                    result[out[1].charAt(i) - '1'] = (char) (i  + 'A');
+                }
+                msg = "你已投过票，上次所投选项为" + String.valueOf(result);
+            }else
+            {
+                msg = "你已投过票，上次所投选项为" + String.valueOf(out[1]);
+            }
         }
         List<com.vote.entity.File> files = fileDao.selectByVoteProjectId(projectId);
         HashMap<String,String> fileMap = new HashMap<String, String>();
@@ -356,7 +365,7 @@ public class VoteController {
             vote_count=content.length;
             String[] out1 = AESUtil.decrypt(voteDetail.getId());
             //LogUtils.info(out1[1]);
-            String[] select = {out1[1]};
+            String[] select = out1[1].split("");
             //LogUtils.info(select[0]);
             for (String i : select) {
                 if(vote_type.equals("2")) {

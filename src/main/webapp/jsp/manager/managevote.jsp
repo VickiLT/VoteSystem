@@ -145,7 +145,7 @@
                 layer.open({
                     type: 2,
                     area: ['500px', '400px'],
-                    shadeClose: true, //点击遮罩关闭
+                    shadeClose: false, //点击遮罩关闭
                     closeBtn: 1,
                     content: '/vote/consoleDlg',
                     btn: ['取消', '下一步'],
@@ -205,7 +205,7 @@
                             layer.open({
                                 type: 2,
                                 area: ['600px', '500px'],
-                                shadeClose: true, //点击遮罩关闭
+                                shadeClose: false, //点击遮罩关闭
                                 skin: 'layui-layer-rim',
                                 closeBtn: 1,
                                 content: '/vote/updateConsoleDlg',

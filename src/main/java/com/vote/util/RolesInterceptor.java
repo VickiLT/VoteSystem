@@ -43,6 +43,8 @@ public class RolesInterceptor implements HandlerInterceptor {
                 return false;
             if(identityId.equals("1")||identityId.equals("4"))
                 return true;
+            if(identityId.equals("3")&&matchUrl.contains("userManage"))
+                return true;
             else {
                 if (httpServletRequest.getHeader("x-requested-with") != null && httpServletRequest.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")){ //如果是ajax请求响应头会有x-requested-with
                     httpServletResponse.setHeader("REDIRECT", "REDIRECT1");

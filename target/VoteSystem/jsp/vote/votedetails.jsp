@@ -71,8 +71,10 @@
             var flag2=0;
             var data=new Array(sort.length);
             for (var i = 0; i < sort.length; i++) {
-                if (sort[i].value>sort.length||sort[i].value<=0) {
+                if (sort[i].value>sort.length) {
                     flag1 = 1;
+                }else if(sort[i].value<=0){
+                    flag1 = 2;
                 }
                 data[i]=sort[i].value;
             }
@@ -85,7 +87,10 @@
                 }
             }
             if(flag1==1) {
-                alert("选填写的数字应该不大于需排序的选项个数");
+                alert("填写的数字应该不大于需排序的选项个数");
+                return;
+            }else if(flag1==2){
+                alert("填写的数字应该大于0");
                 return;
             }else if(flag2==1){
                 alert("填写的顺序重复，请检查");
@@ -139,7 +144,7 @@
 
 <div>
     <div name="voteTitle" class="voteTitle">
-        <label style="">${voteProject.id}.${voteProject.voteTitle}</label>
+        <label style="">${voteProject.voteTitle}</label>
     </div>
     <div style="margin: 10px auto 30px 10%;width: 80%;min-width:200px;min-height: 50px">
         <span style="margin-left: 5px">&nbsp;&nbsp;${voteProject.voteExplain}</span>
@@ -153,7 +158,7 @@
                 <label style="color: grey;"><span style="color: red;">注意:</span>最多选择${voteProject.selectNum}项</label>
             </c:if>
             <c:if test="${voteProject.voteMode=='2'}">
-                    <label style="color: grey;"><span style="color: red;">注意:</span>请在选项输入框中填写或者点击三角图标选择优先级数字</label>
+                    <label style="color: grey;"><span style="color: red;">注意:</span>请在选项输入框中填写优先级数字</label>
             </c:if>
             <div class="form-group">
                 <c:forEach items="${contentMap}" var="item">
@@ -161,7 +166,7 @@
                         <div class="checkbox" style="margin: 10px">
                             <label for="input${item.key}">
                                 <input id="input${item.key}"type="checkbox" name="content" value="${item.key}" >
-                                ${item.key}、${item.value}
+                                ${item.key}.${item.value}
                             </label>
                         </div>
                     </c:if>
@@ -169,14 +174,14 @@
                         <div class="radio" style="margin: 10px">
                             <label for="input${item.key}">
                                 <input id="input${item.key}" type="radio" name="content" value="${item.key}"lay-skin="primary">
-                                    ${item.key}、${item.value}
+                                    ${item.key}.${item.value}
                             </label>
                         </div>
                     </c:if>
                     <c:if test="${voteProject.voteMode=='2'}">
                         <div style="margin: 10px">
                             <input class="sortResult form-control" type="number" name="content" lay-skin="primary" min="1" max="${contentMap.size()}"style="display:inline;width:70px">
-                            <label class="control-label">${item.key}、${item.value}</label>
+                            <label class="control-label">${item.key}.${item.value}</label>
 
                         </div>
                     </c:if>

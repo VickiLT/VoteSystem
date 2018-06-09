@@ -36,7 +36,7 @@
         <input type="text" hidden="hidden" id="id" name="id" value="${voteProject.id}">
         <div>
             <div name="voteTitle" class="voteTitle">
-                <label style="">${voteProject.id}.${voteProject.voteTitle}</label>
+                <label style="">${voteProject.voteTitle}</label>
             </div>
             <br>
 
@@ -45,26 +45,26 @@
             <span style="margin-left: 5px">&nbsp;&nbsp;${voteProject.voteExplain}</span>
         </div>
         <div style="margin: 10px auto 30px 20%">
-            <c:if test="${voteProject.voteMode=='1'||voteProject.selectNum<voteProject.voteSum}">
+            <c:if test="${voteProject.voteMode=='1'&&voteProject.selectNum<voteProject.voteSum}">
                 <label><span style="color: red;">注意:</span>只能选择${voteProject.selectNum}项</label>
             </c:if>
             <div>
                 <c:forEach items="${contentMap}" var="item">
                     <c:if test="${voteProject.voteMode==1}">
                         <div style="margin: 10px">
-                            <label for="input${item.key}">${item.key}、${item.value}</label>
+                            <label for="input${item.key}">${item.key}.${item.value}</label>
                             <input id="input${item.key}"type="checkbox" name="content" value="${item.key}"lay-skin="primary" disabled>
                         </div>
                     </c:if>
                     <c:if test="${voteProject.voteMode==0}">
                         <div style="margin: 10px">
-                            <label for="input${item.key}">${item.key}、${item.value}</label>
+                            <label for="input${item.key}">${item.key}.${item.value}</label>
                             <input id="input${item.key}" type="radio" name="content" value="${item.key}"lay-skin="primary"disabled>
                         </div>
                     </c:if>
                     <c:if test="${voteProject.voteMode==2}">
                         <div style="margin: 10px">
-                            <label>${item.key}、${item.value}</label>
+                            <label>${item.key}.${item.value}</label>
                         </div>
                     </c:if>
                 </c:forEach>

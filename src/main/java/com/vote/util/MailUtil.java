@@ -133,7 +133,7 @@ public class MailUtil {
         // 2. From: 发件人
         message.setFrom(new InternetAddress(sendMail, "系统管理员", "UTF-8"));
 
-        // 3. To: 收件人（可以增加多个收件人、抄送、密送）
+        // 3. To: 收件人（可以增加多个收件人.抄送.密送）
         message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receiveMail, "尊敬的用户", "UTF-8"));
 
         // 4. Subject: 邮件主题

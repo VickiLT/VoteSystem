@@ -27,7 +27,7 @@
     </script>
     <script type="text/javascript">
         $(function () {
-            $("#time").datetimepicker({timepicker: true, format: 'm-d-Y H:i:s', showSecond: true,});
+            $("#time").datetimepicker({timepicker: true, format: 'm-d-Y HH:ii:ss', showSecond: true,});
             $.datetimepicker.setLocale('zh');
         })
         var callbackdata = function () {

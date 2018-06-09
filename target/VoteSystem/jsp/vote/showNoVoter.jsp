@@ -70,7 +70,7 @@
         </thead>
         <c:forEach items="${whoHasNotVote}" var="item" varStatus="i">
                 <tr style="margin: 10px">
-                    <td>${i.count}、${item}</td>
+                    <td>${item}</td>
                     <td><button class="btn btn-primary"onclick="remindVote('${item}')">提醒他投票</button></td>
                 </tr>
         </c:forEach>
