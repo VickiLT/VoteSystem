@@ -316,7 +316,7 @@ public class VoteController {
                 for (int i = 0; i < out[1].length(); i++) {
                     result[out[1].charAt(i) - '1'] = (char) (i  + 'A');
                 }
-                msg = "你已投过票，上次所投选项为" + String.valueOf(result);
+                msg = "你已投过票，上次所投选项顺序为" + String.valueOf(result);
             }else
             {
                 msg = "你已投过票，上次所投选项为" + String.valueOf(out[1]);

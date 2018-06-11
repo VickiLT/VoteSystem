@@ -49,7 +49,7 @@
             endDate.setFullYear(endDate.getFullYear()+1);
             endDate=endDate.Format("yyyy-MM-dd hh:00:00");
             $("#endTime").datetimepicker({
-                format: 'y-m-d H:i:s',
+                format: 'Y-m-d H:i:s',
                 timepicker:true,
                 defaultDate:startDate,
                 startDate: startDate,
