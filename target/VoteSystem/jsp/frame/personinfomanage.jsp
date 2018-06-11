@@ -107,6 +107,10 @@
         margin-left:10%;
     }
     .infoForm input{ border-color: #d1bbbb;}
+    .layui-form-label{
+        width: 88px;
+        padding: 9px 9px;
+    }
 
 </style>
 <body>

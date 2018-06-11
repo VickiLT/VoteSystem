@@ -72,6 +72,17 @@ public class LoginController {
         if (identity.equals("user")) {
             flag1 = userService.findUserByNameAndPwd(name, password);
         } else if (identity.equals("manager")) {
+
+            //管理员登录登录
+            if(adminService.login(name,password)){
+                Person person = adminService.selectAdminByName(name);
+                request.getSession().setAttribute("username", name);
+                request.getSession().setAttribute("person", person);
+                request.getSession().setAttribute("identity", "admin");
+                model.addAttribute("identity", "admin");
+                sessionService.changeLogin4Me(person);
+                return "admin/adminframe";
+            }
             flag1 = managerService.findManagerByNameAndPwd(name, password);
         } else {
             flag1 = secretaryService.findManagerByNameAndPwd(name, password);
@@ -165,10 +176,7 @@ public class LoginController {
         if(msg==null)
             msg="";
         try {
-            if(identity!=null&&identity.equals("admin"))
-                response.getWriter().write("<script>window.top.location.href=\"/jsp/adminLogin.jsp?msg="+msg+"\"</script>");
-            else
-                response.getWriter().write("<script>window.top.location.href=\"/jsp/login.jsp?msg="+msg+"\"</script>");
+            response.getWriter().write("<script>window.top.location.href=\"/jsp/login.jsp?msg="+msg+"\"</script>");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -200,10 +208,13 @@ public class LoginController {
         if (identity.equals("user")) {
             person = userService.selectUserByName(name);
         } else if (identity.equals("manager")) {
-            person= managerService.selectManagerByName(name);
-        } else if(identity.equals("admin")){
-            person= adminService.selectAdminByName(name);
-        }else {
+            person=adminService.selectAdminByName(name);
+            if(person!=null)
+                identity="admin";
+            else
+                person= managerService.selectManagerByName(name);
+
+        } else {
             person = secretaryService.selectSecretaryByName(name);
         }
         //是否找到用户
@@ -345,8 +356,6 @@ public class LoginController {
             managerService.update((Manager)person);
         }else if(identity.equals("admin")){
             adminService.update((Admin)person);
-            model.addAttribute("msg","设置密码成功，请登录");
-            return "adminLogin";
         }else {
             secretaryService.updateById((Secretary)person);
         }
