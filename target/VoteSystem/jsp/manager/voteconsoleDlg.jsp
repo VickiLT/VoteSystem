@@ -16,8 +16,8 @@
     <script src="<%=path%>/layui/layui.js"></script>
     <script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="<%=path%>/datetimepicker-master/build/jquery.datetimepicker.min.css"/>
-    <script type="text/javascript" src="<%=path%>/datetimepicker-master/jquery.js"></script>
     <script type="text/javascript" src="<%=path%>/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/js/dateFormat.js"></script>
     <script>
         layui.use('form', function () {
             var form = layui.form;
@@ -27,7 +27,18 @@
     </script>
     <script type="text/javascript">
         $(function () {
-            $("#time").datetimepicker({timepicker: true, format: 'm-d-Y HH:ii:ss', showSecond: true,});
+            var startDate=(new Date()).Format("yyyy-MM-dd hh:00:00");
+            var endDate = new Date();
+            endDate.setFullYear(endDate.getFullYear()+1);
+            endDate=endDate.Format("yyyy-MM-dd hh:00:00");
+            $("#time").datetimepicker({
+                format: 'y-m-d H:i:s',
+                timepicker:true,
+                defaultDate:startDate,
+                startDate: startDate,
+                minDate:startDate,
+                maxDate:endDate
+            });
             $.datetimepicker.setLocale('zh');
         })
         var callbackdata = function () {

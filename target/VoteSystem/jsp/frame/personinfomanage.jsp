@@ -149,7 +149,7 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">联系邮箱</label>
+        <label class="layui-form-label"><font color='red'>*</font>联系邮箱</label>
         <div class="layui-input-block" style="width: 300px">
             <input type="text" name="email" id="email" lay-verify="required" class="layui-input"
                    value="${person.email}">

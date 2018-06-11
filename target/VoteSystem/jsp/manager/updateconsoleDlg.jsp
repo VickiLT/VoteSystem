@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="<%=path%>/datetimepicker-master/build/jquery.datetimepicker.min.css"/>
     <script type="text/javascript" src="<%=path%>/datetimepicker-master/jquery.js"></script>
     <script type="text/javascript" src="<%=path%>/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/js/dateFormat.js"></script>
     <style>
         .layui-form-label{
             width:25%;
@@ -43,7 +44,19 @@
 //            });
         });
         $(function () {
-            $("#endTime").datetimepicker({timepicker: true, format: 'Y-m-d H:i:s', showSecond: true,});
+            var startDate=(new Date()).Format("yyyy-MM-dd hh:00:00");
+            var endDate = new Date();
+            endDate.setFullYear(endDate.getFullYear()+1);
+            endDate=endDate.Format("yyyy-MM-dd hh:00:00");
+            $("#endTime").datetimepicker({
+                format: 'y-m-d H:i:s',
+                timepicker:true,
+                defaultDate:startDate,
+                startDate: startDate,
+                minDate:startDate,
+                maxDate:endDate
+            });
+            $.datetimepicker.setLocale('zh');
             $.datetimepicker.setLocale('zh');
         })
         var callbackdata = function () {
